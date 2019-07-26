@@ -2,7 +2,8 @@
 #define _BENCHMARKING_H
 
 
-#define WEBSPAM
+// #define WEBSPAM
+#define TEST
 #ifdef WEBSPAM
 
 #define SPARSE_DATASET
@@ -57,6 +58,16 @@
 #define QUERY_PROBES 1
 #define ALLOC_FRACTION 1
 #define TOPK 3
+#define AVAILABLE_TOPK 8
+#define CMS_HASHES 2
+#define CMS_BUCKET_SIZE 8
+
+//Dummy Variables
+#define BASEFILE ""
+#define GTRUTHINDICE ""
+#define GTRUTHDIST ""
+#define NUM_BATCHES 1
+#define BATCH_PRINT 1
 
 #endif
 

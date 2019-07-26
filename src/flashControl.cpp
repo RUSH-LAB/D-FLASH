@@ -69,6 +69,10 @@ void flashControl::allocateQuery() {
     MPI_Scatterv(_sparseVals, _queryCts, _queryOffsets, MPI_FLOAT, _myQueryVals, _myQueryVectorsLen, MPI_FLOAT, 0, MPI_COMM_WORLD);
     MPI_Scatterv(_sparseMarkers, tempQueryMarkerCts, _queryVectorOffsets, MPI_INT, _myQueryMarkers, _myQueryVectorsCt + 1, MPI_INT, 0, MPI_COMM_WORLD);
 
+    int myQueryOffset = _queryOffsets[_myRank];
+    for (int i = 0; i < _myQueryVectorsCt + 1; i++) {
+        _myQueryMarkers[i] -= myQueryOffset;
+    }
     delete[] tempQueryMarkerCts;
 }
 

@@ -20,7 +20,7 @@
 #include <iostream>
 
 int main() {
-	// controlTest();
-	webspamTest();
+	controlTest();
+	// webspamTest();
 	return 0;
 }

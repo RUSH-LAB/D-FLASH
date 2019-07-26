@@ -23,7 +23,7 @@ LSH::LSH(int _K_in, int _L_in, int _rangePow_in, int worldSize, int worldRank)
 	// MPI
 
 	_worldSize = worldSize;
-	_worldRank = _worldRank;
+	_worldRank = worldRank;
 
 	if (_worldRank == 0)
 	{

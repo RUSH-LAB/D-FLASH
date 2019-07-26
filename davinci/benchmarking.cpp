@@ -18,46 +18,64 @@
 void controlTest()
 {
 
-	MPI_Init(0, 0);
-
+	int provided;
+	MPI_Init_thread(0, 0, MPI_THREAD_FUNNELED, &provided);
 	int myRank, worldSize;
-
 	MPI_Comm_size(MPI_COMM_WORLD, &worldSize);
 	MPI_Comm_rank(MPI_COMM_WORLD, &myRank);
 
 	LSH *lsh = new LSH(NUM_HASHES, NUM_TABLES, RANGE_POW, worldSize, myRank);
 
+	MPI_Barrier(MPI_COMM_WORLD);
+
 	CMS *cms = new CMS(CMS_HASHES, CMS_BUCKET_SIZE, NUM_QUERY_VECTORS, myRank, worldSize);
+
+	MPI_Barrier(MPI_COMM_WORLD);
 
 	LSHReservoirSampler *reservoir = new LSHReservoirSampler(lsh, NUM_HASHES, NUM_TABLES, RESERVOIR_SIZE, DIMENSION,
 															 RANGE_ROW_U, NUM_DATA_VECTORS + NUM_QUERY_VECTORS, QUERY_PROBES, HASHING_PROBES, ALLOC_FRACTION, myRank, worldSize);
 
-	flashControl control(reservoir, cms, myRank, worldSize, NUM_DATA_VECTORS, NUM_QUERY_VECTORS,
+	MPI_Barrier(MPI_COMM_WORLD);
+
+	flashControl* control = new flashControl(reservoir, cms, myRank, worldSize, NUM_DATA_VECTORS, NUM_QUERY_VECTORS,
 						 NUM_TABLES, QUERY_PROBES, RESERVOIR_SIZE);
+	
+	MPI_Barrier(MPI_COMM_WORLD);
 
-	control.readData("placeholder_txt", 8, 5);
+	control->readData("placeholder_txt", 8, 5);
 
-	control.showPartitions();
+	control->showPartitions();
 
-	control.allocateData();
-	control.allocateQuery();
+	MPI_Barrier(MPI_COMM_WORLD);
 
-	control.add(1, 1);
+	control->allocateData();
+	control->allocateQuery();
 
-	control.hashQuery();
+	MPI_Barrier(MPI_COMM_WORLD);
+
+	control->printData();
+
+	control->add(1, 1);
+
+	MPI_Barrier(MPI_COMM_WORLD);
+
+	control->hashQuery();
 
 	unsigned int *outputs = new unsigned int[TOPK * NUM_QUERY_VECTORS];
 
-	control.extractReservoirs(TOPK, outputs);
+	control->extractReservoirsCMS(TOPK, outputs, 0);
 
-	printf("TOP K..\n");
-	for (int i = 0; i < TOPK * NUM_QUERY_VECTORS; i++)
-	{
-		printf("\t%d", outputs[i]);
+	if (myRank == 0) {
+		printf("TOP K..\n");
+		for (int i = 0; i < TOPK * NUM_QUERY_VECTORS; i++) {
+			printf("\t%d", outputs[i]);
+		}
+		printf("\n");
 	}
-	printf("\n");
 
 	delete reservoir;
+	delete cms;
+	delete control;
 	delete lsh;
 
 	delete[] outputs;
@@ -81,9 +99,18 @@ void webspamTest()
 	Data Structure Initialization
 */
 	LSH *lsh = new LSH(NUM_HASHES, NUM_TABLES, RANGE_POW, worldSize, myRank);
+
+	MPI_Barrier(MPI_COMM_WORLD);
+
 	CMS *cms = new CMS(CMS_HASHES, CMS_BUCKET_SIZE, NUM_QUERY_VECTORS, myRank, worldSize);
+
+	MPI_Barrier(MPI_COMM_WORLD);
+
 	LSHReservoirSampler *reservoir = new LSHReservoirSampler(lsh, RANGE_POW, NUM_TABLES, RESERVOIR_SIZE, DIMENSION,
 															 RANGE_ROW_U, NUM_DATA_VECTORS + NUM_QUERY_VECTORS, QUERY_PROBES, HASHING_PROBES, ALLOC_FRACTION, myRank, worldSize);
+
+	MPI_Barrier(MPI_COMM_WORLD);
+
 	flashControl *control = new flashControl(reservoir, cms, myRank, worldSize, NUM_DATA_VECTORS, NUM_QUERY_VECTORS,
 											 NUM_TABLES, QUERY_PROBES, RESERVOIR_SIZE);
 
@@ -119,9 +146,19 @@ void webspamTest()
 /* ===============================================================
 	Partitioning Data Between Nodes
 */
+	MPI_Barrier(MPI_COMM_WORLD);
+
 	control->showPartitions();
+	
+	MPI_Barrier(MPI_COMM_WORLD);
+
 	control->allocateData();
+
+	MPI_Barrier(MPI_COMM_WORLD);
+
 	control->allocateQuery();
+
+	MPI_Barrier(MPI_COMM_WORLD);
 
 /* ===============================================================
 	Adding Vectors
@@ -133,6 +170,8 @@ void webspamTest()
 	elapsed = end - start;
 	std::cout << "Vectors Added Node " << myRank << ": " << elapsed.count() << " Seconds\n" << std::endl;
 
+	MPI_Barrier(MPI_COMM_WORLD);
+
 /* ===============================================================
 	Hashing Query Vectors
 */
@@ -142,6 +181,8 @@ void webspamTest()
 	end = std::chrono::system_clock::now();
 	elapsed = end - start;
 	std::cout << "Query Hashes Computed Node " << myRank << ": " << elapsed.count() << " Seconds\n" << std::endl;
+
+	MPI_Barrier(MPI_COMM_WORLD);
 
 /* ===============================================================
 	Extracting Reservoirs and Preforming Top-K selection
@@ -153,6 +194,8 @@ void webspamTest()
 	end = std::chrono::system_clock::now();
 	elapsed = end - start;
 	std::cout << "Top K Extracted Node " << myRank << ": " << elapsed.count() << " Seconds\n" << std::endl;
+
+	MPI_Barrier(MPI_COMM_WORLD);
 
 /* ===============================================================
 	Similarity and Accuracy Calculations

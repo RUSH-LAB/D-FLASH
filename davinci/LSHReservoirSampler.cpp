@@ -50,7 +50,7 @@ void LSHReservoirSampler::ann(int numQueryEntries, int* dataIdx, float* dataVal,
 	kSelect(tally, outputs, segmentSize, numQueryEntries, topk);
 
 	delete[] allprobsHash;
-	delete[] allprobsIdx;
+	delete[] allprobsIdx;[]
 	delete[] tally;
 }
 
