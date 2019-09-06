@@ -22,7 +22,7 @@ LIB += -fopenmp
 CXXFLAGS := -m64 -DUNIX -std=c++11 $(WARN_FLAGS) $(OPT_FLAGS) -I$(INC)
 CFLAGS := -m64 -DUNIX $(WARN_FLAGS) $(OPT_FLAGS) -I$(INC)
 
-LDFLAGS := $(LIBRARY_PATH) $(LIB)
+LDFLAGS := $(LIB)
 
 .PHONY: clean
 

@@ -5,14 +5,14 @@
 
 #include <stdlib.h>
 #include <iostream>
+#include <time.h>
 #include <math.h>
-#include <random>
 #include <algorithm>
 #include <omp.h>
 #include <mpi.h>
 
 #define INT_MAX 0xffffff
-#define TABLENULL -1
+#define IGNORE -1
 
 #define hashLocation(dataIndx, numHashes, hashIndx) ((int) (dataIndx * numHashes + hashIndx))
 #define heavyHitterIndx(sketchIndx, sketchSize, bucketSize, hashIndx, hash) ((int) (sketchIndx * sketchSize + bucketSize * 2 * hashIndx + hash * 2))

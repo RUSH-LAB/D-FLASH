@@ -40,4 +40,4 @@
 // storelog: the hashIdx of an input.
 #define storelogHashIdxIdx(numProbsPerTb, probeIdx, tb) (unsigned)(numProbsPerTb * tb * 4 + 4 * probeIdx + 3)
 
-#endif /* INDEXING_H */
+#endif

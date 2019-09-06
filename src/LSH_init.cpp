@@ -18,32 +18,30 @@ LSH::LSH(int _K_in, int _L_in, int _rangePow_in, int worldSize, int worldRank)
 	_rand1 = new int[_K * _L];
 	_randHash = new int[2];
 
-	std::random_device rd;
-	std::mt19937 gen(rd());
-	std::uniform_int_distribution<unsigned int> dis(1, UINT_MAX);
+	srand(time(NULL));
 
 	// MPI
 
 	_worldSize = worldSize;
-	_worldRank = _worldRank;
+	_worldRank = worldRank;
 
 	if (_worldRank == 0)
 	{
 		for (int i = 0; i < _numhashes; i++)
 		{
-			_rand1[i] = dis(gen);
+			_rand1[i] = rand();
 			if (_rand1[i] % 2 == 0)
 				_rand1[i]++;
 		}
 
 		// _randa and _randHash* are random odd numbers.
-		_randa = dis(gen);
+		_randa = rand();
 		if (_randa % 2 == 0)
 			_randa++;
-		_randHash[0] = dis(gen);
+		_randHash[0] = rand();
 		if (_randHash[0] % 2 == 0)
 			_randHash[0]++;
-		_randHash[1] = dis(gen);
+		_randHash[1] = rand();
 		if (_randHash[1] % 2 == 0)
 			_randHash[1]++;
 	}

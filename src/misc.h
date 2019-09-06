@@ -1,7 +1,11 @@
-#pragma once
+#ifndef _MISC_H
+#define _MISC_H
 
 #include <chrono>
 #include <string>
+#include <fstream>
+#include <iostream>
+#include <sstream>
 
 #define GETTIME_MS(begin, end) ((end - begin).count() / (float)1000000)
 
@@ -14,3 +18,5 @@ float cosineDist(int *indiceA, float *valA, int nonzerosA, int *indiceB, float *
 int readGraph(std::string fileName, int *A, int *B, unsigned int bufferlen);
 float smartrp(int *indiceA, float *valA, int nonzerosA, short *randBits);
 void smartrp_batch(int numRP, int dimension, int *indiceA, float *valA, int nonzerosA, short *randBits, float *outputs);
+
+#endif

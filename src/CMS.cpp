@@ -12,11 +12,9 @@ CMS::CMS(int L, int B, int numDataStreams, int myRank, int worldSize) {
 	_hashingSeeds = new unsigned int[_numHashes];
 
 	if (_myRank == 0) {
-		std::random_device rd;
-		std::mt19937 gen(rd());
-		std::uniform_int_distribution<unsigned int> dis(1, INT_MAX);
+		srand(time(NULL));
 		for (int h = 0; h < _numHashes; h++) {
-			_hashingSeeds[h] = dis(gen);
+			_hashingSeeds[h] = rand();
 			if (_hashingSeeds[h] % 2 == 0) {
 				_hashingSeeds[h]++;
 			}
@@ -79,7 +77,8 @@ void CMS::addSketch(int dataStreamIndx, unsigned int* dataStream, int dataStream
 
 	for (int dataIndx = 0; dataIndx < dataStreamLen; dataIndx++) {
 		for (int hashIndx = 0; hashIndx < _numHashes; hashIndx++) {
-			if (dataStream[dataIndx] == TABLENULL) {
+			// Use number of items in bucket to add exactly the right amount to each sketch?
+			if (dataStream[dataIndx] == 0) {
 				continue;
 			}
 			unsigned int currentHash = hashIndices[hashLocation(dataIndx, _numHashes, hashIndx)];
@@ -141,7 +140,9 @@ void CMS::topKSketch(int K, int threshold, unsigned int* topK, int sketchIndx) {
 	std::sort(candidates, candidates + _bucketSize, [&candidates](LHH a, LHH b){return a.count > b.count;});
 
 	for (int i = 0; i < K; i++) {
-		topK[i] = candidates[i].heavyHitter;
+		if (candidates[i].heavyHitter > IGNORE) {
+			topK[i] = candidates[i].heavyHitter;
+		}
 	}
 	delete[] candidates;
 }
@@ -156,7 +157,8 @@ void CMS::topK (int topK, unsigned int* outputs, int threshold) {
 
 void CMS::combineSketches (int* newLHH) {
 
-#pragma omp parallel for default(none) shared(newLHH, _LHH, _numHashes, _bucketSize, _numSketches)
+// #pragma omp parallel for default(none) shared(newLHH, _LHH, _numHashes, _bucketSize, _numSketches)
+#pragma omp parallel for default(none) shared(newLHH)
 	for (int n = 0; n < _numHashes * _bucketSize * _numSketches; n++) {
 		if (newLHH[n * 2] == _LHH[n * 2]) {
 			_LHH[n * 2 + 1] += newLHH[n * 2 + 1];

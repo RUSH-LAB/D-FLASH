@@ -6,7 +6,7 @@ void flashControl::readData(std::string filename, int dataSetSize, int dimension
         _sparseVals = new float[(unsigned)(dataSetSize * dimension)];
         _sparseMarkers = new int[(unsigned)(dataSetSize + 1)];
         readSparse(filename, 0, (unsigned)(_numDataVectors + _numQueryVectors), _sparseIndices, _sparseVals, _sparseMarkers, (unsigned)((_numDataVectors + _numQueryVectors) * dimension));
-        // dummyReadSparse(filename, 0, (unsigned)(_numDataVectors + _numQueryVectors), _sparseIndices, _sparseVals, _sparseMarkers, (unsigned)((_numDataVectors + _numQueryVectors) * dimension));
+        //dummyReadSparse(filename, 0, (unsigned)(_numDataVectors + _numQueryVectors), _sparseIndices, _sparseVals, _sparseMarkers, (unsigned)((_numDataVectors + _numQueryVectors) * dimension));
 
         for (int n = 0; n < _worldSize; n++) {
             _dataOffsets[n] = _sparseMarkers[_dataVectorOffsets[n]];
@@ -77,7 +77,7 @@ void flashControl::allocateQuery() {
 }
 
 void flashControl::add(int numBatches, int batchPrint) {
-    int batchSize = _numDataVectors / numBatches;
+    int batchSize = _myDataVectorsCt / numBatches;
     for (int batch = 0; batch < numBatches; batch++) {
         _myReservoir->add(batchSize, _myDataIndices, _myDataVals, _myDataMarkers + batch * batchSize, _myDataVectorsOffset);
         if (batch % batchPrint == 0) {
@@ -124,4 +124,30 @@ void flashControl::showPartitions(){
             _dataOffsets[_myRank], _dataOffsets[_myRank] + _myDataVectorsLen,
             _queryVectorOffsets[_myRank], _queryVectorOffsets[_myRank] + _myQueryVectorsCt,
             _queryOffsets[_myRank], _queryOffsets[_myRank] + _myQueryVectorsLen);
+}
+
+void flashControl::printData() {
+    if (_myRank == 0) {
+        printf("Data Rank 0:\n");
+        for (int i = 0; i < _myDataVectorsLen; i++) {
+            printf("\t%d", _myDataIndices[i]);
+        }
+        printf("\nQuery Rank 0:\n");
+        for (int i = 0; i < _myQueryVectorsLen; i++) {
+            printf("\t%d", _myQueryIndices[i]);
+        }
+        printf("\n");
+    }
+    MPI_Barrier(MPI_COMM_WORLD);
+    if (_myRank == 1) {
+        printf("Data Rank 1:\n");
+        for (int i = 0; i < _myDataVectorsLen; i++) {
+            printf("\t%d", _myDataIndices[i]);
+        }
+        printf("\nQuery Rank 1:\n");
+        for (int i = 0; i < _myQueryVectorsLen; i++) {
+            printf("\t%d", _myQueryIndices[i]);
+        }
+        printf("\n");
+    }
 }

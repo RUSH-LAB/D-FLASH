@@ -1,4 +1,6 @@
-#pragma once
+#ifndef _FREQUENT_ITEMS_H
+#define _FREQUENT_ITEMS_H
+
 #include <unordered_map>
 #include <queue>
 using namespace std;
@@ -21,3 +23,5 @@ public:
 	unsigned int* getTopk();
 	void getTopk(unsigned int * outputs);
 };
+
+#endif

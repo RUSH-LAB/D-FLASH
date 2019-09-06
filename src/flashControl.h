@@ -1,4 +1,6 @@
-#include <cmath>
+#ifndef _FLASH_CONTROL_H
+#define _FLASH_CONTROL_H
+
 #include <iostream>
 #include "CMS.h"
 #include <string>
@@ -121,7 +123,12 @@ public:
     // For debugging: shows the partitions of the data and query allocated to a specific node.
     void showPartitions();
 
+
+    void printData();
+
     // Destructor
     ~flashControl();
 
 };
+
+#endif

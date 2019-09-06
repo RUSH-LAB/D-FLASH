@@ -1,8 +1,9 @@
-#pragma once
+#ifndef _BENCHMARKING_H
+#define _BENCHMARKING_H
 
 
 #define WEBSPAM
-
+//#define TEST
 #ifdef WEBSPAM
 
 #define SPARSE_DATASET
@@ -37,7 +38,7 @@
 #define CMS_HASHES                  4
 #define CMS_BUCKET_SIZE             1024
 
-#define BASEFILE		"../dataset/webspam/trigram.svm"
+#define BASEFILE		"../dataset/webspam/webspam_trigram.svm"
 #define GTRUTHINDICE	"../dataset/webspam/webspam_tri_gtruth_indices.txt"
 #define GTRUTHDIST		"../dataset/webspam/webspam_tri_gtruth_distances.txt"
 
@@ -51,12 +52,22 @@
 #define DIMENSION 5
 #define RANGE_ROW_U 2
 #define NUM_VECTORS 8
-#define NUM_DATA_VECTORS 6
-#define NUM_QUERY_VECTORS 2
+#define NUM_DATA_VECTORS 4
+#define NUM_QUERY_VECTORS 4
 #define HASHING_PROBES 1
 #define QUERY_PROBES 1
 #define ALLOC_FRACTION 1
 #define TOPK 3
+#define AVAILABLE_TOPK 8
+#define CMS_HASHES 2
+#define CMS_BUCKET_SIZE 8
+
+//Dummy Variables
+#define BASEFILE ""
+#define GTRUTHINDICE ""
+#define GTRUTHDIST ""
+#define NUM_BATCHES 1
+#define BATCH_PRINT 1
 
 #endif
 
@@ -70,4 +81,6 @@ void webspamTest();
 
 #if !defined (SPARSE_DATASET)
 #define K 10 // DUMMY
+#endif
+
 #endif

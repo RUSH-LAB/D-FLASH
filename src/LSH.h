@@ -1,12 +1,12 @@
-#pragma once
+#ifndef _LSH_H
+#define _LSH_H
 
 #define _CRT_SECURE_NO_DEPRECATE
 #include <stdio.h>
 #include <stdlib.h>
-#include <chrono>
-#include <iostream>
+#include <time.h>
 #include <random>
-#include <algorithm>
+#include <iostream>
 #include "omp.h"
 #include "mpi.h"
 
@@ -69,3 +69,5 @@ public:
 	// Destructor
 	~LSH();
 };
+
+#endif

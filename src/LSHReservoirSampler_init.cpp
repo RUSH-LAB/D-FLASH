@@ -66,18 +66,17 @@ void LSHReservoirSampler::initVariables(unsigned int numHashPerFamily, unsigned 
 
 void LSHReservoirSampler::initHelper(int numTablesIn, int numHashPerFamilyIn, int reservoriSizeIn) {
 
-	/* Reservoir Random Number. */
-	std::default_random_engine generator1;
-	std::uniform_int_distribution<unsigned int> distribution_a(0, 0x7FFFFFFF);
-	_sechash_a = distribution_a(generator1) * 2 + 1;
-	std::uniform_int_distribution<unsigned int> distribution_b(0, 0xFFFFFFFF >> _numSecHash);
-	_sechash_b = distribution_b(generator1);
+	srand(time(NULL));
+	_sechash_a = rand() * 2 + 1;
+	_sechash_b = rand();
 
 	_global_rand = new unsigned int[_maxReservoirRand];
-	for (unsigned int i = 0; i < _maxReservoirRand; i++) {
-		std::uniform_int_distribution<unsigned int> distribution(0, i);
-		_global_rand[i] = distribution(generator1);
+
+	_global_rand[0] = 0;
+	for (int i = 1; i < _maxReservoirRand; i++) {
+		_global_rand[i] = rand() % i;
 	}
+
 
 	/* Hash tables. */
 	_tableMemReservoirMax = (_numTables - 1) * _aggNumReservoirs + _numReservoirsHashed;

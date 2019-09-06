@@ -1,4 +1,5 @@
-#include <cmath>
+#include "omp.h"
+#include "mpi.h"
 
 #include "LSH.h"
 #include "LSHReservoirSampler.h"
@@ -8,18 +9,8 @@
 #include "misc.h"
 #include "evaluate.h"
 #include "indexing.h"
-#include "omp.h"
 #include "benchmarking.h"
 #include "MatMul.h"
-#include "mpi.h"
-
-#include <string>
-#include <sstream>
-#include <fstream>
-#include <iostream>
-#include <chrono>
-#include <vector>
-#include <algorithm>
 #include "FrequentItems.h"
 
 #define TOPK_BENCHMARK
@@ -27,46 +18,66 @@
 void controlTest()
 {
 
-	MPI_Init(0, 0);
-
+	int provided;
+	MPI_Init_thread(0, 0, MPI_THREAD_FUNNELED, &provided);
 	int myRank, worldSize;
-
 	MPI_Comm_size(MPI_COMM_WORLD, &worldSize);
 	MPI_Comm_rank(MPI_COMM_WORLD, &myRank);
 
 	LSH *lsh = new LSH(NUM_HASHES, NUM_TABLES, RANGE_POW, worldSize, myRank);
 
+	MPI_Barrier(MPI_COMM_WORLD);
+
 	CMS *cms = new CMS(CMS_HASHES, CMS_BUCKET_SIZE, NUM_QUERY_VECTORS, myRank, worldSize);
+
+	MPI_Barrier(MPI_COMM_WORLD);
 
 	LSHReservoirSampler *reservoir = new LSHReservoirSampler(lsh, NUM_HASHES, NUM_TABLES, RESERVOIR_SIZE, DIMENSION,
 															 RANGE_ROW_U, NUM_DATA_VECTORS + NUM_QUERY_VECTORS, QUERY_PROBES, HASHING_PROBES, ALLOC_FRACTION, myRank, worldSize);
 
-	flashControl control(reservoir, cms, myRank, worldSize, NUM_DATA_VECTORS, NUM_QUERY_VECTORS,
+	MPI_Barrier(MPI_COMM_WORLD);
+
+	flashControl* control = new flashControl(reservoir, cms, myRank, worldSize, NUM_DATA_VECTORS, NUM_QUERY_VECTORS,
 						 NUM_TABLES, QUERY_PROBES, RESERVOIR_SIZE);
+	
+	MPI_Barrier(MPI_COMM_WORLD);
 
-	control.readData("placeholder_txt", 8, 5);
+	control->readData("placeholder_txt", 8, 5);
 
-	control.showPartitions();
+	control->showPartitions();
 
-	control.allocateData();
-	control.allocateQuery();
+	MPI_Barrier(MPI_COMM_WORLD);
 
-	control.add(1, 1);
+	control->allocateData();
+	control->allocateQuery();
 
-	control.hashQuery();
+	MPI_Barrier(MPI_COMM_WORLD);
+
+	control->printData();
+
+	control->add(1, 1);
+
+	printf("Data Added Node %d\n", myRank);
+
+	MPI_Barrier(MPI_COMM_WORLD);
+
+	control->hashQuery();
 
 	unsigned int *outputs = new unsigned int[TOPK * NUM_QUERY_VECTORS];
 
-	control.extractReservoirs(TOPK, outputs);
+	control->extractReservoirsCMS(TOPK, outputs, 0);
 
-	printf("TOP K..\n");
-	for (int i = 0; i < TOPK * NUM_QUERY_VECTORS; i++)
-	{
-		printf("\t%d", outputs[i]);
+	if (myRank == 0) {
+		printf("TOP K..\n");
+		for (int i = 0; i < TOPK * NUM_QUERY_VECTORS; i++) {
+			printf("\t%d", outputs[i]);
+		}
+		printf("\n");
 	}
-	printf("\n");
 
 	delete reservoir;
+	delete cms;
+	delete control;
 	delete lsh;
 
 	delete[] outputs;
@@ -76,26 +87,38 @@ void controlTest()
 
 void webspamTest()
 {
+
+/* ===============================================================
+	MPI Initialization
+*/
 	int provided;
 	MPI_Init_thread(0, 0, MPI_THREAD_FUNNELED, &provided);
-
 	int myRank, worldSize;
-
 	MPI_Comm_size(MPI_COMM_WORLD, &worldSize);
 	MPI_Comm_rank(MPI_COMM_WORLD, &myRank);
 
-	std::cout << "Hashing Probes: " << HASHING_PROBES << " Query Probes: " << QUERY_PROBES << std::endl;
-
+/* ===============================================================
+	Data Structure Initialization
+*/
 	LSH *lsh = new LSH(NUM_HASHES, NUM_TABLES, RANGE_POW, worldSize, myRank);
 
+	MPI_Barrier(MPI_COMM_WORLD);
+
 	CMS *cms = new CMS(CMS_HASHES, CMS_BUCKET_SIZE, NUM_QUERY_VECTORS, myRank, worldSize);
+
+	MPI_Barrier(MPI_COMM_WORLD);
 
 	LSHReservoirSampler *reservoir = new LSHReservoirSampler(lsh, RANGE_POW, NUM_TABLES, RESERVOIR_SIZE, DIMENSION,
 															 RANGE_ROW_U, NUM_DATA_VECTORS + NUM_QUERY_VECTORS, QUERY_PROBES, HASHING_PROBES, ALLOC_FRACTION, myRank, worldSize);
 
+	MPI_Barrier(MPI_COMM_WORLD);
+
 	flashControl *control = new flashControl(reservoir, cms, myRank, worldSize, NUM_DATA_VECTORS, NUM_QUERY_VECTORS,
 											 NUM_TABLES, QUERY_PROBES, RESERVOIR_SIZE);
 
+/* ===============================================================
+	Reading Data
+*/
 	if (myRank == 0) {
 		std::cout << "\nReading Data Node 0..." << std::endl;
 	}
@@ -107,6 +130,9 @@ void webspamTest()
 		std::cout << "Data Read Node 0: " << elapsed.count() << " Seconds\n" << std::endl;
 	}
 
+/* ===============================================================
+	Reading Groundtruths
+*/
 	unsigned int *gtruth_indice = new unsigned int[NUM_QUERY_VECTORS * AVAILABLE_TOPK];
 	float *gtruth_dist = new float[NUM_QUERY_VECTORS * AVAILABLE_TOPK];
 	if (myRank == 0) {
@@ -119,10 +145,26 @@ void webspamTest()
 		std::cout << "Groundtruth Read Node 0: " << elapsed.count() << " Seconds\n" << std::endl;
 	}
 
+/* ===============================================================
+	Partitioning Data Between Nodes
+*/
+	MPI_Barrier(MPI_COMM_WORLD);
+
 	control->showPartitions();
+	
+	MPI_Barrier(MPI_COMM_WORLD);
+
 	control->allocateData();
+
+	MPI_Barrier(MPI_COMM_WORLD);
+
 	control->allocateQuery();
 
+	MPI_Barrier(MPI_COMM_WORLD);
+
+/* ===============================================================
+	Adding Vectors
+*/
 	std::cout << "Adding Vectors Node " << myRank << "..." << std::endl;
 	start = std::chrono::system_clock::now();
 	control->add(NUM_BATCHES, BATCH_PRINT);
@@ -130,6 +172,11 @@ void webspamTest()
 	elapsed = end - start;
 	std::cout << "Vectors Added Node " << myRank << ": " << elapsed.count() << " Seconds\n" << std::endl;
 
+	MPI_Barrier(MPI_COMM_WORLD);
+
+/* ===============================================================
+	Hashing Query Vectors
+*/
 	std::cout << "Computing Query Hashes Node " << myRank << "..." << std::endl;
 	start = std::chrono::system_clock::now();
 	control->hashQuery();
@@ -137,6 +184,11 @@ void webspamTest()
 	elapsed = end - start;
 	std::cout << "Query Hashes Computed Node " << myRank << ": " << elapsed.count() << " Seconds\n" << std::endl;
 
+	MPI_Barrier(MPI_COMM_WORLD);
+
+/* ===============================================================
+	Extracting Reservoirs and Preforming Top-K selection
+*/
 	unsigned int *outputs = new unsigned int[TOPK * NUM_QUERY_VECTORS];
 	start = std::chrono::system_clock::now();
 	std::cout << "Extracting Top K (CMS) Node " << myRank << "..." << std::endl;
@@ -145,16 +197,13 @@ void webspamTest()
 	elapsed = end - start;
 	std::cout << "Top K Extracted Node " << myRank << ": " << elapsed.count() << " Seconds\n" << std::endl;
 
-#ifdef TOPK_BENCHMARK
-	unsigned int *outputs2 = new unsigned int[TOPK * NUM_QUERY_VECTORS];
-	start = std::chrono::system_clock::now();
-	std::cout << "Extracting Top K (Standard) Node " << myRank << "..." << std::endl;
-	control->extractReservoirs(TOPK, outputs2);
-	end = std::chrono::system_clock::now();
-	elapsed = end - start;
-	std::cout << "Top K Extracted Node " << myRank << ": " << elapsed.count() << " Seconds\n" << std::endl;
-#endif
+	MPI_Barrier(MPI_COMM_WORLD);
 
+	// DELETE after
+
+/* ===============================================================
+	Similarity and Accuracy Calculations
+*/
 	if (myRank == 0) {
 		const int nCnt = 10;
 		int nList[nCnt] = {1, 10, 20, 30, 32, 40, 50, 64, 100, TOPK};
@@ -173,47 +222,29 @@ void webspamTest()
 		similarityOfData(gtruth_dist, NUM_QUERY_VECTORS, TOPK, AVAILABLE_TOPK, nList, nCnt);
 		std::cout << "Similarity of Data Computed" << std::endl;
 
-		for (int i = 0; i < NUM_QUERY_VECTORS * TOPK; i++) {
-			outputs[i] -= NUM_QUERY_VECTORS;
-		}
+		// for (int i = 0; i < NUM_QUERY_VECTORS * TOPK; i++) {
+		// 	outputs[i] -= NUM_QUERY_VECTORS;
+		// }
 
-		evaluate(outputs, NUM_QUERY_VECTORS, TOPK, gtruth_indice, gtruth_dist, AVAILABLE_TOPK, gstdVec, gstdCnt, tstdVec, tstdCnt, nList, nCnt);
-		std::cout << "Evaluation Complete" << std::endl;
-
-#ifdef TOPK_BENCHMARK
-		std::cout << "\n\n================================\nTOP K STANDARD\n"
-				  << std::endl;
-
-		similarityMetric(control->_sparseIndices, control->_sparseVals, control->_sparseMarkers,
-						 control->_sparseIndices, control->_sparseVals, control->_sparseMarkers, outputs2, gtruth_dist,
-						 NUM_QUERY_VECTORS, TOPK, AVAILABLE_TOPK, nList, nCnt);
-		std::cout << "Similarity Metric Computed" << std::endl;
-		similarityOfData(gtruth_dist, NUM_QUERY_VECTORS, TOPK, AVAILABLE_TOPK, nList, nCnt);
-		std::cout << "Similarity of Data Computed" << std::endl;
-
-		for (int i = 0; i < NUM_QUERY_VECTORS * TOPK; i++) {
-			outputs2[i] -= NUM_QUERY_VECTORS;
-		}
-
-		evaluate(outputs2, NUM_QUERY_VECTORS, TOPK, gtruth_indice, gtruth_dist, AVAILABLE_TOPK, gstdVec, gstdCnt, tstdVec, tstdCnt, nList, nCnt);
-		std::cout << "Evaluation Complete" << std::endl;
-#endif
+		// evaluate(outputs, NUM_QUERY_VECTORS, TOPK, gtruth_indice, gtruth_dist, AVAILABLE_TOPK, gstdVec, gstdCnt, tstdVec, tstdCnt, nList, nCnt);
+		// std::cout << "Evaluation Complete" << std::endl;
 	}
 
+/* ===============================================================
+	De-allocating Memory
+*/
 	delete[] outputs;
-#ifdef TOPK_BENCHMARK
-	delete[] outputs2;
-#endif
-
 	if (myRank == 0) {
 		delete[] gtruth_dist;
 		delete[] gtruth_indice;
 	}
-
 	delete control;
 	delete reservoir;
 	delete lsh;
 	delete cms;
 
+/* ===============================================================
+	MPI Closing
+*/
 	MPI_Finalize();
 }

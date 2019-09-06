@@ -1,10 +1,11 @@
-//@file
-//@brief This file contains vector multiplications codes.
+#ifndef _MATRIX_MULTIPLICATION_H
+#define _MATRIX_MULTIPLICATION_H
 
-#pragma once
 #include "LSHReservoirSampler.h"
 #include "LSH.h"
 
 float SparseVecMul(int *indicesA, float *valuesA, unsigned int sizeA,
 	int *indicesB, float *valuesB, unsigned int sizeB);
 float SparseVecMul(int *indicesA, float *valuesA, unsigned int sizeA, float *B);
+
+#endif

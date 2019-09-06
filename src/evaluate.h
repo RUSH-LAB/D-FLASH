@@ -43,4 +43,4 @@ void rMetric(unsigned int *queryOutputs, int numQueries, int topk,
 void tMetric(unsigned int *queryOutputs, int numQueries, int topk,
 	unsigned int *groundTruthIdx, float *groundTruthDist, int availableTopk, int *tstdVec, const int tstdCnt);
 
-#endif /* EVALUATE_H */
+#endif

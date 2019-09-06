@@ -1,17 +1,11 @@
-#pragma once
+#ifndef _LSH_RESERVOIR_SAMPLER_H
+#define _LSH_RESERVOIR_SAMPLER_H
 
 #define _CRT_SECURE_NO_DEPRECATE
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
-#include <chrono>
-#include <fstream>
-#include <iostream>
-#include <sstream>
-#include <string>
-#include <random>
+#include <time.h>
 #include <algorithm>
-#include <inttypes.h>
 #include <math.h>
 #include "indexing.h"
 #include "misc.h"
@@ -145,6 +139,7 @@ public:
 	*/
   	void extractReservoirs(int numQueryEntries, int segmentSize, unsigned int *queue, unsigned int *hashIndices);
 
+	// TESTING
 	void extractTopK(int numQueryEntries, unsigned int* hashIndices, int topK, unsigned int* outputs);
 
 	/* Print current parameter settings to the console.
@@ -159,3 +154,5 @@ public:
 	*/
 	~LSHReservoirSampler();
 };
+
+#endif

@@ -1,4 +1,6 @@
-#pragma once
+#ifndef _DATASET_H
+#define _DATASET_H
+
 #include <iostream>
 
 using namespace std;
@@ -16,3 +18,5 @@ void readGroundTruthInt(const std::string& file, int numQueries, int availableTo
 void readGroundTruthFloat(const std::string& file, int numQueries, int availableTopK, float *out);
 
 void dummyReadSparse(std::string filename, int offset, int n, int* indices, float* vals, int* markers, int len);
+
+#endif

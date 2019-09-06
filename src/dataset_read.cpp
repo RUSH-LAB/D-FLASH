@@ -121,6 +121,9 @@ void readSparse(string fileName, int offset, int n, int *indices, float *values,
 		if (ct == (offset + n)) {
 			break;
 		}
+		if (ct % 1000 == 0) {
+			printf("%d\n", ct);
+		}
 	}
 	markers[ct - offset] = totalLen; // Final length marker.
 	std::cout << "[readSparse] Read " << totalLen << " numbers, " <<
