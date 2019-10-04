@@ -126,6 +126,8 @@ public:
 
     void printData();
 
+    void checkDataTransfer();
+
     // Destructor
     ~flashControl();
 

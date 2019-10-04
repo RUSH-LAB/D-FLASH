@@ -17,8 +17,12 @@ LSH::LSH(int _K_in, int _L_in, int _rangePow_in, int worldSize, int worldRank)
 
 	_rand1 = new int[_K * _L];
 	_randHash = new int[2];
-
-	srand(time(NULL));
+	
+	//Rancom hash functions
+	//srand(time(NULL));
+	
+	//Fixed random seed for hash functions
+	srand(145297);
 
 	// MPI
 

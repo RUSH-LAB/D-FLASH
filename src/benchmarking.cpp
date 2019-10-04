@@ -199,8 +199,6 @@ void webspamTest()
 
 	MPI_Barrier(MPI_COMM_WORLD);
 
-	// DELETE after
-
 /* ===============================================================
 	Similarity and Accuracy Calculations
 */
@@ -219,15 +217,16 @@ void webspamTest()
 						 control->_sparseIndices, control->_sparseVals, control->_sparseMarkers, outputs, gtruth_dist,
 						 NUM_QUERY_VECTORS, TOPK, AVAILABLE_TOPK, nList, nCnt);
 		std::cout << "Similarity Metric Computed" << std::endl;
-		similarityOfData(gtruth_dist, NUM_QUERY_VECTORS, TOPK, AVAILABLE_TOPK, nList, nCnt);
-		std::cout << "Similarity of Data Computed" << std::endl;
+		//Commented out for testing purposes
+		//similarityOfData(gtruth_dist, NUM_QUERY_VECTORS, TOPK, AVAILABLE_TOPK, nList, nCnt);
+		//std::cout << "Similarity of Data Computed" << std::endl;
 
-		// for (int i = 0; i < NUM_QUERY_VECTORS * TOPK; i++) {
-		// 	outputs[i] -= NUM_QUERY_VECTORS;
-		// }
-
-		// evaluate(outputs, NUM_QUERY_VECTORS, TOPK, gtruth_indice, gtruth_dist, AVAILABLE_TOPK, gstdVec, gstdCnt, tstdVec, tstdCnt, nList, nCnt);
-		// std::cout << "Evaluation Complete" << std::endl;
+		for (int i = 0; i < NUM_QUERY_VECTORS * TOPK; i++) {
+			outputs[i] -= NUM_QUERY_VECTORS;
+		}
+		//Commented out for testing purposes
+		//evaluate(outputs, NUM_QUERY_VECTORS, TOPK, gtruth_indice, gtruth_dist, AVAILABLE_TOPK, gstdVec, gstdCnt, tstdVec, tstdCnt, nList, nCnt);
+		std::cout << "Evaluation Complete" << std::endl;
 	}
 
 /* ===============================================================

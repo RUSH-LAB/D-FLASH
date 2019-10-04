@@ -12,7 +12,7 @@
 #include <mpi.h>
 
 #define INT_MAX 0xffffff
-#define IGNORE -1
+#define TABLENULL -1
 
 #define hashLocation(dataIndx, numHashes, hashIndx) ((int) (dataIndx * numHashes + hashIndx))
 #define heavyHitterIndx(sketchIndx, sketchSize, bucketSize, hashIndx, hash) ((int) (sketchIndx * sketchSize + bucketSize * 2 * hashIndx + hash * 2))

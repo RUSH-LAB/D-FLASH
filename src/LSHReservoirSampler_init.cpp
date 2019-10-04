@@ -66,7 +66,11 @@ void LSHReservoirSampler::initVariables(unsigned int numHashPerFamily, unsigned 
 
 void LSHReservoirSampler::initHelper(int numTablesIn, int numHashPerFamilyIn, int reservoriSizeIn) {
 
-	srand(time(NULL));
+	//Random initialization of hash functions
+	//srand(time(NULL));
+	
+	//Fixed random seeds for hash functions
+	srand(712376);
 	_sechash_a = rand() * 2 + 1;
 	_sechash_b = rand();
 

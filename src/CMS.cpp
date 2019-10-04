@@ -12,7 +12,11 @@ CMS::CMS(int L, int B, int numDataStreams, int myRank, int worldSize) {
 	_hashingSeeds = new unsigned int[_numHashes];
 
 	if (_myRank == 0) {
-		srand(time(NULL));
+		//Random hash functions
+		//srand(time(NULL));
+
+		//Fixed random seeds for hash functions
+		srand(8524023);
 		for (int h = 0; h < _numHashes; h++) {
 			_hashingSeeds[h] = rand();
 			if (_hashingSeeds[h] % 2 == 0) {
@@ -77,7 +81,6 @@ void CMS::addSketch(int dataStreamIndx, unsigned int* dataStream, int dataStream
 
 	for (int dataIndx = 0; dataIndx < dataStreamLen; dataIndx++) {
 		for (int hashIndx = 0; hashIndx < _numHashes; hashIndx++) {
-			// Use number of items in bucket to add exactly the right amount to each sketch?
 			if (dataStream[dataIndx] == 0) {
 				continue;
 			}
@@ -140,7 +143,7 @@ void CMS::topKSketch(int K, int threshold, unsigned int* topK, int sketchIndx) {
 	std::sort(candidates, candidates + _bucketSize, [&candidates](LHH a, LHH b){return a.count > b.count;});
 
 	for (int i = 0; i < K; i++) {
-		if (candidates[i].heavyHitter > IGNORE) {
+		if (candidates[i].heavyHitter > -1) {
 			topK[i] = candidates[i].heavyHitter;
 		}
 	}
@@ -206,6 +209,4 @@ CMS::~CMS() {
 
 	delete[] _LHH;
 	delete[] _hashingSeeds;
-
-	std::cout << "Count Min Sketch Destroyed" << std::endl;
 }

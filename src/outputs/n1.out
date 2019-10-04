@@ -1,0 +1,219 @@
+LSH Initialized in Node 0
+CMS Initialized in Node 0
+LSH Reservoir Initialized in Node 0
+FLASH Controller Initialized in Node 0
+
+Reading Data Node 0...
+[readSparse]
+1000
+2000
+3000
+4000
+5000
+6000
+7000
+8000
+9000
+10000
+[readSparse] Read 38357581 numbers, 10300 vectors. 
+Data Read Node 0: 14.492 Seconds
+
+Reading Groundtruth Node 0...
+Groundtruth Read Node 0: 0.0101898 Seconds
+
+[Status Rank 0]:
+	Data Vector Range: [300, 10300)
+	Data Range: [1100633, 38357581)
+	Query Vector Range: [0, 300)
+	Query Range: [0, 1100633)
+
+Adding Vectors Node 0...
+Node 0 Table Mem Usage ranges from 0.003052 to 0.004974, average 0.004091
+Node 0 Table Mem Usage ranges from 0.019562 to 0.037903, average 0.028501
+Node 0 Table Mem Usage ranges from 0.032043 to 0.064484, average 0.047153
+Node 0 Table Mem Usage ranges from 0.041901 to 0.086334, average 0.062129
+Node 0 Table Mem Usage ranges from 0.050934 to 0.104645, average 0.075352
+Vectors Added Node 0: 0.255012 Seconds
+
+Computing Query Hashes Node 0...
+Query Hashes Computed Node 0: 0.00661779 Seconds
+
+Extracting Top K (CMS) Node 0...
+Top K Extracted Node 0: 0.0349348 Seconds
+
+
+
+================================
+TOP K CMS
+
+[similarityMetric] Averaging gtruth. 
+[similarityMetric] Averaging output. 
+
+S@k = s_out(s_true): In top k, average output similarity (average groundtruth similarity). 
+S@1 = 0.834 (0.000) 
+S@10 = 0.750 (0.000) 
+S@20 = 0.716 (0.000) 
+S@30 = 0.695 (0.000) 
+S@32 = 0.691 (0.000) 
+S@40 = 0.682 (0.000) 
+S@50 = 0.669 (0.000) 
+S@64 = 0.655 (0.000) 
+S@100 = 0.627 (0.000) 
+S@128 = 0.611 (0.000) 
+1 10 20 30 32 40 50 64 100 128 
+0.834 0.750 0.716 0.695 0.691 0.682 0.669 0.655 0.627 0.611 
+0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 
+
+Similarity Metric Computed
+S@1 = 0.000 
+S@10 = 0.000 
+S@20 = 0.000 
+S@30 = 0.000 
+S@32 = 0.000 
+S@40 = 0.000 
+S@50 = 0.000 
+S@64 = 0.000 
+S@100 = 0.000 
+S@128 = 0.000 
+1 10 20 30 32 40 50 64 100 128 
+0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 
+
+Similarity of Data Computed
+
+R@k: Average fraction of query where the nearest neighbor is in the k first results. 
+R@1 = 0.000 
+R@10 = 0.000 
+R@20 = 0.000 
+R@30 = 0.000 
+R@32 = 0.003 
+R@40 = 0.003 
+R@50 = 0.007 
+R@64 = 0.007 
+R@100 = 0.007 
+R@128 = 0.007 
+1 10 20 30 32 40 50 64 100 128 
+0.000 0.000 0.000 0.000 0.003 0.003 0.007 0.007 0.007 0.007 
+
+
+T@k Average fraction of top k nearest neighbors returned in k first results. 
+T@1 = 0.000
+T@10 = 0.000
+T@20 = 0.000
+T@30 = 0.000
+T@32 = 0.000
+T@40 = 0.000
+T@50 = 0.000
+T@64 = 0.000
+T@100 = 0.000
+T@128 = 0.000
+1 10 20 30 32 40 50 64 100 128 
+0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 
+
+
+Gg@k: Average recall of sim>g neighbors in k first results. 
+G0.95@1 = -nan (0 queries 0 contributions)
+G0.95@10 = -nan (0 queries 0 contributions)
+G0.95@20 = -nan (0 queries 0 contributions)
+G0.95@30 = -nan (0 queries 0 contributions)
+G0.95@32 = -nan (0 queries 0 contributions)
+G0.95@40 = -nan (0 queries 0 contributions)
+G0.95@50 = -nan (0 queries 0 contributions)
+G0.95@64 = -nan (0 queries 0 contributions)
+G0.95@100 = -nan (0 queries 0 contributions)
+G0.95@128 = -nan (0 queries 0 contributions)
+1 10 20 30 32 40 50 64 100 128 
+-nan -nan -nan -nan -nan -nan -nan -nan -nan -nan 
+
+G0.90@1 = -nan (0 queries 0 contributions)
+G0.90@10 = -nan (0 queries 0 contributions)
+G0.90@20 = -nan (0 queries 0 contributions)
+G0.90@30 = -nan (0 queries 0 contributions)
+G0.90@32 = -nan (0 queries 0 contributions)
+G0.90@40 = -nan (0 queries 0 contributions)
+G0.90@50 = -nan (0 queries 0 contributions)
+G0.90@64 = -nan (0 queries 0 contributions)
+G0.90@100 = -nan (0 queries 0 contributions)
+G0.90@128 = -nan (0 queries 0 contributions)
+1 10 20 30 32 40 50 64 100 128 
+-nan -nan -nan -nan -nan -nan -nan -nan -nan -nan 
+
+G0.85@1 = -nan (0 queries 0 contributions)
+G0.85@10 = -nan (0 queries 0 contributions)
+G0.85@20 = -nan (0 queries 0 contributions)
+G0.85@30 = -nan (0 queries 0 contributions)
+G0.85@32 = -nan (0 queries 0 contributions)
+G0.85@40 = -nan (0 queries 0 contributions)
+G0.85@50 = -nan (0 queries 0 contributions)
+G0.85@64 = -nan (0 queries 0 contributions)
+G0.85@100 = -nan (0 queries 0 contributions)
+G0.85@128 = -nan (0 queries 0 contributions)
+1 10 20 30 32 40 50 64 100 128 
+-nan -nan -nan -nan -nan -nan -nan -nan -nan -nan 
+
+G0.80@1 = -nan (0 queries 0 contributions)
+G0.80@10 = -nan (0 queries 0 contributions)
+G0.80@20 = -nan (0 queries 0 contributions)
+G0.80@30 = -nan (0 queries 0 contributions)
+G0.80@32 = -nan (0 queries 0 contributions)
+G0.80@40 = -nan (0 queries 0 contributions)
+G0.80@50 = -nan (0 queries 0 contributions)
+G0.80@64 = -nan (0 queries 0 contributions)
+G0.80@100 = -nan (0 queries 0 contributions)
+G0.80@128 = -nan (0 queries 0 contributions)
+1 10 20 30 32 40 50 64 100 128 
+-nan -nan -nan -nan -nan -nan -nan -nan -nan -nan 
+
+G0.75@1 = -nan (0 queries 0 contributions)
+G0.75@10 = -nan (0 queries 0 contributions)
+G0.75@20 = -nan (0 queries 0 contributions)
+G0.75@30 = -nan (0 queries 0 contributions)
+G0.75@32 = -nan (0 queries 0 contributions)
+G0.75@40 = -nan (0 queries 0 contributions)
+G0.75@50 = -nan (0 queries 0 contributions)
+G0.75@64 = -nan (0 queries 0 contributions)
+G0.75@100 = -nan (0 queries 0 contributions)
+G0.75@128 = -nan (0 queries 0 contributions)
+1 10 20 30 32 40 50 64 100 128 
+-nan -nan -nan -nan -nan -nan -nan -nan -nan -nan 
+
+G0.70@1 = -nan (0 queries 0 contributions)
+G0.70@10 = -nan (0 queries 0 contributions)
+G0.70@20 = -nan (0 queries 0 contributions)
+G0.70@30 = -nan (0 queries 0 contributions)
+G0.70@32 = -nan (0 queries 0 contributions)
+G0.70@40 = -nan (0 queries 0 contributions)
+G0.70@50 = -nan (0 queries 0 contributions)
+G0.70@64 = -nan (0 queries 0 contributions)
+G0.70@100 = -nan (0 queries 0 contributions)
+G0.70@128 = -nan (0 queries 0 contributions)
+1 10 20 30 32 40 50 64 100 128 
+-nan -nan -nan -nan -nan -nan -nan -nan -nan -nan 
+
+G0.65@1 = -nan (0 queries 0 contributions)
+G0.65@10 = -nan (0 queries 0 contributions)
+G0.65@20 = -nan (0 queries 0 contributions)
+G0.65@30 = -nan (0 queries 0 contributions)
+G0.65@32 = -nan (0 queries 0 contributions)
+G0.65@40 = -nan (0 queries 0 contributions)
+G0.65@50 = -nan (0 queries 0 contributions)
+G0.65@64 = -nan (0 queries 0 contributions)
+G0.65@100 = -nan (0 queries 0 contributions)
+G0.65@128 = -nan (0 queries 0 contributions)
+1 10 20 30 32 40 50 64 100 128 
+-nan -nan -nan -nan -nan -nan -nan -nan -nan -nan 
+
+G0.50@1 = -nan (0 queries 0 contributions)
+G0.50@10 = -nan (0 queries 0 contributions)
+G0.50@20 = -nan (0 queries 0 contributions)
+G0.50@30 = -nan (0 queries 0 contributions)
+G0.50@32 = -nan (0 queries 0 contributions)
+G0.50@40 = -nan (0 queries 0 contributions)
+G0.50@50 = -nan (0 queries 0 contributions)
+G0.50@64 = -nan (0 queries 0 contributions)
+G0.50@100 = -nan (0 queries 0 contributions)
+G0.50@128 = -nan (0 queries 0 contributions)
+1 10 20 30 32 40 50 64 100 128 
+-nan -nan -nan -nan -nan -nan -nan -nan -nan -nan 
+
+Evaluation Complete
+Count Min Sketch Destroyed

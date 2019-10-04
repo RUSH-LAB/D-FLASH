@@ -108,6 +108,8 @@ void flashControl::extractReservoirsCMS(int topK, unsigned int* outputs, int thr
 
     _mySketch->add(tally, segmentSize);
 
+    //_mySketch->printBuckets();
+
     _mySketch->aggregateSketches();
 
     if (_myRank == 0) {
@@ -149,5 +151,56 @@ void flashControl::printData() {
             printf("\t%d", _myQueryIndices[i]);
         }
         printf("\n");
+    }
+}
+
+void flashControl::checkDataTransfer() {
+    std::cout << "Markers Check" << std::endl; 
+    if (_myRank == 0) {
+        std::cout << "\nInitial Read" << std::endl;
+        for (int i = 0; i < _numDataVectors + _numQueryVectors + 1; i++) {
+            printf("\t%d. %d\n", i, _sparseMarkers[i]);
+        }
+    }
+    for (int n = 0; n < _worldSize; n++) {
+        if (_myRank == n) {
+            printf("\nQuery Markers Node %d\n", n);
+            for (int i = 0; i < _myQueryVectorsCt + 1; i++) {
+                printf("\t%d. %d\n", i, _myQueryMarkers[i] + _queryOffsets[_myRank]);
+            }
+            MPI_Barrier(MPI_COMM_WORLD);
+        }
+    }
+    for (int n = 0; n < _worldSize; n++) {
+        if (_myRank == n) {
+            printf("\nData Markers Node %d\n", n);
+            for (int i = 0; i < _myDataVectorsCt + 1; i++) {
+                printf("\t%d. %d\n", i, _myDataMarkers[i]);
+            }
+            MPI_Barrier(MPI_COMM_WORLD);
+        }
+    }
+    std::cout << "Indices Check" << std::endl;
+    if (_myRank == 0) {
+        std::cout << "\nInitial Read" << std::endl;
+        for (int i = 0; i < _numDataVectors + _numQueryVectors; i++) {
+            printf("\t%d. Start: %d  Middle: %d  End: %d\n", i, _sparseIndices[_sparseMarkers[i]], _sparseIndices[_sparseMarkers[i] + 12], _sparseIndices[_sparseMarkers[i+1]]);
+        }
+    }
+    for (int n = 0; n < _worldSize; n++) {
+        if (_myRank == n) {
+            printf("\nQuery Indices Node %d\n", n);
+            for (int i = 0; i < _myQueryVectorsCt; i++) {
+                printf("\t%d. Start: %d  Middle: %d  End: %d\n", i, _myQueryIndices[_myQueryMarkers[i]], _myQueryIndices[_myQueryMarkers[i] + 12], _myQueryIndices[_myQueryMarkers[i+1]]);
+            }
+        }
+    }
+    for (int n = 0; n < _worldSize; n++) {
+        if (_myRank == n) {
+            printf("\nData Indices Node %d\n", n);
+            for (int i = 0; i < _myDataVectorsCt; i++) {
+                printf("\t%d. Start: %d  Middle: %d  End: %d\n", i, _myDataIndices[_myDataMarkers[i]], _myDataIndices[_myDataMarkers[i] + 12], _myDataIndices[_myDataMarkers[i+1]]);
+            }
+        }
     }
 }

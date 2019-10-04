@@ -1,0 +1,92 @@
+LSH Initialized in Node 0
+LSH Initialized in Node 1
+CMS Initialized in Node 0
+CMS Initialized in Node 1
+LSH Reservoir Initialized in Node 1
+LSH Reservoir Initialized in Node 0
+FLASH Controller Initialized in Node 0
+
+Reading Data Node 0...
+FLASH Controller Initialized in Node 1
+[readSparse]
+1000
+2000
+3000
+4000
+5000
+6000
+7000
+8000
+9000
+10000
+[readSparse] Read 38357581 numbers, 10300 vectors. 
+Data Read Node 0: 9.91519 Seconds
+
+Reading Groundtruth Node 0...
+Groundtruth Read Node 0: 0.000585702 Seconds
+
+[Status Rank 0]:
+	Data Vector Range: [300, 5300)
+	Data Range: [1100633, 19747643)
+	Query Vector Range: [0, 150)
+	Query Range: [0, 536537)
+
+Adding Vectors Node 0...
+[Status Rank 1]:
+	Data Vector Range: [5300, 10300)
+	Data Range: [19747643, 38357581)
+	Query Vector Range: [150, 300)
+	Query Range: [536537, 1100633)
+
+Adding Vectors Node 1...
+Node 1 Table Mem Usage ranges from 0.001923 to 0.002655, average 0.002209
+Node 1 Table Mem Usage ranges from 0.013000 to 0.019806, average 0.017233
+Node 1 Table Mem Usage ranges from 0.021881 to 0.032471, average 0.028276
+Node 1 Table Mem Usage ranges from 0.029510 to 0.043701, average 0.037966
+Node 1 Table Mem Usage ranges from 0.036346 to 0.054474, average 0.046974
+Vectors Added Node 1: 0.0758601 Seconds
+
+Node 0 Table Mem Usage ranges from 0.001923 to 0.002625, average 0.002253
+Node 0 Table Mem Usage ranges from 0.013977 to 0.021088, average 0.017439
+Node 0 Table Mem Usage ranges from 0.022461 to 0.033661, average 0.028551
+Node 0 Table Mem Usage ranges from 0.030426 to 0.044983, average 0.038330
+Node 0 Table Mem Usage ranges from 0.037750 to 0.054901, average 0.047617
+Vectors Added Node 0: 0.0777743 Seconds
+
+Computing Query Hashes Node 0...
+Computing Query Hashes Node 1...
+Query Hashes Computed Node 0: 0.00210331 Seconds
+
+Extracting Top K (CMS) Node 0...
+Query Hashes Computed Node 1: 0.00211174 Seconds
+
+Extracting Top K (CMS) Node 1...
+Top K Extracted Node 1: 0.00995547 Seconds
+
+Top K Extracted Node 0: 0.0114766 Seconds
+
+
+
+================================
+TOP K CMS
+
+[similarityMetric] Averaging gtruth. 
+[similarityMetric] Averaging output. 
+
+S@k = s_out(s_true): In top k, average output similarity (average groundtruth similarity). 
+S@1 = 0.576 (0.000) 
+S@10 = 0.566 (0.000) 
+S@20 = 0.551 (0.000) 
+S@30 = 0.540 (0.000) 
+S@32 = 0.538 (0.000) 
+S@40 = 0.530 (0.000) 
+S@50 = 0.521 (0.000) 
+S@64 = 0.508 (0.000) 
+S@100 = 0.475 (0.000) 
+S@128 = 0.452 (0.000) 
+1 10 20 30 32 40 50 64 100 128 
+0.576 0.566 0.551 0.540 0.538 0.530 0.521 0.508 0.475 0.452 
+0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 
+
+Similarity Metric Computed
+Evaluation Complete

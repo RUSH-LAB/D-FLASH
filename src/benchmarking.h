@@ -15,7 +15,7 @@
 #define RANGE_POW					15
 #define RANGE_ROW_U					15
 
-#define NUM_TABLES					32
+#define NUM_TABLES				16	
 #define RESERVOIR_SIZE				64
 #define ALLOC_FRACTION				1
 
@@ -24,21 +24,18 @@
 
 #define DIMENSION					4000
 #define FULL_DIMENSION				16609143
-// #define NUM_DATA_VECTORS			340000
-// #define NUM_QUERY_VECTORS			10000
+//#define NUM_DATA_VECTORS			340000
+//#define NUM_QUERY_VECTORS			10000
 #define NUM_DATA_VECTORS            10000
 #define NUM_QUERY_VECTORS           300
 #define MAX_RESERVOIR_RAND			35000
 #define TOPK						128
 #define AVAILABLE_TOPK				1024
 
-#define AVAILABLE_TOPK				1024
-#define TOPK						128
-
 #define CMS_HASHES                  4
-#define CMS_BUCKET_SIZE             1024
+#define CMS_BUCKET_SIZE             256
 
-#define BASEFILE		"../dataset/webspam/webspam_trigram.svm"
+#define BASEFILE		"../dataset/webspam/trigram.svm"
 #define GTRUTHINDICE	"../dataset/webspam/webspam_tri_gtruth_indices.txt"
 #define GTRUTHDIST		"../dataset/webspam/webspam_tri_gtruth_distances.txt"
 
