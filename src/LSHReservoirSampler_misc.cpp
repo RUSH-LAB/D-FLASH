@@ -68,6 +68,28 @@ void LSHReservoirSampler::viewTables() {
 	pause();
 }
 
+void LSHReservoirSampler::tableContents() {
+	unsigned int hashBucketLocation;
+	for (int t = 0; t < _numTables; t++) {
+		printf("\nNode %d: Table %d\n", _myRank, t);
+		for (int b = 0; b < std::min(_numReservoirs, (unsigned) 256); b++) {
+			hashBucketLocation = _tablePointers[tablePointersIdx(_numReservoirsHashed, b, t, _sechash_a, _sechash_b)];
+			if (hashBucketLocation == TABLE_NULL) {
+				continue;
+			}
+			printf("\tHash %d: ", b);
+			for (int i = 0; i < _reservoirSize; i++) {
+				if (_tableMem[tableMemResIdx(t, hashBucketLocation, _aggNumReservoirs) + i] == 0) {
+					break;
+				}
+				printf("%d ", _tableMem[tableMemResIdx(t, hashBucketLocation, _aggNumReservoirs) + i]);
+			}
+			printf("\n");
+		}
+		printf("\n");
+	}
+}
+
 void LSHReservoirSampler::pause() {
 #ifdef VISUAL_STUDIO
 	system("pause");

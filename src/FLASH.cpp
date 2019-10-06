@@ -20,7 +20,12 @@
 #include <iostream>
 
 int main() {
-	//controlTest();
+
+#ifdef UNIT_TESTING	
+	unitTesting();
+#endif
+#ifdef WEBSPAM
 	webspamTest();
+#endif
 	return 0;
 }

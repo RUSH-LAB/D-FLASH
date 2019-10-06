@@ -17,6 +17,7 @@ CMS::CMS(int L, int B, int numDataStreams, int myRank, int worldSize) {
 
 		//Fixed random seeds for hash functions
 		srand(8524023);
+		
 		for (int h = 0; h < _numHashes; h++) {
 			_hashingSeeds[h] = rand();
 			if (_hashingSeeds[h] % 2 == 0) {

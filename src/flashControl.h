@@ -125,9 +125,11 @@ public:
 
     void localTopK(int topK, unsigned int* outputs, int threshold);
 
-    void printData();
+    void printTables();
 
     void checkDataTransfer();
+
+    void checkQueryHashes();
 
     // Destructor
     ~flashControl();

@@ -13,6 +13,9 @@
 #include "omp.h"
 #include "LSH.h"
 
+#define TABLE_NULL -1
+
+
 #define DEBUGTB 3
 #define DEBUGENTRIES 20
 
@@ -149,6 +152,10 @@ public:
 	/* Check the memory load of the hash table.
 	*/
 	void checkTableMemLoad();
+
+	/* Prints contents of each hash table.
+	*/
+	void tableContents();
 
 	/* Destructor. Frees memory allocations and OpenCL environments.
 	*/

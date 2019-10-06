@@ -131,6 +131,14 @@ void flashControl::localTopK(int topK, unsigned int* outputs, int threshold) {
     delete[] tally;
 }
 
+void flashControl::printTables() {
+    for (int n = 0; n < _worldSize; n++) {
+        if (_myRank == n) {
+            _myReservoir->tableContents();
+        }
+        MPI_Barrier(MPI_COMM_WORLD);
+    }
+}
 
 void flashControl::showPartitions(){
     printf("[Status Rank %d]:\n\tData Vector Range: [%d, %d)\n\tData Range: [%d, %d)\n\tQuery Vector Range: [%d, %d)\n\tQuery Range: [%d, %d)\n\n", 
@@ -141,32 +149,6 @@ void flashControl::showPartitions(){
             _queryOffsets[_myRank], _queryOffsets[_myRank] + _myQueryVectorsLen);
 }
 
-void flashControl::printData() {
-    if (_myRank == 0) {
-        printf("Data Rank 0:\n");
-        for (int i = 0; i < _myDataVectorsLen; i++) {
-            printf("\t%d", _myDataIndices[i]);
-        }
-        printf("\nQuery Rank 0:\n");
-        for (int i = 0; i < _myQueryVectorsLen; i++) {
-            printf("\t%d", _myQueryIndices[i]);
-        }
-        printf("\n");
-    }
-    MPI_Barrier(MPI_COMM_WORLD);
-    if (_myRank == 1) {
-        printf("Data Rank 1:\n");
-        for (int i = 0; i < _myDataVectorsLen; i++) {
-            printf("\t%d", _myDataIndices[i]);
-        }
-        printf("\nQuery Rank 1:\n");
-        for (int i = 0; i < _myQueryVectorsLen; i++) {
-            printf("\t%d", _myQueryIndices[i]);
-        }
-        printf("\n");
-    }
-}
-
 void flashControl::checkDataTransfer() {
     std::cout << "Markers Check" << std::endl; 
     if (_myRank == 0) {
@@ -175,14 +157,15 @@ void flashControl::checkDataTransfer() {
             printf("\t%d. %d\n", i, _sparseMarkers[i]);
         }
     }
+    MPI_Barrier(MPI_COMM_WORLD);
     for (int n = 0; n < _worldSize; n++) {
         if (_myRank == n) {
             printf("\nQuery Markers Node %d\n", n);
             for (int i = 0; i < _myQueryVectorsCt + 1; i++) {
                 printf("\t%d. %d\n", i, _myQueryMarkers[i] + _queryOffsets[_myRank]);
             }
-            MPI_Barrier(MPI_COMM_WORLD);
         }
+        MPI_Barrier(MPI_COMM_WORLD);
     }
     for (int n = 0; n < _worldSize; n++) {
         if (_myRank == n) {
@@ -190,8 +173,9 @@ void flashControl::checkDataTransfer() {
             for (int i = 0; i < _myDataVectorsCt + 1; i++) {
                 printf("\t%d. %d\n", i, _myDataMarkers[i]);
             }
-            MPI_Barrier(MPI_COMM_WORLD);
         }
+        MPI_Barrier(MPI_COMM_WORLD);
+
     }
     std::cout << "Indices Check" << std::endl;
     if (_myRank == 0) {
@@ -200,6 +184,7 @@ void flashControl::checkDataTransfer() {
             printf("\t%d. Start: %d  Middle: %d  End: %d\n", i, _sparseIndices[_sparseMarkers[i]], _sparseIndices[_sparseMarkers[i] + 12], _sparseIndices[_sparseMarkers[i+1]]);
         }
     }
+    MPI_Barrier(MPI_COMM_WORLD);
     for (int n = 0; n < _worldSize; n++) {
         if (_myRank == n) {
             printf("\nQuery Indices Node %d\n", n);
@@ -207,6 +192,7 @@ void flashControl::checkDataTransfer() {
                 printf("\t%d. Start: %d  Middle: %d  End: %d\n", i, _myQueryIndices[_myQueryMarkers[i]], _myQueryIndices[_myQueryMarkers[i] + 12], _myQueryIndices[_myQueryMarkers[i+1]]);
             }
         }
+        MPI_Barrier(MPI_COMM_WORLD);
     }
     for (int n = 0; n < _worldSize; n++) {
         if (_myRank == n) {
@@ -214,6 +200,26 @@ void flashControl::checkDataTransfer() {
             for (int i = 0; i < _myDataVectorsCt; i++) {
                 printf("\t%d. Start: %d  Middle: %d  End: %d\n", i, _myDataIndices[_myDataMarkers[i]], _myDataIndices[_myDataMarkers[i] + 12], _myDataIndices[_myDataMarkers[i+1]]);
             }
+        }
+        MPI_Barrier(MPI_COMM_WORLD);
+    }
+}
+
+void flashControl::checkQueryHashes() {
+    for (int n = 0; n < _worldSize; n++) {
+        if (_myRank == n) {
+            int hashOffset = _hashOffsets[_myRank];
+            printf("Query Hashes Node %d\n", n);
+            for (int h = 0; h < _myHashCt; h++) {
+                printf("\tHash %d: %d\n", hashOffset + h, _allQueryHashes[hashOffset + h]);
+            }
+        }
+        MPI_Barrier(MPI_COMM_WORLD);
+    }
+    if (_myRank == 0) {
+        printf("\n\nCombined Query Hashes\n");
+        for (int h = 0; h < _numQueryVectors * _numTables * _numQueryProbes; h++) {
+            printf("\tHash %d: %d\n", h, _allQueryHashes[h]);
         }
     }
 }
