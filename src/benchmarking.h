@@ -71,6 +71,7 @@
 
 void controlTest();
 void webspamTest();
+void localSimilarityTest();
 
 #if !defined (DENSE_DATASET)
 #define SAMFACTOR 24 // DUMMY.

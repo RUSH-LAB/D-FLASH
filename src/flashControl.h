@@ -123,6 +123,7 @@ public:
     // For debugging: shows the partitions of the data and query allocated to a specific node.
     void showPartitions();
 
+    void localTopK(int topK, unsigned int* outputs, int threshold);
 
     void printData();
 

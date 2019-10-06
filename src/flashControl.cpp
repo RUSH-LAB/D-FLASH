@@ -119,6 +119,19 @@ void flashControl::extractReservoirsCMS(int topK, unsigned int* outputs, int thr
     delete[] tally;
 }
 
+void flashControl::localTopK(int topK, unsigned int* outputs, int threshold) {
+    int segmentSize = _numTables * _numQueryProbes * _reservoirSize;
+    unsigned int* tally = new unsigned int[segmentSize * _numQueryVectors];
+    _myReservoir->extractReservoirs(_numQueryVectors, segmentSize, tally, _allQueryHashes);
+
+    _mySketch->add(tally, segmentSize);
+
+    _mySketch->topK(topK, outputs, threshold);
+
+    delete[] tally;
+}
+
+
 void flashControl::showPartitions(){
     printf("[Status Rank %d]:\n\tData Vector Range: [%d, %d)\n\tData Range: [%d, %d)\n\tQuery Vector Range: [%d, %d)\n\tQuery Range: [%d, %d)\n\n", 
             _myRank, 
