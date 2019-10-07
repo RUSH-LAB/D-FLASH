@@ -2,8 +2,8 @@
 #define _BENCHMARKING_H
 
 
-// #define WEBSPAM
-#define UNIT_TESTING
+#define WEBSPAM
+// #define UNIT_TESTING
 
 #ifdef WEBSPAM
 
@@ -55,7 +55,7 @@
 #define RANGE_ROW_U					8
 
 #define NUM_TABLES				    2	
-#define RESERVOIR_SIZE				16
+#define RESERVOIR_SIZE				128
 #define ALLOC_FRACTION				1
 
 #define QUERY_PROBES				1
@@ -63,7 +63,7 @@
 
 #define DIMENSION					4000
 #define FULL_DIMENSION				16609143
-#define NUM_DATA_VECTORS            128
+#define NUM_DATA_VECTORS            64
 #define NUM_QUERY_VECTORS           8
 #define MAX_RESERVOIR_RAND			35000
 #define TOPK						8

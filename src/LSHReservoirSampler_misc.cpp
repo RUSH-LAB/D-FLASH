@@ -77,7 +77,7 @@ void LSHReservoirSampler::tableContents() {
 			if (hashBucketLocation == TABLE_NULL) {
 				continue;
 			}
-			printf("\tHash %d: ", b);
+			printf("\tHash Bucket %d: ", b);
 			for (int i = 0; i < _reservoirSize; i++) {
 				if (_tableMem[tableMemResIdx(t, hashBucketLocation, _aggNumReservoirs) + i] == 0) {
 					break;

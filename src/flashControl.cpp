@@ -92,8 +92,23 @@ void flashControl::hashQuery() {
 
     _myReservoir->getQueryHash(_myQueryVectorsCt, _myHashCt, _myQueryIndices, _myQueryVals, _myQueryMarkers, myPartitionHashes);
 
-    MPI_Allgatherv(myPartitionHashes, _myHashCt, MPI_UNSIGNED, _allQueryHashes, _hashCts, _hashOffsets, MPI_UNSIGNED, MPI_COMM_WORLD);
+    unsigned int* queryHashBuffer = new unsigned int[_numQueryVectors * _numQueryProbes * _numTables];
 
+    MPI_Allgatherv(myPartitionHashes, _myHashCt, MPI_UNSIGNED, queryHashBuffer, _hashCts, _hashOffsets, MPI_UNSIGNED, MPI_COMM_WORLD);
+
+    unsigned int len;
+    for (int partition = 0; partition < _worldSize; partition++) {
+        len = _queryVectorCts[partition] * _numQueryProbes;
+        for (int tb = 0; tb < _numTables; tb++) {
+            unsigned int* old = queryHashBuffer + _hashOffsets[partition] + tb * len;
+            unsigned int* fin = _allQueryHashes + tb * _numQueryVectors * _numQueryProbes + (_hashOffsets[partition] / _numTables);
+            for (int l = 0; l < len; l++) {
+                fin[l] = old[l];
+            }
+        }
+    }
+
+    delete[] queryHashBuffer;
     delete[] myPartitionHashes;
 }
 
