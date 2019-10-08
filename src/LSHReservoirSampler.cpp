@@ -18,19 +18,11 @@ void LSHReservoirSampler::add(int numInputEntries, int* dataIdx, float* dataVal,
 
 	unsigned int* storelog = new unsigned int[_numTables * 4 * numProbePerTb]();
 
-	// for (int n = 0; n < _worldSize; n++) {
-	// 	if (_myRank == n) {
-	// 		printf("\nData Vector Hashes Node %d:\n", _myRank);
-	// 		for (int i = 0; i < numInputEntries; i++) {
-	// 			printf("\tVector %d: ", i);
-	// 			for (int t = 0; t < _numTables; t++) {
-	// 				printf("%d ", allprobsHash[t * numInputEntries + i]);
-	// 			}
-	// 			printf("\n\n");
-	// 		}
-	// 	}
-	// 	MPI_Barrier(MPI_COMM_WORLD);
+	// printf("Data Hashes\n");
+	// for (int i = 0; i < numInputEntries * _numTables; i++) {
+	// 	printf("\tHash %d: %d\n", i, allprobsHash[i]);
 	// }
+	// printf("\n\n");
 
 	reservoirSampling(allprobsHash, allprobsIdx, storelog, numProbePerTb);
 	addTable(storelog, numProbePerTb, dataOffset);

@@ -3,7 +3,7 @@
 
 
 #define WEBSPAM
-// #define UNIT_TESTING
+//#define UNIT_TESTING
 
 #ifdef WEBSPAM
 
@@ -12,12 +12,12 @@
 #define NUM_BATCHES				    50
 #define BATCH_PRINT                 10
 
-#define NUM_HASHES					4
-#define RANGE_POW					15
-#define RANGE_ROW_U					15
+#define NUM_HASHES					8
+#define RANGE_POW					18
+#define RANGE_ROW_U					18
 
-#define NUM_TABLES				    16	
-#define RESERVOIR_SIZE				64
+#define NUM_TABLES				    32	
+#define RESERVOIR_SIZE				256
 #define ALLOC_FRACTION				1
 
 #define QUERY_PROBES				1
@@ -27,18 +27,18 @@
 #define FULL_DIMENSION				16609143
 //#define NUM_DATA_VECTORS			340000
 //#define NUM_QUERY_VECTORS			10000
-#define NUM_DATA_VECTORS            10000
-#define NUM_QUERY_VECTORS           300
+#define NUM_DATA_VECTORS            130000
+#define NUM_QUERY_VECTORS           1000
 #define MAX_RESERVOIR_RAND			35000
 #define TOPK						128
 #define AVAILABLE_TOPK				1024
 
-#define CMS_HASHES                  4
-#define CMS_BUCKET_SIZE             256
+#define CMS_HASHES                  8
+#define CMS_BUCKET_SIZE             2048
 
-#define BASEFILE		"../../dataset/webspam/webspam_trigram.svm"
-#define GTRUTHINDICE	"../../dataset/webspam/webspam_tri_gtruth_indices.txt"
-#define GTRUTHDIST		"../../dataset/webspam/webspam_tri_gtruth_distances.txt"
+#define BASEFILE		"../dataset/webspam/trigram.svm"
+#define GTRUTHINDICE	"../dataset/webspam/webspam_tri_gtruth_indices.txt"
+#define GTRUTHDIST		"../dataset/webspam/webspam_tri_gtruth_distances.txt"
 
 #endif
 
@@ -72,9 +72,9 @@
 #define CMS_HASHES                  2
 #define CMS_BUCKET_SIZE             32
 
-#define BASEFILE		"../../dataset/webspam/webspam_trigram.svm"
-#define GTRUTHINDICE	"../../dataset/webspam/webspam_tri_gtruth_indices.txt"
-#define GTRUTHDIST		"../../dataset/webspam/webspam_tri_gtruth_distances.txt"
+#define BASEFILE		"../dataset/webspam/trigram.svm"
+#define GTRUTHINDICE	"../dataset/webspam/webspam_tri_gtruth_indices.txt"
+#define GTRUTHDIST		"../dataset/webspam/webspam_tri_gtruth_distances.txt"
 
 #endif
 
