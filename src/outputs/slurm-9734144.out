@@ -1,0 +1,260 @@
+LSH Initialized in Node 0
+LSH Initialized in Node 2
+LSH Initialized in Node 1
+LSH Initialized in Node 3
+CMS Initialized in Node 0
+CMS Initialized in Node 2
+CMS Initialized in Node 1
+CMS Initialized in Node 3
+LSH Reservoir Initialized in Node 3
+LSH Reservoir Initialized in Node 1
+LSH Reservoir Initialized in Node 0
+FLASH Controller Initialized in Node 1
+LSH Reservoir Initialized in Node 2
+FLASH Controller Initialized in Node 2
+FLASH Controller Initialized in Node 3
+FLASH Controller Initialized in Node 0
+
+Reading Data Node 0...
+[readSparse]
+1000
+2000
+3000
+4000
+5000
+6000
+7000
+8000
+9000
+10000
+11000
+12000
+13000
+14000
+15000
+16000
+17000
+18000
+19000
+20000
+21000
+22000
+23000
+24000
+25000
+26000
+27000
+28000
+29000
+30000
+31000
+32000
+33000
+34000
+35000
+36000
+37000
+38000
+39000
+40000
+41000
+42000
+43000
+44000
+45000
+46000
+47000
+48000
+49000
+50000
+51000
+52000
+53000
+54000
+55000
+56000
+57000
+58000
+59000
+60000
+61000
+62000
+63000
+64000
+65000
+66000
+67000
+68000
+69000
+70000
+71000
+72000
+73000
+74000
+75000
+76000
+77000
+78000
+79000
+80000
+81000
+82000
+83000
+84000
+85000
+86000
+87000
+88000
+89000
+90000
+91000
+92000
+93000
+94000
+95000
+96000
+97000
+98000
+99000
+100000
+101000
+102000
+103000
+104000
+105000
+106000
+107000
+108000
+109000
+110000
+111000
+112000
+113000
+114000
+115000
+116000
+117000
+118000
+119000
+120000
+121000
+122000
+123000
+124000
+125000
+126000
+127000
+128000
+129000
+130000
+[readSparse] Read 487856166 numbers, 131000 vectors. 
+Data Read Node 0: 139.561 Seconds
+
+Reading Groundtruth Node 0...
+Groundtruth Read Node 0: 0.00264896 Seconds
+
+[Status Rank 0]:
+	Data Vector Range: [1000, 33500)
+	Data Range: [3718114, 124825109)
+	Query Vector Range: [0, 250)
+	Query Range: [0, 928890)
+
+Adding Vectors Node 0...
+[Status Rank 1]:
+	Data Vector Range: [33500, 66000)
+	Data Range: [124825109, 246203751)
+	Query Vector Range: [250, 500)
+	Query Range: [928890, 1860774)
+
+Adding Vectors Node 1...
+[Status Rank 2]:
+	Data Vector Range: [66000, 98500)
+	Data Range: [246203751, 366942431)
+	Query Vector Range: [500, 750)
+	Query Range: [1860774, 2765644)
+
+Adding Vectors Node 2...
+[Status Rank 3]:
+	Data Vector Range: [98500, 131000)
+	Data Range: [366942431, 487856166)
+	Query Vector Range: [750, 1000)
+	Query Range: [2765644, 3718114)
+
+Adding Vectors Node 3...
+Node 2 Table Mem Usage ranges from 0.001629 to 0.002106, average 0.001916
+Node 2 Table Mem Usage ranges from 0.013657 to 0.018375, average 0.016319
+Node 2 Table Mem Usage ranges from 0.023689 to 0.032104, average 0.028436
+Node 2 Table Mem Usage ranges from 0.032879 to 0.044891, average 0.039475
+Node 2 Table Mem Usage ranges from 0.041458 to 0.056984, average 0.049939
+Vectors Added Node 2: 0.710825 Seconds
+
+Node 3 Table Mem Usage ranges from 0.001751 to 0.002254, average 0.002039
+Node 3 Table Mem Usage ranges from 0.013634 to 0.018471, average 0.016426
+Node 3 Table Mem Usage ranges from 0.023712 to 0.032196, average 0.028482
+Node 3 Table Mem Usage ranges from 0.032478 to 0.044811, average 0.039253
+Node 3 Table Mem Usage ranges from 0.040802 to 0.056553, average 0.049489
+Vectors Added Node 3: 0.712338 Seconds
+
+Node 1 Table Mem Usage ranges from 0.001648 to 0.002132, average 0.001927
+Node 1 Table Mem Usage ranges from 0.013500 to 0.018372, average 0.016371
+Node 1 Table Mem Usage ranges from 0.023182 to 0.031960, average 0.028293
+Node 1 Table Mem Usage ranges from 0.032074 to 0.044483, average 0.039201
+Node 1 Table Mem Usage ranges from 0.040565 to 0.056244, average 0.049320
+Vectors Added Node 1: 0.713868 Seconds
+
+Node 0 Table Mem Usage ranges from 0.001732 to 0.002243, average 0.001996
+Node 0 Table Mem Usage ranges from 0.013824 to 0.018600, average 0.016499
+Node 0 Table Mem Usage ranges from 0.023666 to 0.032387, average 0.028521
+Node 0 Table Mem Usage ranges from 0.032730 to 0.044891, average 0.039451
+Node 0 Table Mem Usage ranges from 0.041172 to 0.056740, average 0.049682
+Vectors Added Node 0: 0.714606 Seconds
+
+Computing Query Hashes Node 1...
+Computing Query Hashes Node 3...
+Computing Query Hashes Node 0...
+Computing Query Hashes Node 2...
+Query Hashes Computed Node 0: 0.00494823 Seconds
+
+Extracting Top K (CMS) Node 0...
+Query Hashes Computed Node 1: 0.00494689 Seconds
+
+Extracting Top K (CMS) Node 1...
+Query Hashes Computed Node 2: 0.00493616 Seconds
+
+Extracting Top K (CMS) Node 2...
+Query Hashes Computed Node 3: 0.00494854 Seconds
+
+Extracting Top K (CMS) Node 3...
+Top K Extracted Node 1: 0.447717 Seconds
+
+Top K Extracted Node 2: 0.493017 Seconds
+
+Top K Extracted Node 3: 0.581056 Seconds
+
+Top K Extracted Node 0: 0.749497 Seconds
+
+
+
+================================
+TOP K CMS
+
+[similarityMetric] Averaging gtruth. 
+[similarityMetric] Averaging output. 
+
+S@k = s_out(s_true): In top k, average output similarity (average groundtruth similarity). 
+S@1 = 0.885 (0.000) 
+S@10 = 0.834 (0.000) 
+S@20 = 0.815 (0.000) 
+S@30 = 0.804 (0.000) 
+S@32 = 0.802 (0.000) 
+S@40 = 0.795 (0.000) 
+S@50 = 0.787 (0.000) 
+S@64 = 0.778 (0.000) 
+S@100 = 0.762 (0.000) 
+S@128 = 0.751 (0.000) 
+1 10 20 30 32 40 50 64 100 128 
+0.885 0.834 0.815 0.804 0.802 0.795 0.787 0.778 0.762 0.751 
+0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 
+
+Similarity Metric Computed
+Evaluation Complete

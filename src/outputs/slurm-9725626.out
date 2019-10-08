@@ -1,0 +1,140 @@
+LSH Initialized in Node 0
+LSH Initialized in Node 2
+LSH Initialized in Node 1
+LSH Initialized in Node 3
+CMS Initialized in Node 0
+CMS Initialized in Node 1
+CMS Initialized in Node 2
+CMS Initialized in Node 3
+LSH Reservoir Initialized in Node 2
+LSH Reservoir Initialized in Node 3
+LSH Reservoir Initialized in Node 1
+LSH Reservoir Initialized in Node 0
+FLASH Controller Initialized in Node 1
+FLASH Controller Initialized in Node 3
+FLASH Controller Initialized in Node 0
+
+Reading Data Node 0...
+FLASH Controller Initialized in Node 2
+[readSparse]
+1000
+2000
+3000
+4000
+5000
+6000
+7000
+8000
+9000
+10000
+[readSparse] Read 38357581 numbers, 10300 vectors. 
+Data Read Node 0: 10.0626 Seconds
+
+Reading Groundtruth Node 0...
+Groundtruth Read Node 0: 0.00108052 Seconds
+
+[Status Rank 0]:
+	Data Vector Range: [300, 2800)
+	Data Range: [1100633, 10531330)
+	Query Vector Range: [0, 75)
+	Query Range: [0, 260073)
+
+Adding Vectors Node 0...
+[Status Rank 1]:
+	Data Vector Range: [2800, 5300)
+	Data Range: [10531330, 19747643)
+	Query Vector Range: [75, 150)
+	Query Range: [260073, 536537)
+
+Adding Vectors Node 1...
+[Status Rank 2]:
+	Data Vector Range: [5300, 7800)
+	Data Range: [19747643, 29003925)
+	Query Vector Range: [150, 225)
+	Query Range: [536537, 821914)
+
+Adding Vectors Node 2...
+[Status Rank 3]:
+	Data Vector Range: [7800, 10300)
+	Data Range: [29003925, 38357581)
+	Query Vector Range: [225, 300)
+	Query Range: [821914, 1100633)
+
+Adding Vectors Node 3...
+Node 1 Table Mem Usage ranges from 0.001099 to 0.001465, average 0.001280
+Node 1 Table Mem Usage ranges from 0.008179 to 0.011902, average 0.009953
+Node 1 Table Mem Usage ranges from 0.013947 to 0.020172, average 0.017351
+Node 1 Table Mem Usage ranges from 0.018951 to 0.026825, average 0.023371
+Node 1 Table Mem Usage ranges from 0.023193 to 0.032990, average 0.029055
+Vectors Added Node 1: 0.0383566 Seconds
+
+Node 3 Table Mem Usage ranges from 0.001099 to 0.001526, average 0.001303
+Node 3 Table Mem Usage ranges from 0.008118 to 0.011383, average 0.009956
+Node 3 Table Mem Usage ranges from 0.013367 to 0.019287, average 0.016792
+Node 3 Table Mem Usage ranges from 0.017761 to 0.026031, average 0.022785
+Node 3 Table Mem Usage ranges from 0.021912 to 0.032135, average 0.027916
+Vectors Added Node 3: 0.0389109 Seconds
+
+Node 2 Table Mem Usage ranges from 0.001007 to 0.001404, average 0.001196
+Node 2 Table Mem Usage ranges from 0.007477 to 0.011230, average 0.009684
+Node 2 Table Mem Usage ranges from 0.012482 to 0.018982, average 0.016474
+Node 2 Table Mem Usage ranges from 0.017181 to 0.025879, average 0.022402
+Node 2 Table Mem Usage ranges from 0.021484 to 0.031860, average 0.027807
+Vectors Added Node 2: 0.0413109 Seconds
+
+Node 0 Table Mem Usage ranges from 0.001038 to 0.001373, average 0.001217
+Node 0 Table Mem Usage ranges from 0.007782 to 0.011536, average 0.009510
+Node 0 Table Mem Usage ranges from 0.013336 to 0.020294, average 0.016729
+Node 0 Table Mem Usage ranges from 0.017883 to 0.027069, average 0.022774
+Node 0 Table Mem Usage ranges from 0.021942 to 0.032959, average 0.028004
+Vectors Added Node 0: 0.0420477 Seconds
+
+Computing Query Hashes Node 1...
+Computing Query Hashes Node 3...
+Computing Query Hashes Node 0...
+Computing Query Hashes Node 2...
+Query Hashes Computed Node 0: 0.00117697 Seconds
+
+Query Hashes Computed Node 2: 0.00117573 Seconds
+
+Query Hashes Computed Node 3: 0.00118724 Seconds
+
+Extracting Top K (CMS) Node 0...
+Query Hashes Computed Node 1: 0.00119366 Seconds
+
+Extracting Top K (CMS) Node 1...
+Extracting Top K (CMS) Node 2...
+Extracting Top K (CMS) Node 3...
+Top K Extracted Node 1: 0.0108481 Seconds
+
+Top K Extracted Node 2: 0.0117844 Seconds
+
+Top K Extracted Node 3: 0.0134452 Seconds
+
+Top K Extracted Node 0: 0.0177868 Seconds
+
+
+
+================================
+TOP K CMS
+
+[similarityMetric] Averaging gtruth. 
+[similarityMetric] Averaging output. 
+
+S@k = s_out(s_true): In top k, average output similarity (average groundtruth similarity). 
+S@1 = 0.807 (0.000) 
+S@10 = 0.723 (0.000) 
+S@20 = 0.689 (0.000) 
+S@30 = 0.671 (0.000) 
+S@32 = 0.667 (0.000) 
+S@40 = 0.657 (0.000) 
+S@50 = 0.643 (0.000) 
+S@64 = 0.630 (0.000) 
+S@100 = 0.607 (0.000) 
+S@128 = 0.591 (0.000) 
+1 10 20 30 32 40 50 64 100 128 
+0.807 0.723 0.689 0.671 0.667 0.657 0.643 0.630 0.607 0.591 
+0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 
+
+Similarity Metric Computed
+Evaluation Complete
