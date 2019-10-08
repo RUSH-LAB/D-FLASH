@@ -36,9 +36,9 @@
 #define CMS_HASHES                  8
 #define CMS_BUCKET_SIZE             2048
 
-#define BASEFILE		"../dataset/webspam/trigram.svm"
-#define GTRUTHINDICE	"../dataset/webspam/webspam_tri_gtruth_indices.txt"
-#define GTRUTHDIST		"../dataset/webspam/webspam_tri_gtruth_distances.txt"
+#define BASEFILE		"../../dataset/webspam/trigram.svm"
+#define GTRUTHINDICE	"../../dataset/webspam/webspam_tri_gtruth_indices.txt"
+#define GTRUTHDIST		"../../dataset/webspam/webspam_tri_gtruth_distances.txt"
 
 #endif
 
