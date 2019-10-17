@@ -139,62 +139,65 @@ void webspam()
 */
 	MPI_Finalize();
 
+if (myRank == 0) {
 /* ===============================================================
 	Reading Groundtruths
 */
-	unsigned int *gtruth_indice = new unsigned int[NUM_QUERY_VECTORS * AVAILABLE_TOPK];
-	float *gtruth_dist = new float[NUM_QUERY_VECTORS * AVAILABLE_TOPK];
-	std::cout << "Reading Groundtruth Node 0..." << std::endl;	
-	start = std::chrono::system_clock::now();
-	readGroundTruthInt(GTRUTHINDICE, NUM_QUERY_VECTORS, AVAILABLE_TOPK, gtruth_indice);
-	readGroundTruthFloat(GTRUTHDIST, NUM_QUERY_VECTORS, AVAILABLE_TOPK, gtruth_dist);
-	end = std::chrono::system_clock::now();
-	elapsed = end - start;
-	std::cout << "Groundtruth Read Node 0: " << elapsed.count() << " Seconds\n" << std::endl;
+		unsigned int *gtruth_indice = new unsigned int[NUM_QUERY_VECTORS * AVAILABLE_TOPK];
+		float *gtruth_dist = new float[NUM_QUERY_VECTORS * AVAILABLE_TOPK];
+		std::cout << "Reading Groundtruth Node 0..." << std::endl;	
+		start = std::chrono::system_clock::now();
+		readGroundTruthInt(GTRUTHINDICE, NUM_QUERY_VECTORS, AVAILABLE_TOPK, gtruth_indice);
+		readGroundTruthFloat(GTRUTHDIST, NUM_QUERY_VECTORS, AVAILABLE_TOPK, gtruth_dist);
+		end = std::chrono::system_clock::now();
+		elapsed = end - start;
+		std::cout << "Groundtruth Read Node 0: " << elapsed.count() << " Seconds\n" << std::endl;
 
 /* ===============================================================
 	Similarity and Accuracy Calculations
 */
-	int totalNumVectors = NUM_DATA_VECTORS + NUM_QUERY_VECTORS;
-	int* sparseIndices = new int[totalNumVectors * DIMENSION];
-	float* sparseVals = new float[totalNumVectors * DIMENSION];
-	int* sparseMarkers = new int[totalNumVectors + 1];
-		
-	readSparse(BASEFILE, 0, totalNumVectors , sparseIndices, sparseVals, sparseMarkers, totalNumVectors * DIMENSION);
+		int totalNumVectors = NUM_DATA_VECTORS + NUM_QUERY_VECTORS;
+		int* sparseIndices = new int[totalNumVectors * DIMENSION];
+		float* sparseVals = new float[totalNumVectors * DIMENSION];
+		int* sparseMarkers = new int[totalNumVectors + 1];
+			
+		readSparse(BASEFILE, 0, totalNumVectors , sparseIndices, sparseVals, sparseMarkers, totalNumVectors * DIMENSION);
 
 
-	const int nCnt = 10;
-	int nList[nCnt] = {1, 10, 20, 30, 32, 40, 50, 64, 100, TOPK};
-	const int gstdCnt = 8;
-	float gstdVec[gstdCnt] = {0.95, 0.90, 0.85, 0.80, 0.75, 0.70, 0.65, 0.50};
-	const int tstdCnt = 10;
-	int tstdVec[tstdCnt] = {1, 10, 20, 30, 32, 40, 50, 64, 100, TOPK};
+		const int nCnt = 10;
+		int nList[nCnt] = {1, 10, 20, 30, 32, 40, 50, 64, 100, TOPK};
+		const int gstdCnt = 8;
+		float gstdVec[gstdCnt] = {0.95, 0.90, 0.85, 0.80, 0.75, 0.70, 0.65, 0.50};
+		const int tstdCnt = 10;
+		int tstdVec[tstdCnt] = {1, 10, 20, 30, 32, 40, 50, 64, 100, TOPK};
 
-	std::cout << "\n\n================================\nTOP K CMS\n" << std::endl;
+		std::cout << "\n\n================================\nTOP K CMS\n" << std::endl;
 
-	similarityMetric(sparseIndices, sparseVals, sparseMarkers,
-						 sparseIndices, sparseVals, sparseMarkers, outputs, gtruth_dist,
-						 NUM_QUERY_VECTORS, TOPK, AVAILABLE_TOPK, nList, nCnt);
-	std::cout << "Similarity Metric Computed" << std::endl;
-	//Commented out for testing purposes
-	//similarityOfData(gtruth_dist, NUM_QUERY_VECTORS, TOPK, AVAILABLE_TOPK, nList, nCnt);
-	//std::cout << "Similarity of Data Computed" << std::endl;
+		similarityMetric(sparseIndices, sparseVals, sparseMarkers,
+							sparseIndices, sparseVals, sparseMarkers, outputs, gtruth_dist,
+							NUM_QUERY_VECTORS, TOPK, AVAILABLE_TOPK, nList, nCnt);
+		std::cout << "Similarity Metric Computed" << std::endl;
+		//Commented out for testing purposes
+		//similarityOfData(gtruth_dist, NUM_QUERY_VECTORS, TOPK, AVAILABLE_TOPK, nList, nCnt);
+		//std::cout << "Similarity of Data Computed" << std::endl;
 
-	for (int i = 0; i < NUM_QUERY_VECTORS * TOPK; i++) {
-		outputs[i] -= NUM_QUERY_VECTORS;
-	}
-	//Commented out for testing purposes
-	//evaluate(outputs, NUM_QUERY_VECTORS, TOPK, gtruth_indice, gtruth_dist, AVAILABLE_TOPK, gstdVec, gstdCnt, tstdVec, tstdCnt, nList, nCnt);
-	std::cout << "Evaluation Complete" << std::endl;
+		for (int i = 0; i < NUM_QUERY_VECTORS * TOPK; i++) {
+			outputs[i] -= NUM_QUERY_VECTORS;
+		}
+		//Commented out for testing purposes
+		//evaluate(outputs, NUM_QUERY_VECTORS, TOPK, gtruth_indice, gtruth_dist, AVAILABLE_TOPK, gstdVec, gstdCnt, tstdVec, tstdCnt, nList, nCnt);
+		std::cout << "Evaluation Complete" << std::endl;
 
 /* ===============================================================
 	De-allocating Memory
 */
-	delete[] outputs;
-	if (myRank == 0) {
 		delete[] gtruth_dist;
 		delete[] gtruth_indice;
+		delete[] sparseIndices;
+		delete[] sparseVals;
+		delete[] sparseMarkers;
 	}
+	delete[] outputs;
 }
 
 /*
