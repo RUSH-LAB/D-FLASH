@@ -25,10 +25,10 @@
 
 #define DIMENSION					4000
 #define FULL_DIMENSION				16609143
-//#define NUM_DATA_VECTORS			340000
-//#define NUM_QUERY_VECTORS			10000
-#define NUM_DATA_VECTORS            130000
-#define NUM_QUERY_VECTORS           1000
+#define NUM_DATA_VECTORS			340000
+#define NUM_QUERY_VECTORS			10000
+//#define NUM_DATA_VECTORS            130000
+//#define NUM_QUERY_VECTORS           1000
 #define MAX_RESERVOIR_RAND			35000
 #define TOPK						128
 #define AVAILABLE_TOPK				1024
@@ -36,7 +36,7 @@
 #define CMS_HASHES                  8
 #define CMS_BUCKET_SIZE             2048
 
-#define BASEFILE		"../../dataset/webspam/trigram.svm"
+#define BASEFILE		"../../dataset/webspam/webspam_trigram.svm"
 #define GTRUTHINDICE	"../../dataset/webspam/webspam_tri_gtruth_indices.txt"
 #define GTRUTHDIST		"../../dataset/webspam/webspam_tri_gtruth_distances.txt"
 
@@ -72,7 +72,7 @@
 #define CMS_HASHES                  2
 #define CMS_BUCKET_SIZE             32
 
-#define BASEFILE		"../dataset/webspam/trigram.svm"
+#define BASEFILE		"../dataset/webspam/webspam_trigram.svm"
 #define GTRUTHINDICE	"../dataset/webspam/webspam_tri_gtruth_indices.txt"
 #define GTRUTHDIST		"../dataset/webspam/webspam_tri_gtruth_distances.txt"
 

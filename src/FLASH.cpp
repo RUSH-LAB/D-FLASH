@@ -36,7 +36,7 @@ void checkFileIO() {
 			printf("Reading File Node %d\n", n);
 			readSparse(BASEFILE, vectorsPerNode * myRank, vectorsPerNode, sparseIndices, sparseVals, sparseMarkers, vectorsPerNode * 5000);
 		}
-		MPI_Barrier(MPI_COMM_WORLD);
+		//MPI_Barrier(MPI_COMM_WORLD);
 	}
 
 	MPI_Finalize();
@@ -48,7 +48,7 @@ int main() {
 	unitTesting();
 #endif
 #ifdef WEBSPAM
-	// webspamTest();
+	//webspamTest();
 #endif
 	checkFileIO();
 	return 0;
