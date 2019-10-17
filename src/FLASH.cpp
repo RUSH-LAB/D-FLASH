@@ -48,10 +48,7 @@ int main() {
 	unitTesting();
 #endif
 #ifdef WEBSPAM
-	webspamTest();
+	webspam();
 #endif
-	//checkFileIO();
 	return 0;
 }
-
-// PROOF OF LATEST UPDATE

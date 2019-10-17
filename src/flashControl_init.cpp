@@ -1,6 +1,6 @@
 #include "flashControl.h"
 
-flashControl::flashControl(LSHReservoirSampler* reservoir, CMS* cms, int myRank, int worldSize, int numDataVectors, int numQueryVectors, int numTables, int numQueryProbes, int reservoirSize) {
+flashControl::flashControl(LSHReservoirSampler* reservoir, CMS* cms, int myRank, int worldSize, int numDataVectors, int numQueryVectors, int dimension, int numTables, int numQueryProbes, int reservoirSize) {
 
     // Core Params
     _myReservoir = reservoir;
@@ -9,14 +9,15 @@ flashControl::flashControl(LSHReservoirSampler* reservoir, CMS* cms, int myRank,
     _worldSize = worldSize;
     _numDataVectors = numDataVectors;
     _numQueryVectors = numQueryVectors;
+    _dimension = dimension;
     _numTables = numTables;
     _numQueryProbes = numQueryProbes;
     _reservoirSize = reservoirSize;
 
     _dataVectorOffsets = new int[_worldSize];
     _dataVectorCts = new int[_worldSize]();
-    _dataOffsets = new int[_worldSize];
-    _dataCts = new int[_worldSize];
+    // _dataOffsets = new int[_worldSize];
+    // _dataCts = new int[_worldSize];
 
     _queryVectorOffsets = new int[_worldSize];
     _queryVectorCts = new int[_worldSize]();
@@ -54,28 +55,12 @@ flashControl::flashControl(LSHReservoirSampler* reservoir, CMS* cms, int myRank,
         _hashOffsets[n] = _hashOffsets[n-1] + _hashCts[n-1];
     }
 
-#ifdef DEBUG
-    if (_myRank == 0) {
-        printf("Data and Query Vector Counts and Offsets...\n");
-        for(int i = 0; i < _worldSize; i++) {
-            printf("[Rank %d]: Data Vector Offset: %d, Data Vector Ct: %d, Query Vector Offset: %d, Query Vector Ct: %d\n", i, _dataVectorOffsets[i], _dataVectorCts[i], _queryVectorOffsets[i], _queryVectorCts[i]);
-        }
-    }
-#endif
-
     _allQueryHashes = new unsigned int[_numQueryVectors * _numQueryProbes * _numTables];
 
     _myDataVectorsCt = _dataVectorCts[_myRank];
     _myDataVectorsOffset = _dataVectorOffsets[_myRank];
     _myQueryVectorsCt = _queryVectorCts[_myRank];
     _myHashCt = _hashCts[_myRank];
-    
-#ifdef DEBUG 
-    printf("DATA COUNTS: %d\n\n", _myDataVectorsCt);
-    printf("DATA OFFSET: %d\n\n", _myDataVectorsOffset);
-    printf("QUERY COUNTS: %d\n\n", _myQueryVectorsCt);
-    printf("HASH COUNTS: %d\n\n", _myHashCt);
-#endif
 
     std::cout << "FLASH Controller Initialized in Node " << _myRank << std::endl;
 }
@@ -83,8 +68,6 @@ flashControl::flashControl(LSHReservoirSampler* reservoir, CMS* cms, int myRank,
 flashControl::~flashControl() {
     delete[] _dataVectorOffsets;
     delete[] _dataVectorCts;
-    delete[] _dataOffsets;
-    delete[] _dataCts;
 
     delete[] _queryVectorOffsets;
     delete[] _queryVectorCts;
@@ -103,9 +86,9 @@ flashControl::~flashControl() {
     delete[] _hashOffsets;
 
     if (_myRank == 0) {
-        delete[] _sparseIndices;
-        delete[] _sparseVals;
-        delete[] _sparseMarkers;
+        delete[] _queryIndices;
+        delete[] _queryVals;
+        delete[] _queryMarkers;
     }
 
     delete[] _allQueryHashes;

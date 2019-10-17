@@ -1,61 +1,32 @@
 #include "flashControl.h"
 
-void flashControl::readData(std::string filename, int dataSetSize, int dimension) {
-    if (_myRank == 0) {
-        _sparseIndices = new int[(unsigned)(dataSetSize * dimension)];
-        _sparseVals = new float[(unsigned)(dataSetSize * dimension)];
-        _sparseMarkers = new int[(unsigned)(dataSetSize + 1)];
-        readSparse(filename, 0, (unsigned)(_numDataVectors + _numQueryVectors), _sparseIndices, _sparseVals, _sparseMarkers, (unsigned)((_numDataVectors + _numQueryVectors) * dimension));
-        //dummyReadSparse(filename, 0, (unsigned)(_numDataVectors + _numQueryVectors), _sparseIndices, _sparseVals, _sparseMarkers, (unsigned)((_numDataVectors + _numQueryVectors) * dimension));
-
-        for (int n = 0; n < _worldSize; n++) {
-            _dataOffsets[n] = _sparseMarkers[_dataVectorOffsets[n]];
-            _dataCts[n] = _sparseMarkers[_dataVectorOffsets[n] + _dataVectorCts[n]] - _dataOffsets[n];
-            _queryOffsets[n] = _sparseMarkers[_queryVectorOffsets[n]];
-            _queryCts[n] = _sparseMarkers[_queryVectorOffsets[n] + _queryVectorCts[n]] - _queryOffsets[n];
-        }
-    }
-
-#ifdef DEBUG
-    if (_myRank == 0) {
-        printf("Data and Query Counts and Offsets...\n");
-        for(int i = 0; i < _worldSize; i++) {
-            printf("[Rank %d]: Data Offset: %d, Data Ct: %d, Query Offset: %d, Query Ct: %d\n", i, _dataOffsets[i], _dataCts[i], _queryOffsets[i], _queryCts[i]);
-        }
-    }
-#endif
-
-    MPI_Bcast(_dataOffsets, _worldSize, MPI_INT, 0, MPI_COMM_WORLD);
-    MPI_Bcast(_dataCts, _worldSize, MPI_INT, 0, MPI_COMM_WORLD);
-    MPI_Bcast(_queryOffsets, _worldSize, MPI_INT, 0, MPI_COMM_WORLD);
-    MPI_Bcast(_queryCts, _worldSize, MPI_INT, 0, MPI_COMM_WORLD);
-    
-    _myDataVectorsLen = _dataCts[_myRank];
-    _myDataOffset = _dataOffsets[_myRank];
-    _myQueryVectorsLen = _queryCts[_myRank];
-}
-
-void flashControl::allocateData() {
-    _myDataIndices = new int[_myDataVectorsLen];
-    _myDataVals = new float[_myDataVectorsLen];
+void flashControl::allocateData(std::string filename) {
+    _myDataIndices = new int[_myDataVectorsCt * _dimension];
+    _myDataVals = new float[_myDataVectorsCt * _dimension];
     _myDataMarkers = new int[_myDataVectorsCt + 1];
 
-    int* tempDataMarkerCts = new int[_worldSize];
-    for (int n = 0; n < _worldSize; n++) {
-        tempDataMarkerCts[n] = _dataVectorCts[n] + 1; // To account for extra element at the end of each marker array
-    }
-
-    MPI_Scatterv(_sparseIndices, _dataCts, _dataOffsets, MPI_INT, _myDataIndices, _myDataVectorsLen, MPI_INT, 0, MPI_COMM_WORLD);
-    MPI_Scatterv(_sparseVals, _dataCts, _dataOffsets, MPI_FLOAT, _myDataVals, _myDataVectorsLen, MPI_FLOAT, 0, MPI_COMM_WORLD);
-    MPI_Scatterv(_sparseMarkers, tempDataMarkerCts, _dataVectorOffsets, MPI_INT, _myDataMarkers, _myDataVectorsCt + 1, MPI_INT, 0, MPI_COMM_WORLD);
-    
-    for (int i = 0; i < _myDataVectorsCt + 1; i++) {
-        _myDataMarkers[i] -= _myDataOffset;
-    }
-    delete[] tempDataMarkerCts;
+    readSparse(filename, _myDataVectorsOffset, _myDataVectorsCt, _myDataIndices, _myDataVals, _myDataMarkers, _myDataVectorsCt * _dimension);
 }
 
-void flashControl::allocateQuery() {
+void flashControl::allocateQuery(std::string filename) {
+
+    if (_myRank == 0) {
+        _queryIndices = new int[(unsigned)(_numQueryVectors * _dimension)];
+        _queryVals = new float[(unsigned)(_numDataVectors * _dimension)];
+        _queryMarkers = new int[(unsigned)(_numQueryVectors + 1)];
+        readSparse(filename, 0, (unsigned) _numQueryVectors, _queryIndices, _queryVals, _queryMarkers, (unsigned)(_numQueryVectors * _dimension));
+
+        for (int n = 0; n < _worldSize; n++) {
+            _queryOffsets[n] = _queryMarkers[_queryVectorOffsets[n]];
+            _queryCts[n] = _queryMarkers[_queryVectorOffsets[n] + _queryVectorCts[n]] - _queryOffsets[n];
+        }
+    }
+    
+    MPI_Bcast(_queryOffsets, _worldSize, MPI_INT, 0, MPI_COMM_WORLD);
+    MPI_Bcast(_queryCts, _worldSize, MPI_INT, 0, MPI_COMM_WORLD);
+
+    _myQueryVectorsLen = _queryCts[_myRank];
+
     _myQueryIndices = new int[_myQueryVectorsLen];
     _myQueryVals = new float[_myQueryVectorsLen];
     _myQueryMarkers = new int[_myQueryVectorsCt + 1];
@@ -65,9 +36,9 @@ void flashControl::allocateQuery() {
         tempQueryMarkerCts[n] = _queryVectorCts[n] + 1; // To account for extra element at the end of each marker array
     }
 
-    MPI_Scatterv(_sparseIndices, _queryCts, _queryOffsets, MPI_INT, _myQueryIndices, _myQueryVectorsLen, MPI_INT, 0, MPI_COMM_WORLD);
-    MPI_Scatterv(_sparseVals, _queryCts, _queryOffsets, MPI_FLOAT, _myQueryVals, _myQueryVectorsLen, MPI_FLOAT, 0, MPI_COMM_WORLD);
-    MPI_Scatterv(_sparseMarkers, tempQueryMarkerCts, _queryVectorOffsets, MPI_INT, _myQueryMarkers, _myQueryVectorsCt + 1, MPI_INT, 0, MPI_COMM_WORLD);
+    MPI_Scatterv(_queryIndices, _queryCts, _queryOffsets, MPI_INT, _myQueryIndices, _myQueryVectorsLen, MPI_INT, 0, MPI_COMM_WORLD);
+    MPI_Scatterv(_queryVals, _queryCts, _queryOffsets, MPI_FLOAT, _myQueryVals, _myQueryVectorsLen, MPI_FLOAT, 0, MPI_COMM_WORLD);
+    MPI_Scatterv(_queryMarkers, tempQueryMarkerCts, _queryVectorOffsets, MPI_INT, _myQueryMarkers, _myQueryVectorsCt + 1, MPI_INT, 0, MPI_COMM_WORLD);
 
     int myQueryOffset = _queryOffsets[_myRank];
     for (int i = 0; i < _myQueryVectorsCt + 1; i++) {
@@ -156,68 +127,11 @@ void flashControl::printTables() {
 }
 
 void flashControl::showPartitions(){
-    printf("[Status Rank %d]:\n\tData Vector Range: [%d, %d)\n\tData Range: [%d, %d)\n\tQuery Vector Range: [%d, %d)\n\tQuery Range: [%d, %d)\n\n", 
+    printf("[Status Rank %d]:\n\tData Vector Range: [%d, %d)\n\tQuery Vector Range: [%d, %d)\n\tQuery Range: [%d, %d)\n\n", 
             _myRank, 
             _myDataVectorsOffset, _myDataVectorsOffset + _myDataVectorsCt, 
-            _dataOffsets[_myRank], _dataOffsets[_myRank] + _myDataVectorsLen,
             _queryVectorOffsets[_myRank], _queryVectorOffsets[_myRank] + _myQueryVectorsCt,
             _queryOffsets[_myRank], _queryOffsets[_myRank] + _myQueryVectorsLen);
-}
-
-void flashControl::checkDataTransfer() {
-    std::cout << "Markers Check" << std::endl; 
-    if (_myRank == 0) {
-        std::cout << "\nInitial Read" << std::endl;
-        for (int i = 0; i < _numDataVectors + _numQueryVectors + 1; i++) {
-            printf("\t%d. %d\n", i, _sparseMarkers[i]);
-        }
-    }
-    MPI_Barrier(MPI_COMM_WORLD);
-    for (int n = 0; n < _worldSize; n++) {
-        if (_myRank == n) {
-            printf("\nQuery Markers Node %d\n", n);
-            for (int i = 0; i < _myQueryVectorsCt + 1; i++) {
-                printf("\t%d. %d\n", i, _myQueryMarkers[i] + _queryOffsets[_myRank]);
-            }
-        }
-        MPI_Barrier(MPI_COMM_WORLD);
-    }
-    for (int n = 0; n < _worldSize; n++) {
-        if (_myRank == n) {
-            printf("\nData Markers Node %d\n", n);
-            for (int i = 0; i < _myDataVectorsCt + 1; i++) {
-                printf("\t%d. %d\n", i, _myDataMarkers[i]);
-            }
-        }
-        MPI_Barrier(MPI_COMM_WORLD);
-
-    }
-    std::cout << "Indices Check" << std::endl;
-    if (_myRank == 0) {
-        std::cout << "\nInitial Read" << std::endl;
-        for (int i = 0; i < _numDataVectors + _numQueryVectors; i++) {
-            printf("\t%d. Start: %d  Middle: %d  End: %d\n", i, _sparseIndices[_sparseMarkers[i]], _sparseIndices[_sparseMarkers[i] + 12], _sparseIndices[_sparseMarkers[i+1]]);
-        }
-    }
-    MPI_Barrier(MPI_COMM_WORLD);
-    for (int n = 0; n < _worldSize; n++) {
-        if (_myRank == n) {
-            printf("\nQuery Indices Node %d\n", n);
-            for (int i = 0; i < _myQueryVectorsCt; i++) {
-                printf("\t%d. Start: %d  Middle: %d  End: %d\n", i, _myQueryIndices[_myQueryMarkers[i]], _myQueryIndices[_myQueryMarkers[i] + 12], _myQueryIndices[_myQueryMarkers[i+1]]);
-            }
-        }
-        MPI_Barrier(MPI_COMM_WORLD);
-    }
-    for (int n = 0; n < _worldSize; n++) {
-        if (_myRank == n) {
-            printf("\nData Indices Node %d\n", n);
-            for (int i = 0; i < _myDataVectorsCt; i++) {
-                printf("\t%d. Start: %d  Middle: %d  End: %d\n", i, _myDataIndices[_myDataMarkers[i]], _myDataIndices[_myDataMarkers[i] + 12], _myDataIndices[_myDataMarkers[i+1]]);
-            }
-        }
-        MPI_Barrier(MPI_COMM_WORLD);
-    }
 }
 
 void flashControl::checkQueryHashes() {

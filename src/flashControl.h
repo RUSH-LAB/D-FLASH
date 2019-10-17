@@ -20,12 +20,12 @@ private:
     // Reservoir Params
     int _numTables, _numQueryProbes, _reservoirSize;
 
-    int _numDataVectors, _numQueryVectors; // Total number of data and query vectors across all nodes
+    int _numDataVectors, _numQueryVectors, _dimension; // Total number of data and query vectors across all nodes
 
     int* _dataVectorCts; // Number of data vectors allocated to each node
     int* _dataVectorOffsets; // Offset, in number of vectors, for the range of vectors of each node
-    int* _dataCts; // Total length of all data vectors allocated to each node
-    int* _dataOffsets; // Offset, in total length of data vectors, of the data range of each node
+    //D int* _dataCts; // Total length of all data vectors allocated to each node
+    //D int* _dataOffsets; // Offset, in total length of data vectors, of the data range of each node
 
     int* _queryVectorCts; // Number of query vectors allocated to each node
     int* _queryVectorOffsets; // Offset, in number of vectors, for the range of vectors of each node
@@ -36,9 +36,9 @@ private:
 
     // For storing the partition of the data allocated to each node
     int _myDataVectorsCt; // Number of data vectors allocated to a specific node
-    int _myDataVectorsLen; // Combined length of all of the data vectors allocated to a specific node
-    int _myDataVectorsOffset; // Offset of data vectory array for a specific node
-    int _myDataOffset;
+    //D int _myDataVectorsLen; // Combined length of all of the data vectors allocated to a specific node
+    int _myDataVectorsOffset; // Offset of data vector array for a specific node
+    //D int _myDataOffset;
     int* _myDataIndices; // Locations of non-zeros within a node's partition of data vectors
     float* _myDataVals; // Values of non-zeros within a node's partition of data vectors
     int* _myDataMarkers; // Start and end indexes of data vectors within a node's partition of data vectors
@@ -56,13 +56,12 @@ private:
 
     unsigned int* _allQueryHashes; // Combined hashes from all nodes
 
+    int* _queryIndices;
+    float* _queryVals;
+    int* _queryMarkers;
+
 public:
 
-    // For storing full dataset, only used in node 0
-    int* _sparseIndices; // Locations of non-zeros
-    float* _sparseVals; // Vals of non-zeros
-    int* _sparseMarkers; // Start and end indexes of data vectors
-    
     /* Constructor. 
         Initializes a FLASH Controller object that manages communication and data partitions between nodes.
         Determines how the many data vectors will be sent to each node and how many query vectors each node will hash.
@@ -73,27 +72,19 @@ public:
     @param worldSize: the total number of nodes.
     @param numDataVectors: the total number of dataVectors that will be added across all nodes.
     @param numQueryVectors: the total number of queryVectors that will used across all nodes.
+    @param dimension: the dimension of each vector (or max for sparse datasets)
     @param numTables: the number of tables in the instance of LSHReservoirSampler.
     @param numQueryProbes: the number of probes used for each query vector.
     @param reservoirSize: the size of each reservoir in the instance of LSHReservoirSampler.
     */
     flashControl(LSHReservoirSampler* reservoir, CMS* cms, int myRank, int worldSize, int numDataVectors, 
-                 int numQueryVectors, int numTables, int numQueryProbes, int reservoirSize);
-
-    /* Reads the data from a file, determines the indices of the partitions of data and query vectors
-       that each node will be responsible for.
-
-       @param filename: the file to read the data from.
-       @param dataSetSize: the total number of vectors to read.
-       @param dimension: max length of each vector, used for allocating memory.
-    */
-    void readData(std::string filename, int dataSetSize, int dimension);
+                 int numQueryVectors, int dimension, int numTables, int numQueryProbes, int reservoirSize);
 
     // Allocates memory in each node and sends each node its partition of the set of data vectors.
-    void allocateData();
+    void allocateData(std::string filename);
 
     // Allocates memory in each node and sends each node its partition of the set of query vectors for hashing.
-    void allocateQuery();
+    void allocateQuery(std::string filename);
 
     /* Adds a nodes set of data vectors to its LSHReservoirSampler object.
 

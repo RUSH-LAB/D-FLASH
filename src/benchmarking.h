@@ -78,37 +78,7 @@
 
 #endif
 
-#ifdef TEST
-#define NUM_HASHES 2
-#define RANGE_POW 2
-#define NUM_TABLES 2
-#define RESERVOIR_SIZE 8
-#define DIMENSION 5
-#define RANGE_ROW_U 2
-#define NUM_VECTORS 8
-#define NUM_DATA_VECTORS 4
-#define NUM_QUERY_VECTORS 4
-#define HASHING_PROBES 1
-#define QUERY_PROBES 1
-#define ALLOC_FRACTION 1
-#define TOPK 3
-#define AVAILABLE_TOPK 8
-#define CMS_HASHES 2
-#define CMS_BUCKET_SIZE 8
-
-//Dummy Variables
-#define BASEFILE ""
-#define GTRUTHINDICE ""
-#define GTRUTHDIST ""
-#define NUM_BATCHES 1
-#define BATCH_PRINT 1
-
-#endif
-
-
-void controlTest();
-void webspamTest();
-void localSimilarityTest();
+void webspam();
 void unitTesting();
 
 #if !defined (DENSE_DATASET)
