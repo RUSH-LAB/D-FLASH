@@ -176,9 +176,9 @@ if (myRank == 0) {
 							sparseIndices, sparseVals, sparseMarkers, outputs, gtruth_dist,
 							NUM_QUERY_VECTORS, TOPK, AVAILABLE_TOPK, nList, nCnt);
 		std::cout << "Similarity Metric Computed" << std::endl;
-		//Commented out for testing purposes
-		//similarityOfData(gtruth_dist, NUM_QUERY_VECTORS, TOPK, AVAILABLE_TOPK, nList, nCnt);
-		//std::cout << "Similarity of Data Computed" << std::endl;
+		// Commented out for testing purposes
+		similarityOfData(gtruth_dist, NUM_QUERY_VECTORS, TOPK, AVAILABLE_TOPK, nList, nCnt);
+		std::cout << "Similarity of Data Computed" << std::endl;
 
 		for (int i = 0; i < NUM_QUERY_VECTORS * TOPK; i++) {
 			outputs[i] -= NUM_QUERY_VECTORS;
