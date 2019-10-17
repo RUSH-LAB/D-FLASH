@@ -163,7 +163,6 @@ if (myRank == 0) {
 			
 		readSparse(BASEFILE, 0, totalNumVectors , sparseIndices, sparseVals, sparseMarkers, totalNumVectors * DIMENSION);
 
-
 		const int nCnt = 10;
 		int nList[nCnt] = {1, 10, 20, 30, 32, 40, 50, 64, 100, TOPK};
 		const int gstdCnt = 8;
