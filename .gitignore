@@ -1,3 +1,18 @@
 .vscode 
 
 dataset
+
+cobjs
+./cobjs
+.cobjs
+/cobjs
+
+cppobjs
+./cppobjs
+.cppobjs
+/cppobjs
+
+runme
+./runme
+/runme
+.runme
