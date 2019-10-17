@@ -25,10 +25,10 @@
 
 #define DIMENSION					4000
 #define FULL_DIMENSION				16609143
-#define NUM_DATA_VECTORS			340000
-#define NUM_QUERY_VECTORS			10000
-//#define NUM_DATA_VECTORS            130000
-//#define NUM_QUERY_VECTORS           1000
+//#define NUM_DATA_VECTORS			340000
+//#define NUM_QUERY_VECTORS			10000
+#define NUM_DATA_VECTORS            10000
+#define NUM_QUERY_VECTORS           300
 #define MAX_RESERVOIR_RAND			35000
 #define TOPK						128
 #define AVAILABLE_TOPK				1024
