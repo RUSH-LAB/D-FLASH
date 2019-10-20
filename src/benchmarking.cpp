@@ -119,7 +119,7 @@ void webspam()
 	unsigned int *outputs = new unsigned int[TOPK * NUM_QUERY_VECTORS];
 	start = std::chrono::system_clock::now();
 	std::cout << "Extracting Top K (CMS) Node " << myRank << "..." << std::endl;
-	control->extractReservoirsCMS(TOPK, outputs, 0);
+	control->topKCMSAggregation(TOPK, outputs, 0);
 	end = std::chrono::system_clock::now();
 	elapsed = end - start;
 	std::cout << "Top K Extracted Node " << myRank << ": " << elapsed.count() << " Seconds\n" << std::endl;
@@ -301,7 +301,8 @@ void unitTesting()
 	unsigned int *outputs = new unsigned int[TOPK * NUM_QUERY_VECTORS];
 	start = std::chrono::system_clock::now();
 	std::cout << "Extracting Top K (CMS) Node " << myRank << "..." << std::endl;
-	control->extractReservoirsCMS(TOPK, outputs, 0);
+	control->topKCMSAggregation(TOPK, outputs, 0);
+	// control->topKBruteForceAggretation(TOPK, outputs);
 	end = std::chrono::system_clock::now();
 	elapsed = end - start;
 	std::cout << "Top K Extracted Node " << myRank << ": " << elapsed.count() << " Seconds\n" << std::endl;

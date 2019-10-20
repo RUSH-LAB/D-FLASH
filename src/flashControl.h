@@ -2,11 +2,17 @@
 #define _FLASH_CONTROL_H
 
 #include <iostream>
+#include <algorithm>
 #include "CMS.h"
 #include <string>
 #include "mpi.h"
 #include "LSHReservoirSampler.h"
 #include "dataset.h"
+
+struct VectorFrequency {
+	unsigned int vector;
+	int count;
+};
 
 class flashControl {
 
@@ -98,18 +104,22 @@ public:
     // partition of hashes into a single set of hashes in every node.
     void hashQuery();
 
-    // For testing
-    // For use with single node to establish benchmark for comparison with TopKAPI top-k selection.
-    void extractReservoirs(int topK, unsigned int* outputs);
-
-    /* Extracts reservoirs from each node's hash tables, stores frequency counts for each node 
-        in  a CMS object, aggregates CMS objects in node 0, and preforms top-k selection there.
+    /* Extracts reservoirs from each node's hash tables, and sends these top k candidates to 
+       node 0, which preforms frequency counts and selects the top-k.
 
     @param topK: the number of top elements to select.
-    @param outputs: an array to store the top-k selected.
+    @param outputs: an array to store the selected top-k for each query vector.
+    */
+    void topKBruteForceAggretation(int topK, unsigned int* outputs);
+
+    /* Extracts reservoirs from each node's hash tables, stores frequency counts for each node 
+        in a CMS object, aggregates CMS objects in node 0, and preforms top-k selection there.
+
+    @param topK: the number of top elements to select.
+    @param outputs: an array to store the selected top-k for each query vector.
     @param threshold: used for extracting heavy hitters in topKAPI
     */
-    void extractReservoirsCMS(int topK, unsigned int* outputs, int threshold);
+    void topKCMSAggregation(int topK, unsigned int* outputs, int threshold);
 
     // For debugging: shows the partitions of the data and query allocated to a specific node.
     void showPartitions();

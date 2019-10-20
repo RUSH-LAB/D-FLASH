@@ -68,11 +68,16 @@ void flashControl::hashQuery() {
     MPI_Allgatherv(myPartitionHashes, _myHashCt, MPI_UNSIGNED, queryHashBuffer, _hashCts, _hashOffsets, MPI_UNSIGNED, MPI_COMM_WORLD);
 
     unsigned int len;
+
+    unsigned int* old;
+    unsigned int* fin;
+
+#pragma omp parallel for default(none) shared(queryHashBuffer, _allQueryHashes, _hashOffsets, _numQueryProbes, _numTables) private(len, old, fin)
     for (int partition = 0; partition < _worldSize; partition++) {
         len = _queryVectorCts[partition] * _numQueryProbes;
         for (int tb = 0; tb < _numTables; tb++) {
-            unsigned int* old = queryHashBuffer + _hashOffsets[partition] + tb * len;
-            unsigned int* fin = _allQueryHashes + tb * _numQueryVectors * _numQueryProbes + (_hashOffsets[partition] / _numTables);
+            old = queryHashBuffer + _hashOffsets[partition] + tb * len;
+            fin = _allQueryHashes + tb * _numQueryVectors * _numQueryProbes + (_hashOffsets[partition] / _numTables);
             for (int l = 0; l < len; l++) {
                 fin[l] = old[l];
             }
@@ -83,18 +88,79 @@ void flashControl::hashQuery() {
     delete[] myPartitionHashes;
 }
 
-void flashControl::extractReservoirs(int topK, unsigned int* outputs) {
-    _myReservoir->extractTopK(_numQueryVectors, _allQueryHashes, topK, outputs);
+void flashControl::topKBruteForceAggretation(int topK, unsigned int* outputs) {
+    int segmentSize = _numTables * _numQueryProbes * _reservoirSize;
+    unsigned int* allReservoirsExtracted = new unsigned int[segmentSize * _numQueryVectors];
+    _myReservoir->extractReservoirs(_numQueryVectors, segmentSize, allReservoirsExtracted, _allQueryHashes);
+
+    unsigned int* allReservoirsAllNodes;
+    if (_myRank == 0) {
+        allReservoirsAllNodes = new unsigned int[segmentSize * _numQueryVectors * _worldSize];
+    }
+    MPI_Gather(allReservoirsExtracted, segmentSize * _numQueryVectors, MPI_UNSIGNED, allReservoirsAllNodes, segmentSize * _numQueryVectors, MPI_UNSIGNED, 0, MPI_COMM_WORLD);
+    
+    if (_myRank == 0) {
+        unsigned int* allReservoirsAllNodesOrdered = new unsigned int[segmentSize * _numQueryVectors * _worldSize];
+        
+        int queryBlockSize = _worldSize * segmentSize;
+        unsigned int* old;
+        unsigned int* final;
+
+#pragma omp parallel for default(none) shared(allReservoirsAllNodes, allReservoirsAllNodesOrdered, queryBlockSize, segmentSize, _numQueryVectors) private(old, final)
+        for(int v = 0; v < _numQueryVectors; v++) {
+            for (int n = 0; n < _worldSize; n++) {
+                old = allReservoirsAllNodes + v * segmentSize + n * (_numQueryVectors * segmentSize);
+                final = allReservoirsAllNodesOrdered + v * queryBlockSize + n * segmentSize;
+                for (int i = 0; n < segmentSize; n++) {
+                    final[i] = old[i];
+                }
+            }
+        }
+
+        delete[] allReservoirsAllNodes;
+
+#pragma omp parallel for default(none) shared(allReservoirsAllNodesOrdered, queryBlockSize)
+        for (int v = 0; v < _numQueryVectors; v++) {
+            std::sort(allReservoirsAllNodesOrdered + v * queryBlockSize, allReservoirsAllNodesOrdered + (v + 1) * queryBlockSize);
+        }
+
+        VectorFrequency* vectorCnts = new VectorFrequency[segmentSize * _numDataVectors * _worldSize];
+
+#pragma omp parallel for default(none) shared(allReservoirsAllNodesOrdered, vectorCnts, queryBlockSize, outputs, topK)
+        for (int v = 0; v < _numQueryVectors; v++) {
+            int uniqueVectors = 0;
+            unsigned int current = allReservoirsAllNodesOrdered[0];
+            int count = 1;
+            for (int i = 1; i < queryBlockSize; i++) {
+                if (allReservoirsAllNodesOrdered[i + v * queryBlockSize] == current) {
+                    count++;
+                } else {
+                    vectorCnts[uniqueVectors + v * queryBlockSize].vector = current;
+                    vectorCnts[uniqueVectors + v * queryBlockSize].count = count;
+                    current = allReservoirsAllNodesOrdered[i + v * queryBlockSize];
+                    count = 1;
+                    uniqueVectors++;
+                }
+            }
+            for (; uniqueVectors < queryBlockSize; uniqueVectors++) {
+                vectorCnts[uniqueVectors + v * queryBlockSize].count = -1;
+            }
+            std::sort(vectorCnts + v * queryBlockSize, vectorCnts + (v + 1) * queryBlockSize, [&vectorCnts](VectorFrequency a, VectorFrequency b){return a.count > b.count;});
+            int k = 0;
+            if (vectorCnts[0].vector == 0) k++;
+            for (; k < topK; k++) {
+                outputs[k + topK * v] = vectorCnts[k + v * queryBlockSize].vector;
+            }
+        }
+    }
 }
 
-void flashControl::extractReservoirsCMS(int topK, unsigned int* outputs, int threshold) {
+void flashControl::topKCMSAggregation(int topK, unsigned int* outputs, int threshold) {
     int segmentSize = _numTables * _numQueryProbes * _reservoirSize;
-    unsigned int* tally = new unsigned int[segmentSize * _numQueryVectors];
-    _myReservoir->extractReservoirs(_numQueryVectors, segmentSize, tally, _allQueryHashes);
+    unsigned int* allReservoirsExtracted = new unsigned int[segmentSize * _numQueryVectors];
+    _myReservoir->extractReservoirs(_numQueryVectors, segmentSize, allReservoirsExtracted, _allQueryHashes);
 
-    _mySketch->add(tally, segmentSize);
-
-    //_mySketch->printBuckets();
+    _mySketch->add(allReservoirsExtracted, segmentSize);
 
     _mySketch->aggregateSketches();
 
@@ -102,7 +168,7 @@ void flashControl::extractReservoirsCMS(int topK, unsigned int* outputs, int thr
         _mySketch->topK(topK, outputs, threshold);
     }
 
-    delete[] tally;
+    delete[] allReservoirsExtracted;
 }
 
 void flashControl::localTopK(int topK, unsigned int* outputs, int threshold) {
