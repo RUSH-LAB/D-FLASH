@@ -125,6 +125,10 @@ void webspam()
 	elapsed = end - start;
 	std::cout << "Top K Extracted Node " << myRank << ": " << elapsed.count() << " Seconds\n" << std::endl;
 
+	for (int i = 0; i < 20; i++) {
+		std::cout << outputs[128 * i + 0] << std::endl;
+	}
+
 	MPI_Barrier(MPI_COMM_WORLD);
 
 /* ===============================================================
