@@ -111,7 +111,7 @@ void flashControl::topKBruteForceAggretation(int topK, unsigned int* outputs) {
             for (int n = 0; n < _worldSize; n++) {
                 old = allReservoirsAllNodes + v * segmentSize + n * (_numQueryVectors * segmentSize);
                 final = allReservoirsAllNodesOrdered + v * queryBlockSize + n * segmentSize;
-                for (int i = 0; n < segmentSize; n++) {
+                for (int i = 0; i < segmentSize; i++) {
                     final[i] = old[i];
                 }
             }
@@ -124,7 +124,7 @@ void flashControl::topKBruteForceAggretation(int topK, unsigned int* outputs) {
             std::sort(allReservoirsAllNodesOrdered + v * queryBlockSize, allReservoirsAllNodesOrdered + (v + 1) * queryBlockSize);
         }
 
-        VectorFrequency* vectorCnts = new VectorFrequency[segmentSize * _numDataVectors * _worldSize];
+        VectorFrequency* vectorCnts = new VectorFrequency[segmentSize * _numQueryVectors * _worldSize];
 
 #pragma omp parallel for default(none) shared(allReservoirsAllNodesOrdered, vectorCnts, queryBlockSize, outputs, topK)
         for (int v = 0; v < _numQueryVectors; v++) {
@@ -142,13 +142,16 @@ void flashControl::topKBruteForceAggretation(int topK, unsigned int* outputs) {
                     uniqueVectors++;
                 }
             }
+            vectorCnts[uniqueVectors + v * queryBlockSize].vector = current;
+            vectorCnts[uniqueVectors + v * queryBlockSize].count = count;
+			uniqueVectors++;
             for (; uniqueVectors < queryBlockSize; uniqueVectors++) {
                 vectorCnts[uniqueVectors + v * queryBlockSize].count = -1;
             }
             std::sort(vectorCnts + v * queryBlockSize, vectorCnts + (v + 1) * queryBlockSize, [&vectorCnts](VectorFrequency a, VectorFrequency b){return a.count > b.count;});
-            int k = 0;
-            if (vectorCnts[0].vector == 0) k++;
-            for (; k < topK; k++) {
+            int s = 0;
+            if (vectorCnts[queryBlockSize * v].vector == 0) s++;
+            for (int k = s; k < topK + s; k++) {
                 outputs[k + topK * v] = vectorCnts[k + v * queryBlockSize].vector;
             }
         }
