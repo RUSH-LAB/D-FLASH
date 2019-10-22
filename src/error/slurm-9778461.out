@@ -1,0 +1,51 @@
+LSH Initialized in Node 0
+LSH Initialized in Node 4
+LSH Initialized in Node 1
+LSH Initialized in Node 2
+LSH Initialized in Node 3
+LSH Initialized in Node 5
+LSH Initialized in Node 6
+LSH Initialized in Node 7
+CMS Initialized in Node 0
+CMS Initialized in Node 2
+CMS Initialized in Node 4
+CMS Initialized in Node 6
+CMS Initialized in Node 1
+CMS Initialized in Node 3
+CMS Initialized in Node 5
+CMS Initialized in Node 7
+LSH Reservoir Initialized in Node 5
+LSH Reservoir Initialized in Node 7
+LSH Reservoir Initialized in Node 3
+LSH Reservoir Initialized in Node 4
+LSH Reservoir Initialized in Node 6
+LSH Reservoir Initialized in Node 1
+LSH Reservoir Initialized in Node 2
+LSH Reservoir Initialized in Node 0
+FLASH Controller Initialized in Node 0
+
+Reading Data Node 0...
+FLASH Controller Initialized in Node 1
+FLASH Controller Initialized in Node 3
+FLASH Controller Initialized in Node 5
+FLASH Controller Initialized in Node 7
+FLASH Controller Initialized in Node 2
+[readSparse]
+FLASH Controller Initialized in Node 4
+FLASH Controller Initialized in Node 6
+[readSparse]
+[readSparse]
+[readSparse]
+[readSparse]
+[readSparse]
+[readSparse]
+[readSparse]
+slurmstepd: Exceeded job memory limit at some point.
+srun: error: bc12u11n2: task 0: Killed
+[readSparse] Read 93450180 numbers, 25000 vectors. 
+[readSparse] Read 92970488 numbers, 25000 vectors. 
+[readSparse] Read 93116748 numbers, 25000 vectors. 
+[readSparse] Read 92502406 numbers, 25000 vectors. 
+[readSparse] Read 93122772 numbers, 25000 vectors. 
+[readSparse] Read 93608435 numbers, 25000 vectors. 
+[readSparse] Read 93562585 numbers, 25000 vectors. 
