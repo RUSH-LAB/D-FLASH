@@ -165,7 +165,8 @@ void flashControl::topKCMSAggregation(int topK, unsigned int* outputs, int thres
 
     _mySketch->add(allReservoirsExtracted, segmentSize);
 
-    _mySketch->aggregateSketches();
+    // _mySketch->aggregateSketches();
+    _mySketch->aggregateSketchesTree();
 
     if (_myRank == 0) {
         _mySketch->topK(topK, outputs, threshold);
