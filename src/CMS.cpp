@@ -201,11 +201,11 @@ void CMS::aggregateSketchesTree() {
 			int source = _myRank + std::pow(2, iter);
 			MPI_Recv(recvBuffer, bufferSize, MPI_INT, source, iter, MPI_COMM_WORLD, &status);
 			combineSketches(recvBuffer);
-			printf("Iteration %d: Node %d: Recv from %d\n", iter, _myRank, source);
+			// printf("Iteration %d: Node %d: Recv from %d\n", iter, _myRank, source);
 	    } else if (_myRank % ((int) std::pow(2, iter + 1)) == ((int) std::pow(2, iter))) {
 			int destination = _myRank - ((int) std::pow(2, iter));
 			MPI_Send(_LHH, bufferSize, MPI_INT, destination, iter, MPI_COMM_WORLD);
-			printf("Iteration %d: Node %d: Send from %d\n", iter, _myRank, destination);
+			// printf("Iteration %d: Node %d: Send from %d\n", iter, _myRank, destination);
         }
 	}
 	delete[] recvBuffer;
