@@ -7,6 +7,7 @@
 #include <iostream>
 #include <time.h>
 #include <math.h>
+#include <cmath>
 #include <algorithm>
 #include <omp.h>
 #include <mpi.h>
@@ -88,6 +89,9 @@ public:
 	   Uses combineSketches helper function.
 	*/
 	void aggregateSketches();
+
+	void aggregateSketchesTree();
+
 
 	/* For Debugging. Prints the heavy hitter and count for each element of the bucket for each hash function.
 
