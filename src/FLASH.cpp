@@ -50,5 +50,8 @@ int main() {
 #ifdef WEBSPAM
 	webspam();	
 #endif
+#ifdef KDD12
+	webspam();	
+#endif
 	return 0;
 }
