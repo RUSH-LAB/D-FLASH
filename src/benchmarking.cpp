@@ -30,7 +30,7 @@
  * WEBSPAM TESTING FUNCTION
  */
 
-void webspam()
+void sparseExecution()
 {
 
 /* ===============================================================

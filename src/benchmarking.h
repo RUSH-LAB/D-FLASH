@@ -120,7 +120,7 @@
 
 #endif
 
-void webspam();
+void sparseExecution();
 void unitTesting();
 
 #if !defined (DENSE_DATASET)
