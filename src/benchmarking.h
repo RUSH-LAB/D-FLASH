@@ -17,8 +17,8 @@
 #define RANGE_POW					18
 #define RANGE_ROW_U					18
 
-//#define NUM_TABLES				    32	
-#define NUM_TABLES				24
+// #define NUM_TABLES				    32	
+#define NUM_TABLES				    24
 #define RESERVOIR_SIZE				256
 #define ALLOC_FRACTION				1
 
@@ -29,16 +29,16 @@
 #define FULL_DIMENSION				16609143
 #define NUM_DATA_VECTORS			340000
 #define NUM_QUERY_VECTORS			10000
-//#define NUM_DATA_VECTORS			10000
-//#define NUM_QUERY_VECTORS			300
+// #define NUM_DATA_VECTORS			10000
+// #define NUM_QUERY_VECTORS			300
 #define MAX_RESERVOIR_RAND			35000
 #define TOPK						128
 #define AVAILABLE_TOPK				1024
 
-//#define CMS_HASHES                  8
-#define CMS_HASHES		    4
-//#define CMS_BUCKET_SIZE             2048
-#define CMS_BUCKET_SIZE	    1024
+// #define CMS_HASHES                  8
+#define CMS_HASHES		            4
+// #define CMS_BUCKET_SIZE             2048
+#define CMS_BUCKET_SIZE             1024
 
 #define BASEFILE		"../../dataset/webspam/webspam_trigram.svm"
 #define GTRUTHINDICE	"../../dataset/webspam/webspam_tri_gtruth_indices.txt"
@@ -57,7 +57,6 @@
 #define RANGE_POW					12
 #define RANGE_ROW_U					12
 
-//#define NUM_TABLES				    32	
 #define NUM_TABLES				    16
 #define RESERVOIR_SIZE				256
 #define ALLOC_FRACTION				1
@@ -65,22 +64,22 @@
 #define QUERY_PROBES				1
 #define HASHING_PROBES				1
 
-#define DIMENSION					20
+#define DIMENSION					15
 #define FULL_DIMENSION				54686452
-#define NUM_DATA_VECTORS			149000000
-#define NUM_QUERY_VECTORS			10000
-// #define NUM_DATA_VECTORS			1000000
-// #define NUM_QUERY_VECTORS			100000
+// #define NUM_DATA_VECTORS			149000000
+// #define NUM_QUERY_VECTORS			10000
+#define NUM_DATA_VECTORS			1000000
+#define NUM_QUERY_VECTORS			100000
 #define MAX_RESERVOIR_RAND			35000
 #define TOPK						128
 #define AVAILABLE_TOPK				1024
 
-#define CMS_HASHES		    4
-#define CMS_BUCKET_SIZE	    1024
+#define CMS_HASHES		            4
+#define CMS_BUCKET_SIZE	            1024
 
 #define BASEFILE		"../../dataset/kdd12/kdd12"
-#define GTRUTHINDICE	"../../dataset/webspam/webspam_tri_gtruth_indices.txt"
-#define GTRUTHDIST		"../../dataset/webspam/webspam_tri_gtruth_distances.txt"
+#define GTRUTHINDICE	""
+#define GTRUTHDIST		""
 
 #endif
 

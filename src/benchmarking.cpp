@@ -336,13 +336,10 @@ if (myRank == 0) {
 		std::cout << "\n\n================================\nTOP K CMS\n" << std::endl;
 
 		similarityMetric(sparseIndices, sparseVals, sparseMarkers,
-							sparseIndices, sparseVals, sparseMarkers, outputs, gtruth_dist,
+							sparseIndices, sparseVals, sparseMarkers, outputs,
 							NUM_QUERY_VECTORS, TOPK, AVAILABLE_TOPK, nList, nCnt);
 		std::cout << "Similarity Metric Computed" << std::endl;
-		// Commented out for testing purposes
-		similarityOfData(gtruth_dist, NUM_QUERY_VECTORS, TOPK, AVAILABLE_TOPK, nList, nCnt);
-		std::cout << "Similarity of Data Computed" << std::endl;
-
+		
 /* ===============================================================
 	De-allocating Memory
 */

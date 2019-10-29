@@ -11,6 +11,11 @@
 void similarityOfData(float *groundTruthDist, unsigned int numQueries, unsigned int topk,
 	unsigned int availableTopk, int *nList, int nCnt);
 
+void similarityMetric(int *queries_indice, float *queries_val, int *queries_marker,
+	int *bases_indice, float *bases_val, int *bases_marker, unsigned int *queryOutputs,
+	unsigned int numQueries, unsigned int topk, unsigned int availableTopk, int *nList,
+	int nCnt);
+
 void similarityMetric(float *queries, float *bases, unsigned int *queryOutputs, float *groundTruthDist,
 	unsigned int dimension, unsigned int numQueries, unsigned int topk, unsigned int availableTopk, int *nList,
 	int nCnt);

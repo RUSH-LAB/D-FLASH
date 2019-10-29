@@ -55,6 +55,46 @@ void similarityOfData(float *groundTruthDist, unsigned int numQueries, unsigned 
 	printf("\n"); printf("\n");
 }
 
+// Similarity Metrix for datasets without ground truths
+void similarityMetric(int *queries_indice, float *queries_val, int *queries_marker,
+	int *bases_indice, float *bases_val, int *bases_marker, unsigned int *queryOutputs,
+	unsigned int numQueries, unsigned int topk, unsigned int availableTopk, int *nList,
+	int nCnt) {
+
+	float *out_avt = new float[nCnt]();
+
+	std::cout << "[similarityMetric] Averaging output. " << std::endl;
+	/* Output average. */
+	for (unsigned int i = 0; i < numQueries; i++) {
+		int startA, endA;
+		startA = queries_marker[i];
+		endA = queries_marker[i + 1];
+		for (unsigned int j = 0; j < topk; j++) {
+			int startB, endB;
+			startB = bases_marker[queryOutputs[i * topk + j]];
+			endB = bases_marker[queryOutputs[i * topk + j] + 1];
+			float dist = cosineDist(queries_indice + startA, queries_val + startA, endA - startA,
+				bases_indice + startB, bases_val + startB, endB - startB);
+			for (int n = 0; n < nCnt; n++) {
+				if (j < nList[n]) out_avt[n] += dist;
+			}
+		}
+	}
+
+	/* Print results. */
+	printf("\nS@k = s_out(s_true): In top k, average output similarity (average groundtruth similarity). \n");
+	for (unsigned int n = 0; n < nCnt; n++) {
+		printf("S@%d = %1.3f \n", nList[n],
+			out_avt[n] / (numQueries * nList[n]));
+	}
+	for (unsigned int n = 0; n < nCnt; n++) printf("%d ", nList[n]);
+	printf("\n");
+	for (unsigned int n = 0; n < nCnt; n++) printf("%1.3f ", out_avt[n] / (numQueries * nList[n]));
+	printf("\n");
+}
+
+
+
 /* Simple comparison of average similarity between gtruth and the outputs. */
 void similarityMetric(int *queries_indice, float *queries_val, int *queries_marker,
 	int *bases_indice, float *bases_val, int *bases_marker, unsigned int *queryOutputs, float *groundTruthDist,
@@ -105,7 +145,6 @@ void similarityMetric(int *queries_indice, float *queries_val, int *queries_mark
 	printf("\n");
 	for (unsigned int n = 0; n < nCnt; n++) printf("%1.3f ", gtruth_avg[n] / (numQueries * nList[n]));
 	printf("\n"); printf("\n");
-
 }
 
 /* Simple comparison of average similarity between gtruth and the outputs. */
