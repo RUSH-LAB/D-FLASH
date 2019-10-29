@@ -26,10 +26,10 @@ int main() {
 	unitTesting();
 #endif
 #ifdef WEBSPAM
-	sparseExecution();	
+	webspam();	
 #endif
 #ifdef KDD12
-	sparseExecution();	
+	kdd12();	
 #endif
 	return 0;
 }
