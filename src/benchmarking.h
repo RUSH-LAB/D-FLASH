@@ -54,8 +54,8 @@
 #define BATCH_PRINT                 10
 
 #define NUM_HASHES					4
-#define RANGE_POW					12
-#define RANGE_ROW_U					12
+#define RANGE_POW					16
+#define RANGE_ROW_U					16
 
 #define NUM_TABLES				    16
 #define RESERVOIR_SIZE				256
@@ -68,8 +68,8 @@
 #define FULL_DIMENSION				54686452
 // #define NUM_DATA_VECTORS			149000000
 // #define NUM_QUERY_VECTORS			10000
-#define NUM_DATA_VECTORS			1000000
-#define NUM_QUERY_VECTORS			100000
+#define NUM_DATA_VECTORS			100000000
+#define NUM_QUERY_VECTORS			10000
 #define MAX_RESERVOIR_RAND			35000
 #define TOPK						128
 #define AVAILABLE_TOPK				1024

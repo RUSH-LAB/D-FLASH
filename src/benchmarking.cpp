@@ -41,6 +41,9 @@ void webspam()
 	int myRank, worldSize;
 	MPI_Comm_size(MPI_COMM_WORLD, &worldSize);
 	MPI_Comm_rank(MPI_COMM_WORLD, &myRank);
+	if (myRank == 0) {
+		std::cout << "===============\n=== WEBSPAM ===\n===============\n" << std::endl;
+	}
 
 /* ===============================================================
 	Data Structure Initialization
@@ -213,7 +216,6 @@ if (myRank == 0) {
 
 void kdd12()
 {
-
 /* ===============================================================
 	MPI Initialization
 */
@@ -222,6 +224,9 @@ void kdd12()
 	int myRank, worldSize;
 	MPI_Comm_size(MPI_COMM_WORLD, &worldSize);
 	MPI_Comm_rank(MPI_COMM_WORLD, &myRank);
+	if (myRank == 0) {
+		std::cout << "=============\n=== KDD12 ===\n=============\n" << std::endl;
+	}
 
 /* ===============================================================
 	Data Structure Initialization
