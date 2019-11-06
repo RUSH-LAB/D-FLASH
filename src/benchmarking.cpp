@@ -15,7 +15,7 @@
 
 #define TOPK_BENCHMARK
 
-void showConfig(std::String dataset, int numVectors, int queries, int nodes, int tables, int rangePow, int reservoirSize, int hashes, int cmsHashes, int cmsBucketSize){
+void showConfig(std::string dataset, int numVectors, int queries, int nodes, int tables, int rangePow, int reservoirSize, int hashes, int cmsHashes, int cmsBucketSize){
 	std::cout << "\n=================\n== " << dataset << "\n=================\n" << std::endl;
 
 	printf("%d Vectors, %d Queries\n", numVectors, queries);
