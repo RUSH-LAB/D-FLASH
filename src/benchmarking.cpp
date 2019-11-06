@@ -15,6 +15,18 @@
 
 #define TOPK_BENCHMARK
 
+void showConfig(std::String dataset, int numVectors, int queries, int nodes, int tables, int rangePow, int reservoirSize, int hashes, int cmsHashes, int cmsBucketSize){
+	std::cout << "\n=================\n== " << dataset << "\n=================\n" << std::endl;
+
+	printf("%d Vectors, %d Queries\n", numVectors, queries);
+
+	printf("Nodes: %d\nTables: %d\nRangePow: %d\nReservoir Size: %d\nHashes: %d\n", nodes, tables, rangePow, reservoirSize, hashes);
+
+	printf("CMS Bucket Size: %d\nCMS Hashes: %d\n", cmsBucketSize, cmsHashes);
+
+
+}
+
 /*
  * WEBSPAM TESTING FUNCTION
  * WEBSPAM TESTING FUNCTION
@@ -42,7 +54,7 @@ void webspam()
 	MPI_Comm_size(MPI_COMM_WORLD, &worldSize);
 	MPI_Comm_rank(MPI_COMM_WORLD, &myRank);
 	if (myRank == 0) {
-		std::cout << "===============\n=== WEBSPAM ===\n===============\n" << std::endl;
+		showConfig("Webspam", NUM_DATA_VECTORS, NUM_QUERY_VECTORS, worldSize, NUM_TABLES, RANGE_POW, RESERVOIR_SIZE, NUM_HASHES, CMS_HASHES, CMS_BUCKET_SIZE);
 	}
 
 /* ===============================================================
@@ -225,7 +237,7 @@ void kdd12()
 	MPI_Comm_size(MPI_COMM_WORLD, &worldSize);
 	MPI_Comm_rank(MPI_COMM_WORLD, &myRank);
 	if (myRank == 0) {
-		std::cout << "=============\n=== KDD12 ===\n=============\n" << std::endl;
+		showConfig("KDD12", NUM_DATA_VECTORS, NUM_QUERY_VECTORS, worldSize, NUM_TABLES, RANGE_POW, RESERVOIR_SIZE, NUM_HASHES, CMS_HASHES, CMS_BUCKET_SIZE);
 	}
 
 /* ===============================================================
