@@ -121,6 +121,7 @@
 
 void webspam();
 void kdd12();
+void showConfig(std::String dataset, int numVectors, int queries, int nodes, int tables, int rangePow, int reservoirSize, int hashes, int cmsHashes, int cmsBucketSize);
 void unitTesting();
 
 #if !defined (DENSE_DATASET)
