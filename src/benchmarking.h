@@ -1,6 +1,7 @@
 #ifndef _BENCHMARKING_H
 #define _BENCHMARKING_H
 
+#include <string>
 
 // #define WEBSPAM
 #define KDD12
