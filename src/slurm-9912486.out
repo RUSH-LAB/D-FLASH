@@ -1,0 +1,122 @@
+slurmstepd: task/cgroup: unable to add task[pid=33042] to memory cg '(null)'
+slurmstepd: unable to build slurm cgroup for ns memory: Cannot allocate memory
+slurmstepd: jobacct_gather/cgroup: unable to instanciate user 17279 memory cgroup
+slurmstepd: task/cgroup: unable to add task[pid=33107] to memory cg '(null)'
+slurmstepd: task/cgroup: unable to add task[pid=33108] to memory cg '(null)'
+slurmstepd: task/cgroup: unable to add task[pid=33109] to memory cg '(null)'
+slurmstepd: unable to build slurm cgroup for ns memory: Cannot allocate memory
+slurmstepd: jobacct_gather/cgroup: unable to instanciate user 17279 memory cgroup
+slurmstepd: unable to build slurm cgroup for ns memory: Cannot allocate memory
+slurmstepd: jobacct_gather/cgroup: unable to instanciate user 17279 memory cgroup
+slurmstepd: unable to build slurm cgroup for ns memory: Cannot allocate memory
+slurmstepd: jobacct_gather/cgroup: unable to instanciate user 17279 memory cgroup
+
+=================
+== KDD12
+=================
+
+140000000 Vectors, 10000 Queries
+Nodes: 3
+Tables: 16
+RangePow: 18
+Reservoir Size: 256
+Hashes: 4
+CMS Bucket Size: 2048
+CMS Hashes: 4
+LSH Initialized in Node 0
+LSH Initialized in Node 1
+LSH Initialized in Node 2
+CMS Initialized in Node 0
+CMS Initialized in Node 1
+CMS Initialized in Node 2
+LSH Reservoir Initialized in Node 1
+LSH Reservoir Initialized in Node 2
+LSH Reservoir Initialized in Node 0
+FLASH Controller Initialized in Node 0
+
+Reading Data Node 0...
+FLASH Controller Initialized in Node 1
+
+Reading Data Node 1...
+FLASH Controller Initialized in Node 2
+
+Reading Data Node 2...
+[readSparse]
+[readSparse]
+[readSparse]
+[readSparse] Read 513333359 numbers, 46666669 vectors. 
+[readSparse] Read 513333359 numbers, 46666669 vectors. 
+[readSparse] Read 513333348 numbers, 46666668 vectors. 
+Data Read Node 2: 190.047 Seconds
+
+Data Read Node 0: 190.047 Seconds
+
+Data Read Node 1: 190.047 Seconds
+
+[readSparse]
+[readSparse] Read 110000 numbers, 10000 vectors. 
+Adding Vectors Node 0...
+Adding Vectors Node 1...
+Adding Vectors Node 2...
+Node 1 Table Mem Usage ranges from 0.735783 to 0.839962, average 0.797754
+Node 1 Table Mem Usage ranges from 0.999657 to 0.999767, average 0.999721
+Node 1 Table Mem Usage ranges from 0.999691 to 0.999786, average 0.999738
+Node 1 Table Mem Usage ranges from 0.999691 to 0.999786, average 0.999738
+Node 1 Table Mem Usage ranges from 0.999691 to 0.999786, average 0.999738
+Vectors Added Node 1: 133.45 Seconds
+
+Node 2 Table Mem Usage ranges from 0.505341 to 0.696674, average 0.639206
+Node 2 Table Mem Usage ranges from 0.994305 to 0.999760, average 0.999175
+Node 2 Table Mem Usage ranges from 0.999660 to 0.999863, average 0.999753
+Node 2 Table Mem Usage ranges from 0.999660 to 0.999878, average 0.999760
+Node 2 Table Mem Usage ranges from 0.999660 to 0.999878, average 0.999760
+Vectors Added Node 2: 138.591 Seconds
+
+Node 0 Table Mem Usage ranges from 0.718834 to 0.830849, average 0.786215
+Node 0 Table Mem Usage ranges from 0.999626 to 0.999752, average 0.999689
+Node 0 Table Mem Usage ranges from 0.999630 to 0.999783, average 0.999707
+Node 0 Table Mem Usage ranges from 0.999630 to 0.999783, average 0.999707
+Node 0 Table Mem Usage ranges from 0.999630 to 0.999783, average 0.999707
+Vectors Added Node 0: 148.299 Seconds
+
+Computing Query Hashes Node 0...
+Computing Query Hashes Node 1...
+Computing Query Hashes Node 2...
+Query Hashes Computed Node 0: 0.00474688 Seconds
+
+Query Hashes Computed Node 2: 0.00484911 Seconds
+
+Query Hashes Computed Node 1: 0.00490487 Seconds
+
+Extracting Top K (CMS) Node 2...
+Extracting Top K (CMS) Node 0...
+Extracting Top K (CMS) Node 1...
+Top K Extracted Node 1: 1.79832 Seconds
+
+Top K Extracted Node 2: 2.20677 Seconds
+
+Top K Extracted Node 0: 2.64336 Seconds
+
+[readSparse]
+[readSparse] Read 1540110000 numbers, 140010000 vectors. 
+
+
+================================
+TOP K CMS
+
+[similarityMetric] Averaging output. 
+
+S@k = s_out(s_true): In top k, average output similarity (average groundtruth similarity). 
+S@1 = 0.823 
+S@10 = 0.779 
+S@20 = 0.754 
+S@30 = 0.734 
+S@32 = 0.730 
+S@40 = 0.717 
+S@50 = 0.702 
+S@64 = 0.685 
+S@100 = 0.650 
+S@128 = 0.628 
+1 10 20 30 32 40 50 64 100 128 
+0.823 0.779 0.754 0.734 0.730 0.717 0.702 0.685 0.650 0.628 
+Similarity Metric Computed

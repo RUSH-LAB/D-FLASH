@@ -3,9 +3,9 @@
 
 #include <string>
 
-// #define WEBSPAM
-#define KDD12
-//#define UNIT_TESTING
+#define WEBSPAM
+// #define KDD12
+// #define UNIT_TESTING
 
 #ifdef WEBSPAM
 
