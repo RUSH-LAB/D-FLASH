@@ -1,0 +1,6 @@
+slurmstepd: execve(): /scratch/ncm5/Distributed-LSH-Algorithm-For-Similarity-Search/src/./runme: No such file or directory
+slurmstepd: execve(): /scratch/ncm5/Distributed-LSH-Algorithm-For-Similarity-Search/src/./runme: No such file or directory
+slurmstepd: execve(): /scratch/ncm5/Distributed-LSH-Algorithm-For-Similarity-Search/src/./runme: No such file or directory
+slurmstepd: execve(): /scratch/ncm5/Distributed-LSH-Algorithm-For-Similarity-Search/src/./runme: No such file or directory
+slurmstepd: execve(): /scratch/ncm5/Distributed-LSH-Algorithm-For-Similarity-Search/src/./runme: No such file or directory
+srun: error: bc12u21n1: tasks 0-4: Exited with exit code 2

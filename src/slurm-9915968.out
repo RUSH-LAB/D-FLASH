@@ -1,0 +1,133 @@
+
+=================
+== Webspam
+=================
+
+340000 Vectors, 10000 Queries
+Nodes: 3
+Tables: 24
+RangePow: 18
+Reservoir Size: 256
+Hashes: 8
+Using CMS Aggregation
+CMS Bucket Size: 1024
+CMS Hashes: 4
+
+LSH Initialized in Node 0
+LSH Initialized in Node 1
+LSH Initialized in Node 2
+CMS Initialized in Node 0
+CMS Initialized in Node 1
+CMS Initialized in Node 2
+LSH Reservoir Initialized in Node 1
+LSH Reservoir Initialized in Node 2
+LSH Reservoir Initialized in Node 0
+FLASH Controller Initialized in Node 0
+
+Reading Data Node 0...
+FLASH Controller Initialized in Node 1
+
+Reading Data Node 1...
+FLASH Controller Initialized in Node 2
+
+Reading Data Node 2...
+[readSparse]
+[readSparse]
+[readSparse]
+[readSparse] Read 422377049 numbers, 113334 vectors. 
+[readSparse] Read 422570289 numbers, 113333 vectors. 
+[readSparse] Read 422542390 numbers, 113333 vectors. 
+Data Read Node 2: 165.5 Seconds
+
+Data Read Node 1: 165.5 Seconds
+
+Data Read Node 0: 165.5 Seconds
+
+[readSparse]
+[readSparse] Read 37207718 numbers, 10000 vectors. 
+Adding Vectors Node 0...
+Adding Vectors Node 1...
+Adding Vectors Node 2...
+Node 1 Table Mem Usage ranges from 0.005157 to 0.006489, average 0.005927
+Node 1 Table Mem Usage ranges from 0.038200 to 0.051167, average 0.045839
+Node 1 Table Mem Usage ranges from 0.063915 to 0.086708, average 0.077382
+Node 1 Table Mem Usage ranges from 0.086266 to 0.117573, average 0.104691
+Node 1 Table Mem Usage ranges from 0.106022 to 0.145576, average 0.129176
+Vectors Added Node 1: 2.13118 Seconds
+
+Node 2 Table Mem Usage ranges from 0.005039 to 0.006470, average 0.005835
+Node 2 Table Mem Usage ranges from 0.038025 to 0.050915, average 0.045679
+Node 2 Table Mem Usage ranges from 0.063751 to 0.086288, average 0.077087
+Node 2 Table Mem Usage ranges from 0.086426 to 0.117386, average 0.104834
+Node 2 Table Mem Usage ranges from 0.106781 to 0.145397, average 0.129618
+Vectors Added Node 2: 2.26052 Seconds
+
+Node 0 Table Mem Usage ranges from 0.005116 to 0.006462, average 0.005895
+Node 0 Table Mem Usage ranges from 0.038013 to 0.050983, average 0.045780
+Node 0 Table Mem Usage ranges from 0.063557 to 0.086193, average 0.076990
+Node 0 Table Mem Usage ranges from 0.085873 to 0.117058, average 0.104153
+Node 0 Table Mem Usage ranges from 0.106342 to 0.145653, average 0.129305
+Vectors Added Node 0: 2.26094 Seconds
+
+Computing Query Hashes Node 1...
+Computing Query Hashes Node 0...
+Computing Query Hashes Node 2...
+Query Hashes Computed Node 0: 0.0581519 Seconds
+
+Extracting Top K (CMS) Node 0...
+Query Hashes Computed Node 1: 0.0581553 Seconds
+
+Extracting Top K (CMS) Node 1...
+Query Hashes Computed Node 2: 0.0581301 Seconds
+
+Extracting Top K (CMS) Node 2...
+Top K Extracted Node 1: 1.84194 Seconds
+
+Top K Extracted Node 2: 2.03539 Seconds
+
+Top K Extracted Node 0: 2.2574 Seconds
+
+Reading Groundtruth Node 0...
+Groundtruth Read Node 0: 0.00394027 Seconds
+
+[readSparse]
+[readSparse] Read 1304697446 numbers, 350000 vectors. 
+
+
+================================
+TOP K CMS
+
+[similarityMetric] Averaging gtruth. 
+[similarityMetric] Averaging output. 
+
+S@k = s_out(s_true): In top k, average output similarity (average groundtruth similarity). 
+S@1 = 0.901 (0.000) 
+S@10 = 0.857 (0.000) 
+S@20 = 0.841 (0.000) 
+S@30 = 0.831 (0.000) 
+S@32 = 0.829 (0.000) 
+S@40 = 0.824 (0.000) 
+S@50 = 0.818 (0.000) 
+S@64 = 0.811 (0.000) 
+S@100 = 0.798 (0.000) 
+S@128 = 0.789 (0.000) 
+1 10 20 30 32 40 50 64 100 128 
+0.901 0.857 0.841 0.831 0.829 0.824 0.818 0.811 0.798 0.789 
+0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 
+
+Similarity Metric Computed
+S@1 = 0.000 
+S@10 = 0.000 
+S@20 = 0.000 
+S@30 = 0.000 
+S@32 = 0.000 
+S@40 = 0.000 
+S@50 = 0.000 
+S@64 = 0.000 
+S@100 = 0.000 
+S@128 = 0.000 
+1 10 20 30 32 40 50 64 100 128 
+0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 
+
+Similarity of Data Computed
+Evaluation Complete
