@@ -11,6 +11,9 @@
 
 #define SPARSE_DATASET
 
+// 1 for CMS 2 for BRUTEFORCE
+#define AGGREGATION 1
+
 #define NUM_BATCHES				    50
 #define BATCH_PRINT                 10
 
@@ -50,6 +53,9 @@
 #ifdef KDD12
 
 #define SPARSE_DATASET
+
+// 1 for CMS 2 for BRUTEFORCE
+#define AGGREGATION 1
 
 #define NUM_BATCHES				    50
 #define BATCH_PRINT                 10
@@ -122,7 +128,7 @@
 
 void webspam();
 void kdd12();
-void showConfig(std::string dataset, int numVectors, int queries, int nodes, int tables, int rangePow, int reservoirSize, int hashes, int cmsHashes, int cmsBucketSize);
+void showConfig(std::string dataset, int numVectors, int queries, int nodes, int tables, int rangePow, int reservoirSize, int hashes, int cmsHashes, int cmsBucketSize, bool cms);
 void unitTesting();
 
 #if !defined (DENSE_DATASET)

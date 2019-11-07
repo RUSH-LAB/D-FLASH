@@ -13,16 +13,23 @@
 #include "MatMul.h"
 #include "FrequentItems.h"
 
+
 #define TOPK_BENCHMARK
 
-void showConfig(std::string dataset, int numVectors, int queries, int nodes, int tables, int rangePow, int reservoirSize, int hashes, int cmsHashes, int cmsBucketSize){
+void showConfig(std::string dataset, int numVectors, int queries, int nodes, int tables, int rangePow, int reservoirSize, int hashes, int cmsHashes, int cmsBucketSize, bool cms){
 	std::cout << "\n=================\n== " << dataset << "\n=================\n" << std::endl;
 
 	printf("%d Vectors, %d Queries\n", numVectors, queries);
 
 	printf("Nodes: %d\nTables: %d\nRangePow: %d\nReservoir Size: %d\nHashes: %d\n", nodes, tables, rangePow, reservoirSize, hashes);
 
-	printf("CMS Bucket Size: %d\nCMS Hashes: %d\n", cmsBucketSize, cmsHashes);
+	if (cms) {
+		printf("Using CMS Aggregation\n");
+	} else {
+		printf("Using Bruteforce Aggregation");
+	}
+
+	printf("CMS Bucket Size: %d\nCMS Hashes: %d\n\n", cmsBucketSize, cmsHashes);
 
 
 }
@@ -54,7 +61,13 @@ void webspam()
 	MPI_Comm_size(MPI_COMM_WORLD, &worldSize);
 	MPI_Comm_rank(MPI_COMM_WORLD, &myRank);
 	if (myRank == 0) {
-		showConfig("Webspam", NUM_DATA_VECTORS, NUM_QUERY_VECTORS, worldSize, NUM_TABLES, RANGE_POW, RESERVOIR_SIZE, NUM_HASHES, CMS_HASHES, CMS_BUCKET_SIZE);
+
+#ifdef CMS
+		showConfig("Webspam", NUM_DATA_VECTORS, NUM_QUERY_VECTORS, worldSize, NUM_TABLES, RANGE_POW, RESERVOIR_SIZE, NUM_HASHES, CMS_HASHES, CMS_BUCKET_SIZE, true);
+#endif
+#ifdef BF
+		showConfig("Webspam", NUM_DATA_VECTORS, NUM_QUERY_VECTORS, worldSize, NUM_TABLES, RANGE_POW, RESERVOIR_SIZE, NUM_HASHES, CMS_HASHES, CMS_BUCKET_SIZE, false);
+#endif
 	}
 
 /* ===============================================================
@@ -130,8 +143,12 @@ void webspam()
 	unsigned int *outputs = new unsigned int[TOPK * NUM_QUERY_VECTORS];
 	start = std::chrono::system_clock::now();
 	std::cout << "Extracting Top K (CMS) Node " << myRank << "..." << std::endl;
-	//control->topKCMSAggregation(TOPK, outputs, 0);
+#ifdef CMS
+	control->topKCMSAggregation(TOPK, outputs, 0);
+#endif
+#ifdef BF
 	control->topKBruteForceAggretation(TOPK, outputs);
+#endif
 	end = std::chrono::system_clock::now();
 	elapsed = end - start;
 	std::cout << "Top K Extracted Node " << myRank << ": " << elapsed.count() << " Seconds\n" << std::endl;
@@ -237,8 +254,12 @@ void kdd12()
 	MPI_Comm_size(MPI_COMM_WORLD, &worldSize);
 	MPI_Comm_rank(MPI_COMM_WORLD, &myRank);
 	if (myRank == 0) {
-		showConfig("KDD12", NUM_DATA_VECTORS, NUM_QUERY_VECTORS, worldSize, NUM_TABLES, RANGE_POW, RESERVOIR_SIZE, NUM_HASHES, CMS_HASHES, CMS_BUCKET_SIZE);
-	}
+#ifdef CMS
+		showConfig("KDD12", NUM_DATA_VECTORS, NUM_QUERY_VECTORS, worldSize, NUM_TABLES, RANGE_POW, RESERVOIR_SIZE, NUM_HASHES, CMS_HASHES, CMS_BUCKET_SIZE, true);
+#endif
+#ifdef BF
+		showConfig("KDD12", NUM_DATA_VECTORS, NUM_QUERY_VECTORS, worldSize, NUM_TABLES, RANGE_POW, RESERVOIR_SIZE, NUM_HASHES, CMS_HASHES, CMS_BUCKET_SIZE, false);
+#endif	}
 
 /* ===============================================================
 	Data Structure Initialization
@@ -311,7 +332,12 @@ void kdd12()
 	start = std::chrono::system_clock::now();
 	std::cout << "Extracting Top K (CMS) Node " << myRank << "..." << std::endl;
 	control->topKCMSAggregation(TOPK, outputs, 0);
-	// control->topKBruteForceAggretation(TOPK, outputs);
+#ifdef CMS
+	control->topKCMSAggregation(TOPK, outputs, 0);
+#endif
+#ifdef BF
+	control->topKBruteForceAggretation(TOPK, outputs);
+#endif
 	end = std::chrono::system_clock::now();
 	elapsed = end - start;
 	std::cout << "Top K Extracted Node " << myRank << ": " << elapsed.count() << " Seconds\n" << std::endl;
