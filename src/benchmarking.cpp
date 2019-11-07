@@ -62,10 +62,10 @@ void webspam()
 	MPI_Comm_rank(MPI_COMM_WORLD, &myRank);
 	if (myRank == 0) {
 
-#ifdef CMS
+#ifdef CMS_AGGREGATION
 		showConfig("Webspam", NUM_DATA_VECTORS, NUM_QUERY_VECTORS, worldSize, NUM_TABLES, RANGE_POW, RESERVOIR_SIZE, NUM_HASHES, CMS_HASHES, CMS_BUCKET_SIZE, true);
 #endif
-#ifdef BF
+#ifdef BF_AGGREGATION
 		showConfig("Webspam", NUM_DATA_VECTORS, NUM_QUERY_VECTORS, worldSize, NUM_TABLES, RANGE_POW, RESERVOIR_SIZE, NUM_HASHES, CMS_HASHES, CMS_BUCKET_SIZE, false);
 #endif
 	}
@@ -143,10 +143,10 @@ void webspam()
 	unsigned int *outputs = new unsigned int[TOPK * NUM_QUERY_VECTORS];
 	start = std::chrono::system_clock::now();
 	std::cout << "Extracting Top K (CMS) Node " << myRank << "..." << std::endl;
-#ifdef CMS
+#ifdef CMS_AGGREGATION
 	control->topKCMSAggregation(TOPK, outputs, 0);
 #endif
-#ifdef BF
+#ifdef BF_AGGREGATION
 	control->topKBruteForceAggretation(TOPK, outputs);
 #endif
 	end = std::chrono::system_clock::now();
@@ -259,7 +259,8 @@ void kdd12()
 #endif
 #ifdef BF
 		showConfig("KDD12", NUM_DATA_VECTORS, NUM_QUERY_VECTORS, worldSize, NUM_TABLES, RANGE_POW, RESERVOIR_SIZE, NUM_HASHES, CMS_HASHES, CMS_BUCKET_SIZE, false);
-#endif	}
+#endif	
+	}
 
 /* ===============================================================
 	Data Structure Initialization
