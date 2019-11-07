@@ -11,8 +11,8 @@
 
 #define SPARSE_DATASET
 
-// 1 for CMS 2 for BRUTEFORCE
-#define AGGREGATION 1
+#define CMS
+// #define BF
 
 #define NUM_BATCHES				    50
 #define BATCH_PRINT                 10
@@ -54,8 +54,8 @@
 
 #define SPARSE_DATASET
 
-// 1 for CMS 2 for BRUTEFORCE
-#define AGGREGATION 1
+#define CMS
+// #define BF
 
 #define NUM_BATCHES				    50
 #define BATCH_PRINT                 10
