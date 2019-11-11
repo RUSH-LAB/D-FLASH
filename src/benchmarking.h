@@ -3,8 +3,8 @@
 
 #include <string>
 
-// #define WEBSPAM
-#define KDD12
+#define WEBSPAM
+// #define KDD12
 
 #ifdef WEBSPAM
 
