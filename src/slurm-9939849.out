@@ -1,0 +1,89 @@
+
+=================
+== KDD12
+=================
+
+140000000 Vectors, 10000 Queries
+Nodes: 2
+Tables: 16
+RangePow: 18
+Reservoir Size: 256
+Hashes: 4
+Using Bruteforce Aggregation
+Using Tree Aggregation
+CMS Bucket Size: 2048
+CMS Hashes: 4
+
+LSH Initialized in Node 0
+LSH Initialized in Node 1
+CMS Initialized in Node 0
+CMS Initialized in Node 1
+LSH Reservoir Initialized in Node 1
+LSH Reservoir Initialized in Node 0
+FLASH Controller Initialized in Node 0
+
+Reading Data Node 0...
+FLASH Controller Initialized in Node 1
+
+Reading Data Node 1...
+[readSparse]
+[readSparse]
+[readSparse] Read 770000000 numbers, 70000000 vectors. 
+[readSparse] Read 770000000 numbers, 70000000 vectors. 
+Data Read Node 0: 197.215 Seconds
+
+[readSparse]
+Data Read Node 1: 197.215 Seconds
+
+[readSparse] Read 110000 numbers, 10000 vectors. 
+Adding Vectors Node 0...
+Adding Vectors Node 1...
+Node 1 Table Mem Usage ranges from 0.841633 to 0.927452, average 0.894583
+Node 1 Table Mem Usage ranges from 0.999626 to 0.999779, average 0.999708
+Node 1 Table Mem Usage ranges from 0.999626 to 0.999779, average 0.999708
+Node 1 Table Mem Usage ranges from 0.999626 to 0.999779, average 0.999708
+Node 1 Table Mem Usage ranges from 0.999626 to 0.999779, average 0.999708
+Vectors Added Node 1: 193.348 Seconds
+
+Node 0 Table Mem Usage ranges from 0.827866 to 0.919643, average 0.884920
+Node 0 Table Mem Usage ranges from 0.999615 to 0.999832, average 0.999703
+Node 0 Table Mem Usage ranges from 0.999615 to 0.999832, average 0.999703
+Node 0 Table Mem Usage ranges from 0.999615 to 0.999832, average 0.999703
+Node 0 Table Mem Usage ranges from 0.999615 to 0.999832, average 0.999703
+Vectors Added Node 0: 207.222 Seconds
+
+Computing Query Hashes Node 0...
+Computing Query Hashes Node 1...
+Query Hashes Computed Node 0: 0.00671211 Seconds
+
+Extracting Top K (CMS) Node 0...
+Query Hashes Computed Node 1: 0.00673273 Seconds
+
+Extracting Top K (CMS) Node 1...
+Top K Extracted Node 1: 1.85085 Seconds
+
+Top K Extracted Node 0: 2.30824 Seconds
+
+[readSparse]
+[readSparse] Read 1540110000 numbers, 140010000 vectors. 
+
+
+================================
+TOP K CMS
+
+[similarityMetric] Averaging output. 
+
+S@k = s_out(s_true): In top k, average output similarity (average groundtruth similarity). 
+S@1 = 0.815 
+S@10 = 0.763 
+S@20 = 0.731 
+S@30 = 0.707 
+S@32 = 0.703 
+S@40 = 0.687 
+S@50 = 0.670 
+S@64 = 0.651 
+S@100 = 0.613 
+S@128 = 0.590 
+1 10 20 30 32 40 50 64 100 128 
+0.815 0.763 0.731 0.707 0.703 0.687 0.670 0.651 0.613 0.590 
+Similarity Metric Computed
