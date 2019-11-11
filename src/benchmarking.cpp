@@ -26,7 +26,7 @@ void showConfig(std::string dataset, int numVectors, int queries, int nodes, int
 	if (cms) {
 		printf("Using CMS Aggregation\n");
 	} else {
-		printf("Using Bruteforce Aggregation");
+		printf("Using Bruteforce Aggregation\n");
 	}
 	
 	if (tree) {
