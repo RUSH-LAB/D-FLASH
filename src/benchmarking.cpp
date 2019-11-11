@@ -16,7 +16,7 @@
 
 #define TOPK_BENCHMARK
 
-void showConfig(std::string dataset, int numVectors, int queries, int nodes, int tables, int rangePow, int reservoirSize, int hashes, int cmsHashes, int cmsBucketSize, bool cms){
+void showConfig(std::string dataset, int numVectors, int queries, int nodes, int tables, int rangePow, int reservoirSize, int hashes, int cmsHashes, int cmsBucketSize, bool cms, bool tree){
 	std::cout << "\n=================\n== " << dataset << "\n=================\n" << std::endl;
 
 	printf("%d Vectors, %d Queries\n", numVectors, queries);
@@ -27,6 +27,12 @@ void showConfig(std::string dataset, int numVectors, int queries, int nodes, int
 		printf("Using CMS Aggregation\n");
 	} else {
 		printf("Using Bruteforce Aggregation");
+	}
+	
+	if (tree) {
+		printf("Using Tree Aggregation\n");
+	} else {
+		printf("Using Linear Aggregation\n");
 	}
 
 	printf("CMS Bucket Size: %d\nCMS Hashes: %d\n\n", cmsBucketSize, cmsHashes);
@@ -62,13 +68,17 @@ void webspam()
 	MPI_Comm_rank(MPI_COMM_WORLD, &myRank);
 	if (myRank == 0) {
 
+		bool cms = false;
+		bool tree = false;
 #ifdef CMS_AGGREGATION
-		showConfig("Webspam", NUM_DATA_VECTORS, NUM_QUERY_VECTORS, worldSize, NUM_TABLES, RANGE_POW, RESERVOIR_SIZE, NUM_HASHES, CMS_HASHES, CMS_BUCKET_SIZE, true);
+		cms = true;
 #endif
-#ifdef BF_AGGREGATION
-		showConfig("Webspam", NUM_DATA_VECTORS, NUM_QUERY_VECTORS, worldSize, NUM_TABLES, RANGE_POW, RESERVOIR_SIZE, NUM_HASHES, CMS_HASHES, CMS_BUCKET_SIZE, false);
+#ifdef TREE_AGGREGATION
+		tree = true;
 #endif
-	}
+		showConfig("Webspam", NUM_DATA_VECTORS, NUM_QUERY_VECTORS, worldSize, NUM_TABLES, RANGE_POW, RESERVOIR_SIZE, NUM_HASHES, CMS_HASHES, CMS_BUCKET_SIZE, cms, tree);
+
+	}	
 
 /* ===============================================================
 	Data Structure Initialization
@@ -254,13 +264,18 @@ void kdd12()
 	MPI_Comm_size(MPI_COMM_WORLD, &worldSize);
 	MPI_Comm_rank(MPI_COMM_WORLD, &myRank);
 	if (myRank == 0) {
-#ifdef CMS
-		showConfig("KDD12", NUM_DATA_VECTORS, NUM_QUERY_VECTORS, worldSize, NUM_TABLES, RANGE_POW, RESERVOIR_SIZE, NUM_HASHES, CMS_HASHES, CMS_BUCKET_SIZE, true);
+
+		bool cms = false;
+		bool tree = false;
+#ifdef CMS_AGGREGATION
+		cms = true;
 #endif
-#ifdef BF
-		showConfig("KDD12", NUM_DATA_VECTORS, NUM_QUERY_VECTORS, worldSize, NUM_TABLES, RANGE_POW, RESERVOIR_SIZE, NUM_HASHES, CMS_HASHES, CMS_BUCKET_SIZE, false);
-#endif	
-	}
+#ifdef TREE_AGGREGATION
+		tree = true;
+#endif
+		showConfig("Webspam", NUM_DATA_VECTORS, NUM_QUERY_VECTORS, worldSize, NUM_TABLES, RANGE_POW, RESERVOIR_SIZE, NUM_HASHES, CMS_HASHES, CMS_BUCKET_SIZE, cms, tree);
+
+	}	
 
 /* ===============================================================
 	Data Structure Initialization

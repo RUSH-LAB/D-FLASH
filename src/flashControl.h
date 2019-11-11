@@ -2,6 +2,7 @@
 #define _FLASH_CONTROL_H
 
 #include <iostream>
+#include "benchmarking.h"
 #include <algorithm>
 #include "CMS.h"
 #include <string>

@@ -1,3 +1,0 @@
-srun: error: slurm_receive_msg: Socket timed out on send/recv operation
-srun: error: Unable to confirm allocation for job 9915990: Socket timed out on send/recv operation
-srun: Check SLURM_JOB_ID environment variable for expired or invalid job.

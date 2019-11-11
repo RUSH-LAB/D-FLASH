@@ -3,13 +3,15 @@
 
 #include <string>
 
-#define WEBSPAM
-// #define KDD12
-// #define UNIT_TESTING
+// #define WEBSPAM
+#define KDD12
 
 #ifdef WEBSPAM
 
 #define SPARSE_DATASET
+
+#define TREE_AGGREGATION
+// #define LINEAR_AGGREGATION
 
 #define CMS_AGGREGATION
 // #define BF_AGGREGATION
@@ -53,6 +55,9 @@
 #ifdef KDD12
 
 #define SPARSE_DATASET
+
+#define TREE_AGGREGATION
+// #define LINEAR_AGGREGATION
 
 #define CMS_AGGREGATION
 // #define BF_AGGREGATION
