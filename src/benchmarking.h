@@ -59,8 +59,8 @@
 // #define TREE_AGGREGATION
 #define LINEAR_AGGREGATION
 
-#define CMS_AGGREGATION
-// #define BF_AGGREGATION
+// #define CMS_AGGREGATION
+#define BF_AGGREGATION
 
 #define NUM_BATCHES				    50
 #define BATCH_PRINT                 10

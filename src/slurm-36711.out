@@ -1,0 +1,259 @@
+
+=================
+== KDD12
+=================
+
+140000000 Vectors, 10000 Queries
+Nodes: 9
+Tables: 16
+RangePow: 18
+Reservoir Size: 256
+Hashes: 4
+Using Bruteforce Aggregation
+Using Linear Aggregation
+CMS Bucket Size: 2048
+CMS Hashes: 4
+
+LSH Initialized in Node 0
+LSH Initialized in Node 4
+LSH Initialized in Node 2
+LSH Initialized in Node 6
+LSH Initialized in Node 1
+LSH Initialized in Node 5
+LSH Initialized in Node 8
+LSH Initialized in Node 3
+LSH Initialized in Node 7
+CMS Initialized in Node 0
+CMS Initialized in Node 1
+CMS Initialized in Node 2
+CMS Initialized in Node 3
+CMS Initialized in Node 4
+CMS Initialized in Node 5
+CMS Initialized in Node 7
+CMS Initialized in Node 8
+CMS Initialized in Node 6
+LSH Reservoir Initialized in Node 7
+LSH Reservoir Initialized in Node 5
+LSH Reservoir Initialized in Node 3
+LSH Reservoir Initialized in Node 1
+LSH Reservoir Initialized in Node 4
+LSH Reservoir Initialized in Node 8
+LSH Reservoir Initialized in Node 2
+LSH Reservoir Initialized in Node 0
+LSH Reservoir Initialized in Node 6
+FLASH Controller Initialized in Node 6
+
+Reading Data Node 6...
+FLASH Controller Initialized in Node 0
+
+Reading Data Node 0...
+FLASH Controller Initialized in Node 1
+
+Reading Data Node 1...
+FLASH Controller Initialized in Node 2
+
+Reading Data Node 2...
+FLASH Controller Initialized in Node 3
+
+Reading Data Node 3...
+FLASH Controller Initialized in Node 4
+
+Reading Data Node 4...
+[readSparse]
+FLASH Controller Initialized in Node 5
+
+Reading Data Node 5...
+FLASH Controller Initialized in Node 7
+
+Reading Data Node 7...
+FLASH Controller Initialized in Node 8
+
+Reading Data Node 8...
+[readSparse]
+[readSparse]
+[readSparse]
+[readSparse]
+[readSparse]
+[readSparse]
+[readSparse]
+[readSparse]
+[readSparse] Read 171111127 numbers, 15555557 vectors. 
+[readSparse] Read 171111127 numbers, 15555557 vectors. 
+[readSparse] Read 171111127 numbers, 15555557 vectors. 
+[readSparse] Read 171111127 numbers, 15555557 vectors. 
+[readSparse] Read 171111127 numbers, 15555557 vectors. 
+[readSparse] Read 171111116 numbers, 15555556 vectors. 
+[readSparse] Read 171111116 numbers, 15555556 vectors. 
+[readSparse] Read 171111116 numbers, 15555556 vectors. 
+[readSparse] Read 171111116 numbers, 15555556 vectors. 
+Data Read Node 7: 110.958 Seconds
+
+Data Read Node 8: 110.958 Seconds
+
+Data Read Node 1: 110.958 Seconds
+
+Data Read Node 2: 110.958 Seconds
+
+Data Read Node 3: 110.958 Seconds
+
+Data Read Node 5: 110.958 Seconds
+
+Data Read Node 6: 110.958 Seconds
+
+Data Read Node 0: 110.958 Seconds
+
+[readSparse]
+Data Read Node 4: 110.958 Seconds
+
+[readSparse] Read 110000 numbers, 10000 vectors. 
+Adding Vectors Node 0...
+Adding Vectors Node 1...
+Adding Vectors Node 2...
+Adding Vectors Node 3...
+Adding Vectors Node 4...
+Adding Vectors Node 5...
+Adding Vectors Node 6...
+Adding Vectors Node 7...
+Adding Vectors Node 8...
+Node 5 Table Mem Usage ranges from 0.407135 to 0.496521, average 0.458387
+Node 5 Table Mem Usage ranges from 0.927822 to 0.989262, average 0.972902
+Node 5 Table Mem Usage ranges from 0.983776 to 0.999329, average 0.996776
+Node 5 Table Mem Usage ranges from 0.995819 to 0.999729, average 0.999229
+Node 5 Table Mem Usage ranges from 0.998798 to 0.999741, average 0.999614
+Vectors Added Node 5: 46.6099 Seconds
+
+Node 6 Table Mem Usage ranges from 0.228527 to 0.340176, average 0.303581
+Node 6 Table Mem Usage ranges from 0.876030 to 0.983986, average 0.958153
+Node 6 Table Mem Usage ranges from 0.971054 to 0.999233, average 0.994994
+Node 6 Table Mem Usage ranges from 0.992596 to 0.999699, average 0.998958
+Node 6 Table Mem Usage ranges from 0.997982 to 0.999798, average 0.999600
+Vectors Added Node 6: 47.0234 Seconds
+
+Node 7 Table Mem Usage ranges from 0.227390 to 0.337990, average 0.302346
+Node 7 Table Mem Usage ranges from 0.876549 to 0.985352, average 0.959065
+Node 7 Table Mem Usage ranges from 0.972401 to 0.999332, average 0.995147
+Node 7 Table Mem Usage ranges from 0.998478 to 0.999771, average 0.999599
+Node 7 Table Mem Usage ranges from 0.999710 to 0.999878, average 0.999758
+Vectors Added Node 7: 49.2206 Seconds
+
+Node 3 Table Mem Usage ranges from 0.408035 to 0.494556, average 0.457488
+Node 3 Table Mem Usage ranges from 0.977722 to 0.996273, average 0.990219
+Node 3 Table Mem Usage ranges from 0.997936 to 0.999645, average 0.999256
+Node 3 Table Mem Usage ranges from 0.999493 to 0.999752, average 0.999655
+Node 3 Table Mem Usage ranges from 0.999630 to 0.999786, average 0.999683
+Vectors Added Node 3: 53.9789 Seconds
+
+Node 1 Table Mem Usage ranges from 0.409550 to 0.499630, average 0.461555
+Node 1 Table Mem Usage ranges from 0.975204 to 0.995968, average 0.989392
+Node 1 Table Mem Usage ranges from 0.997990 to 0.999660, average 0.999294
+Node 1 Table Mem Usage ranges from 0.999607 to 0.999802, average 0.999696
+Node 1 Table Mem Usage ranges from 0.999645 to 0.999802, average 0.999722
+Vectors Added Node 1: 54.0506 Seconds
+
+Node 4 Table Mem Usage ranges from 0.399254 to 0.489262, average 0.452097
+Node 4 Table Mem Usage ranges from 0.976006 to 0.996296, average 0.989848
+Node 4 Table Mem Usage ranges from 0.997959 to 0.999657, average 0.999248
+Node 4 Table Mem Usage ranges from 0.999619 to 0.999767, average 0.999694
+Node 4 Table Mem Usage ranges from 0.999630 to 0.999798, average 0.999720
+Vectors Added Node 4: 54.627 Seconds
+
+Node 2 Table Mem Usage ranges from 0.416500 to 0.503967, average 0.467183
+Node 2 Table Mem Usage ranges from 0.975494 to 0.996269, average 0.989780
+Node 2 Table Mem Usage ranges from 0.998001 to 0.999706, average 0.999284
+Node 2 Table Mem Usage ranges from 0.999565 to 0.999779, average 0.999686
+Node 2 Table Mem Usage ranges from 0.999638 to 0.999786, average 0.999713
+Vectors Added Node 2: 54.8787 Seconds
+
+Node 8 Table Mem Usage ranges from 0.416492 to 0.503670, average 0.467557
+Node 8 Table Mem Usage ranges from 0.976337 to 0.996120, average 0.989895
+Node 8 Table Mem Usage ranges from 0.997910 to 0.999634, average 0.999249
+Node 8 Table Mem Usage ranges from 0.999535 to 0.999763, average 0.999668
+Node 8 Table Mem Usage ranges from 0.999630 to 0.999767, average 0.999699
+Vectors Added Node 8: 55.474 Seconds
+
+Node 0 Table Mem Usage ranges from 0.400990 to 0.493427, average 0.454939
+Node 0 Table Mem Usage ranges from 0.975681 to 0.995918, average 0.989490
+Node 0 Table Mem Usage ranges from 0.997910 to 0.999638, average 0.999217
+Node 0 Table Mem Usage ranges from 0.999561 to 0.999756, average 0.999655
+Node 0 Table Mem Usage ranges from 0.999603 to 0.999771, average 0.999685
+Vectors Added Node 0: 55.5504 Seconds
+
+Computing Query Hashes Node 0...
+Computing Query Hashes Node 7...
+Computing Query Hashes Node 1...
+Computing Query Hashes Node 2...
+Computing Query Hashes Node 3...
+Computing Query Hashes Node 4...
+Computing Query Hashes Node 5...
+Computing Query Hashes Node 6...
+Computing Query Hashes Node 8...
+Query Hashes Computed Node 0: 0.00240935 Seconds
+
+Query Hashes Computed Node 8: 0.00238098 Seconds
+
+Query Hashes Computed Node 2: 0.00245694 Seconds
+
+Query Hashes Computed Node 6: 0.00245801 Seconds
+
+Query Hashes Computed Node 1: 0.00246832 Seconds
+
+Query Hashes Computed Node 3: 0.00246635 Seconds
+
+Query Hashes Computed Node 7: 0.00247846 Seconds
+
+Query Hashes Computed Node 4: 0.00251175 Seconds
+
+Query Hashes Computed Node 5: 0.00252301 Seconds
+
+Extracting Top K (CMS) Node 2...
+Extracting Top K (CMS) Node 3...
+Extracting Top K (CMS) Node 6...
+Extracting Top K (CMS) Node 7...
+Extracting Top K (CMS) Node 0...
+Extracting Top K (CMS) Node 1...
+Extracting Top K (CMS) Node 4...
+Extracting Top K (CMS) Node 8...
+Extracting Top K (CMS) Node 5...
+Top K Extracted Node 1: 2.22237 Seconds
+
+Top K Extracted Node 2: 2.60906 Seconds
+
+Top K Extracted Node 3: 3.01686 Seconds
+
+Top K Extracted Node 4: 3.39303 Seconds
+
+Top K Extracted Node 5: 3.79185 Seconds
+
+Top K Extracted Node 6: 4.16995 Seconds
+
+Top K Extracted Node 7: 4.56797 Seconds
+
+Top K Extracted Node 8: 5.37651 Seconds
+
+Top K Extracted Node 0: 8.41921 Seconds
+
+[readSparse]
+slurmstepd: Exceeded job memory limit at some point.
+[readSparse] Read 1540110000 numbers, 140010000 vectors. 
+
+
+================================
+TOP K CMS
+
+[similarityMetric] Averaging output. 
+
+S@k = s_out(s_true): In top k, average output similarity (average groundtruth similarity). 
+S@1 = 0.831 
+S@10 = 0.788 
+S@20 = 0.765 
+S@30 = 0.748 
+S@32 = 0.745 
+S@40 = 0.734 
+S@50 = 0.723 
+S@64 = 0.708 
+S@100 = 0.682 
+S@128 = 0.665 
+1 10 20 30 32 40 50 64 100 128 
+0.831 0.788 0.765 0.748 0.745 0.734 0.723 0.708 0.682 0.665 
+Similarity Metric Computed
+slurmstepd: Exceeded job memory limit at some point.
