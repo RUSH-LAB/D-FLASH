@@ -1,7 +1,8 @@
 #!/bin/bash
 
 #SBATCH --job-name=NotsTest
-#SBATCH --ntasks=2 --exclusive
+#SBATCH --nodes=2 --exclusive 
+#SBATCH --ntasks-per-node=6
 #SBATCH --time=00:20:00
 #SBATCH --mail-user=ncm5@rice.edu
 #SBATCH --mail-type=all
