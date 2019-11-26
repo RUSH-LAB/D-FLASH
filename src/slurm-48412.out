@@ -1,0 +1,440 @@
+
+=================
+== KDD12
+=================
+
+LSH Initialized in Node 4
+LSH Initialized in Node 8
+LSH Initialized in Node 12
+140000000 Vectors, 10000 Queries
+Nodes: 16
+Tables: 16
+RangePow: 18
+Reservoir Size: 256
+Hashes: 4
+CMS Bucket Size: 2048
+CMS Hashes: 4
+
+LSH Initialized in Node 0
+LSH Initialized in Node 2
+LSH Initialized in Node 1
+LSH Initialized in Node 3
+LSH Initialized in Node 10
+LSH Initialized in Node 9
+LSH Initialized in Node 6
+LSH Initialized in Node 11
+LSH Initialized in Node 5
+LSH Initialized in Node 7
+LSH Initialized in Node 15
+LSH Initialized in Node 13
+LSH Initialized in Node 14
+CMS Initialized in Node 2
+CMS Initialized in Node 10
+CMS Initialized in Node 0
+CMS Initialized in Node 8
+CMS Initialized in Node 6
+CMS Initialized in Node 14
+CMS Initialized in Node 4
+CMS Initialized in Node 12
+CMS Initialized in Node 1
+CMS Initialized in Node 9
+CMS Initialized in Node 5
+CMS Initialized in Node 13
+CMS Initialized in Node 3
+CMS Initialized in Node 11
+CMS Initialized in Node 7
+CMS Initialized in Node 15
+LSH Reservoir Initialized in Node 6
+LSH Reservoir Initialized in Node 7
+LSH Reservoir Initialized in Node 11
+LSH Reservoir Initialized in Node 5
+LSH Reservoir Initialized in Node 4
+LSH Reservoir Initialized in Node 9
+LSH Reservoir Initialized in Node 10
+LSH Reservoir Initialized in Node 8
+LSH Reservoir Initialized in Node 14
+LSH Reservoir Initialized in Node 12
+LSH Reservoir Initialized in Node 1
+LSH Reservoir Initialized in Node 3
+LSH Reservoir Initialized in Node 15
+LSH Reservoir Initialized in Node 13
+LSH Reservoir Initialized in Node 0
+LSH Reservoir Initialized in Node 2
+FLASH Controller Initialized in Node 1
+
+Reading Data Node 1...
+FLASH Controller Initialized in Node 3
+
+Reading Data Node 3...
+FLASH Controller Initialized in Node 0
+
+Reading Data Node 0...
+FLASH Controller Initialized in Node 2
+
+Reading Data Node 2...
+[readSparse]
+[readSparse]
+[readSparse]
+[readSparse]
+FLASH Controller Initialized in Node 8
+
+Reading Data Node 8...
+[readSparse]
+FLASH Controller Initialized in Node 4
+
+Reading Data Node 4...
+FLASH Controller Initialized in Node 12
+
+Reading Data Node 12...
+FLASH Controller Initialized in Node 9
+
+Reading Data Node 9...
+[readSparse]
+FLASH Controller Initialized in Node 5
+
+Reading Data Node 5...
+[readSparse]
+FLASH Controller Initialized in Node 10
+
+Reading Data Node 10...
+[readSparse]
+FLASH Controller Initialized in Node 6
+
+Reading Data Node 6...
+[readSparse]
+FLASH Controller Initialized in Node 13
+
+Reading Data Node 13...
+FLASH Controller Initialized in Node 11
+
+Reading Data Node 11...
+[readSparse]
+FLASH Controller Initialized in Node 7
+
+Reading Data Node 7...
+[readSparse]
+FLASH Controller Initialized in Node 14
+
+Reading Data Node 14...
+[readSparse]
+FLASH Controller Initialized in Node 15
+
+Reading Data Node 15...
+[readSparse]
+[readSparse]
+[readSparse]
+[readSparse]
+[readSparse] Read 96250000 numbers, 8750000 vectors. 
+[readSparse] Read 96250000 numbers, 8750000 vectors. 
+[readSparse] Read 96250000 numbers, 8750000 vectors. 
+[readSparse] Read 96250000 numbers, 8750000 vectors. 
+[readSparse] Read 96250000 numbers, 8750000 vectors. 
+[readSparse] Read 96250000 numbers, 8750000 vectors. 
+[readSparse] Read 96250000 numbers, 8750000 vectors. 
+[readSparse] Read 96250000 numbers, 8750000 vectors. 
+[readSparse] Read 96250000 numbers, 8750000 vectors. 
+[readSparse] Read 96250000 numbers, 8750000 vectors. 
+[readSparse] Read 96250000 numbers, 8750000 vectors. 
+[readSparse] Read 96250000 numbers, 8750000 vectors. 
+[readSparse] Read 96250000 numbers, 8750000 vectors. 
+[readSparse] Read 96250000 numbers, 8750000 vectors. 
+[readSparse] Read 96250000 numbers, 8750000 vectors. 
+[readSparse] Read 96250000 numbers, 8750000 vectors. 
+Data Read Node 14: 230.408 Seconds
+
+Data Read Node 15: 230.408 Seconds
+
+Data Read Node 13: 230.408 Seconds
+
+Data Read Node 12: 230.408 Seconds
+
+Data Read Node 4: 230.408 Seconds
+
+Data Read Node 8: 230.408 Seconds
+
+Data Read Node 0: 230.408 Seconds
+
+[readSparse]
+Data Read Node 1: 230.408 Seconds
+
+Data Read Node 2: 230.408 Seconds
+
+Data Read Node 3: 230.408 Seconds
+
+Data Read Node 9: 230.408 Seconds
+
+Data Read Node 5: 230.408 Seconds
+
+Data Read Node 10: 230.408 Seconds
+
+Data Read Node 6: 230.408 Seconds
+
+Data Read Node 11: 230.408 Seconds
+
+Data Read Node 7: 230.408 Seconds
+
+[readSparse] Read 110000 numbers, 10000 vectors. 
+Adding Vectors Node 0...
+Adding Vectors Node 8...
+Adding Vectors Node 4...
+Adding Vectors Node 12...
+Adding Vectors Node 1...
+Adding Vectors Node 2...
+Adding Vectors Node 9...
+Adding Vectors Node 5...
+Adding Vectors Node 13...
+Adding Vectors Node 3...
+Adding Vectors Node 10...
+Adding Vectors Node 6...
+Adding Vectors Node 14...
+Adding Vectors Node 11...
+Adding Vectors Node 7...
+Adding Vectors Node 15...
+Node 11 Table Mem Usage ranges from 0.134716 to 0.203671, average 0.179708
+Node 11 Table Mem Usage ranges from 0.711349 to 0.891773, average 0.841710
+Node 11 Table Mem Usage ranges from 0.878620 to 0.970673, average 0.950987
+Node 11 Table Mem Usage ranges from 0.942848 to 0.980549, average 0.975183
+Node 11 Table Mem Usage ranges from 0.970032 to 0.984989, average 0.981773
+Vectors Added Node 11: 9.57241 Seconds
+
+Node 10 Table Mem Usage ranges from 0.138119 to 0.204700, average 0.182455
+Node 10 Table Mem Usage ranges from 0.708366 to 0.890900, average 0.837272
+Node 10 Table Mem Usage ranges from 0.878929 to 0.971088, average 0.950532
+Node 10 Table Mem Usage ranges from 0.943195 to 0.981647, average 0.975515
+Node 10 Table Mem Usage ranges from 0.970818 to 0.985378, average 0.982423
+Vectors Added Node 10: 9.59033 Seconds
+
+Node 9 Table Mem Usage ranges from 0.139309 to 0.208305, average 0.184048
+Node 9 Table Mem Usage ranges from 0.712540 to 0.893715, average 0.841142
+Node 9 Table Mem Usage ranges from 0.879108 to 0.971413, average 0.950665
+Node 9 Table Mem Usage ranges from 0.943249 to 0.981331, average 0.975721
+Node 9 Table Mem Usage ranges from 0.969727 to 0.984470, average 0.982337
+Vectors Added Node 9: 9.6062 Seconds
+
+Node 7 Table Mem Usage ranges from 0.262104 to 0.319324, average 0.295273
+Node 7 Table Mem Usage ranges from 0.881302 to 0.939922, average 0.918897
+Node 7 Table Mem Usage ranges from 0.962280 to 0.972610, average 0.969927
+Node 7 Table Mem Usage ranges from 0.974545 to 0.977982, average 0.976359
+Node 7 Table Mem Usage ranges from 0.974892 to 0.980686, average 0.977393
+Vectors Added Node 7: 10.7821 Seconds
+
+Node 5 Table Mem Usage ranges from 0.265579 to 0.325111, average 0.300092
+Node 5 Table Mem Usage ranges from 0.886608 to 0.944721, average 0.923333
+Node 5 Table Mem Usage ranges from 0.964478 to 0.975807, average 0.972720
+Node 5 Table Mem Usage ranges from 0.977318 to 0.980423, average 0.979284
+Node 5 Table Mem Usage ranges from 0.977486 to 0.982986, average 0.980321
+Vectors Added Node 5: 10.81 Seconds
+
+Node 8 Table Mem Usage ranges from 0.272194 to 0.325821, average 0.302603
+Node 8 Table Mem Usage ranges from 0.893108 to 0.943909, average 0.925266
+Node 8 Table Mem Usage ranges from 0.967575 to 0.975384, average 0.971680
+Node 8 Table Mem Usage ranges from 0.974937 to 0.982975, average 0.977817
+Node 8 Table Mem Usage ranges from 0.975185 to 0.985195, average 0.978848
+Vectors Added Node 8: 10.9601 Seconds
+
+Node 6 Table Mem Usage ranges from 0.270943 to 0.322372, average 0.300077
+Node 6 Table Mem Usage ranges from 0.896896 to 0.943512, average 0.925792
+Node 6 Table Mem Usage ranges from 0.967556 to 0.976696, average 0.971532
+Node 6 Table Mem Usage ranges from 0.974022 to 0.984005, average 0.977547
+Node 6 Table Mem Usage ranges from 0.974396 to 0.985966, average 0.978565
+Vectors Added Node 6: 11.009 Seconds
+
+Node 4 Table Mem Usage ranges from 0.257778 to 0.312660, average 0.290398
+Node 4 Table Mem Usage ranges from 0.888927 to 0.942806, average 0.923416
+Node 4 Table Mem Usage ranges from 0.963135 to 0.973152, average 0.970427
+Node 4 Table Mem Usage ranges from 0.974632 to 0.977894, average 0.976373
+Node 4 Table Mem Usage ranges from 0.974831 to 0.980076, average 0.977388
+Vectors Added Node 4: 11.1187 Seconds
+
+Node 12 Table Mem Usage ranges from 0.134995 to 0.201687, average 0.178374
+Node 12 Table Mem Usage ranges from 0.714321 to 0.890358, average 0.843210
+Node 12 Table Mem Usage ranges from 0.885738 to 0.972534, average 0.953799
+Node 12 Table Mem Usage ranges from 0.947762 to 0.983639, average 0.977461
+Node 12 Table Mem Usage ranges from 0.972614 to 0.987740, average 0.983708
+Vectors Added Node 12: 14.7072 Seconds
+
+Node 13 Table Mem Usage ranges from 0.132366 to 0.200039, average 0.174231
+Node 13 Table Mem Usage ranges from 0.721085 to 0.897869, average 0.846542
+Node 13 Table Mem Usage ranges from 0.950436 to 0.980495, average 0.971781
+Node 13 Table Mem Usage ranges from 0.983532 to 0.987595, average 0.984879
+Node 13 Table Mem Usage ranges from 0.984035 to 0.989975, average 0.986659
+Vectors Added Node 13: 18.0864 Seconds
+
+Node 14 Table Mem Usage ranges from 0.260288 to 0.321384, average 0.293264
+Node 14 Table Mem Usage ranges from 0.879616 to 0.950390, average 0.925121
+Node 14 Table Mem Usage ranges from 0.956783 to 0.983017, average 0.974494
+Node 14 Table Mem Usage ranges from 0.971104 to 0.986359, average 0.980682
+Node 14 Table Mem Usage ranges from 0.974403 to 0.986710, average 0.981704
+Vectors Added Node 14: 18.5725 Seconds
+
+Node 15 Table Mem Usage ranges from 0.269783 to 0.329659, average 0.303656
+Node 15 Table Mem Usage ranges from 0.891762 to 0.951000, average 0.926978
+Node 15 Table Mem Usage ranges from 0.965214 to 0.980953, average 0.974555
+Node 15 Table Mem Usage ranges from 0.979038 to 0.984138, average 0.981150
+Node 15 Table Mem Usage ranges from 0.979218 to 0.984482, average 0.982171
+Vectors Added Node 15: 18.9634 Seconds
+
+Node 1 Table Mem Usage ranges from 0.272324 to 0.328693, average 0.304419
+Node 1 Table Mem Usage ranges from 0.891712 to 0.947220, average 0.926461
+Node 1 Table Mem Usage ranges from 0.965530 to 0.976917, average 0.973266
+Node 1 Table Mem Usage ranges from 0.978004 to 0.980801, average 0.979615
+Node 1 Table Mem Usage ranges from 0.978203 to 0.983253, average 0.980662
+Vectors Added Node 1: 19.1013 Seconds
+
+Node 3 Table Mem Usage ranges from 0.268078 to 0.331749, average 0.303199
+Node 3 Table Mem Usage ranges from 0.891476 to 0.950611, average 0.927442
+Node 3 Table Mem Usage ranges from 0.966663 to 0.980774, average 0.975128
+Node 3 Table Mem Usage ranges from 0.979847 to 0.983959, average 0.981690
+Node 3 Table Mem Usage ranges from 0.979988 to 0.984924, average 0.982719
+Vectors Added Node 3: 19.1078 Seconds
+
+Node 2 Table Mem Usage ranges from 0.262623 to 0.321354, average 0.296449
+Node 2 Table Mem Usage ranges from 0.889572 to 0.946148, average 0.926147
+Node 2 Table Mem Usage ranges from 0.968220 to 0.978443, average 0.975696
+Node 2 Table Mem Usage ranges from 0.980167 to 0.983040, average 0.981886
+Node 2 Table Mem Usage ranges from 0.980392 to 0.985680, average 0.982914
+Vectors Added Node 2: 19.3628 Seconds
+
+Node 0 Table Mem Usage ranges from 0.261372 to 0.325123, average 0.297668
+Node 0 Table Mem Usage ranges from 0.885059 to 0.950165, average 0.924541
+Node 0 Table Mem Usage ranges from 0.966873 to 0.982658, average 0.975816
+Node 0 Table Mem Usage ranges from 0.980106 to 0.985870, average 0.982212
+Node 0 Table Mem Usage ranges from 0.980316 to 0.986259, average 0.983245
+Vectors Added Node 0: 19.3698 Seconds
+
+Computing Query Hashes Node 0...
+Computing Query Hashes Node 12...
+Computing Query Hashes Node 1...
+Computing Query Hashes Node 4...
+Computing Query Hashes Node 2...
+Computing Query Hashes Node 8...
+Computing Query Hashes Node 5...
+Computing Query Hashes Node 13...
+Computing Query Hashes Node 3...
+Computing Query Hashes Node 9...
+Computing Query Hashes Node 6...
+Computing Query Hashes Node 14...
+Computing Query Hashes Node 10...
+Computing Query Hashes Node 7...
+Computing Query Hashes Node 15...
+Computing Query Hashes Node 11...
+Query Hashes Computed Node 3: 0.856604 Seconds
+
+Query Hashes Computed Node 0: 0.856949 Seconds
+
+Query Hashes Computed Node 6: 0.856827 Seconds
+
+Query Hashes Computed Node 2: 0.856987 Seconds
+
+Query Hashes Computed Node 7: 0.856973 Seconds
+
+Query Hashes Computed Node 8: 0.856963 Seconds
+
+Query Hashes Computed Node 14: 0.856937 Seconds
+
+Query Hashes Computed Node 10: 0.85696 Seconds
+
+Query Hashes Computed Node 15: 0.85697 Seconds
+
+Query Hashes Computed Node 11: 0.856997 Seconds
+
+Query Hashes Computed Node 9: 0.860114 Seconds
+
+Query Hashes Computed Node 4: 0.861188 Seconds
+
+Query Hashes Computed Node 5: 0.861307 Seconds
+
+Query Hashes Computed Node 13: 0.861264 Seconds
+
+Query Hashes Computed Node 12: 0.864983 Seconds
+
+Query Hashes Computed Node 1: 0.865938 Seconds
+
+Extracting Top K (TREE) Node 0...
+Extracting Top K (TREE) Node 2...
+Extracting Top K (TREE) Node 4...
+Extracting Top K (TREE) Node 12...
+Extracting Top K (TREE) Node 1...
+Extracting Top K (TREE) Node 14...
+Extracting Top K (TREE) Node 3...
+Extracting Top K (TREE) Node 13...
+Extracting Top K (TREE) Node 6...
+Extracting Top K (TREE) Node 15...
+Extracting Top K (TREE) Node 5...
+Extracting Top K (TREE) Node 7...
+Extracting Top K (TREE) Node 8...
+Extracting Top K (TREE) Node 9...
+Extracting Top K (TREE) Node 10...
+Extracting Top K (TREE) Node 11...
+Top K (TREE) Extracted Node 11: 0.644775 Seconds
+
+Top K (TREE) Extracted Node 7: 0.660088 Seconds
+
+Top K (TREE) Extracted Node 5: 0.663885 Seconds
+
+Top K (TREE) Extracted Node 9: 0.684516 Seconds
+
+Top K (TREE) Extracted Node 13: 0.76331 Seconds
+
+Top K (TREE) Extracted Node 15: 0.77454 Seconds
+
+Top K (TREE) Extracted Node 3: 0.854624 Seconds
+
+Top K (TREE) Extracted Node 1: 0.859598 Seconds
+
+Top K (TREE) Extracted Node 6: 0.903589 Seconds
+
+Top K (TREE) Extracted Node 10: 0.930771 Seconds
+
+Top K (TREE) Extracted Node 14: 1.0514 Seconds
+
+Top K (TREE) Extracted Node 2: 1.17663 Seconds
+
+Top K (TREE) Extracted Node 12: 1.18387 Seconds
+
+Top K (TREE) Extracted Node 4: 1.31694 Seconds
+
+Top K (TREE) Extracted Node 8: 1.49324 Seconds
+
+Top K (TREE) Extracted Node 0: 1.66535 Seconds
+
+Extracting Top K (LINEAR) Node 3...
+Extracting Top K (LINEAR) Node 1...
+Extracting Top K (LINEAR) Node 9...
+Extracting Top K (LINEAR) Node 5...
+Extracting Top K (LINEAR) Node 13...
+Extracting Top K (LINEAR) Node 7...
+Extracting Top K (LINEAR) Node 15...
+Extracting Top K (LINEAR) Node 11...
+Extracting Top K (LINEAR) Node 0...
+Extracting Top K (LINEAR) Node 8...
+Extracting Top K (LINEAR) Node 4...
+Extracting Top K (LINEAR) Node 12...
+Extracting Top K (LINEAR) Node 2...
+Extracting Top K (LINEAR) Node 6...
+Extracting Top K (LINEAR) Node 10...
+Extracting Top K (LINEAR) Node 14...
+terminate called after throwing an instance of 'std::bad_array_new_length'
+  what():  std::bad_array_new_length
+[bc11u11n1:34593] *** Process received signal ***
+[bc11u11n1:34593] Signal: Aborted (6)
+[bc11u11n1:34593] Signal code:  (-6)
+[bc11u11n1:34593] [ 0] /usr/lib64/libpthread.so.0(+0xf5d0)[0x7ffff77385d0]
+[bc11u11n1:34593] [ 1] /usr/lib64/libc.so.6(gsignal+0x37)[0x7ffff7392207]
+[bc11u11n1:34593] [ 2] /usr/lib64/libc.so.6(abort+0x148)[0x7ffff73938f8]
+[bc11u11n1:34593] [ 3] /opt/apps/software/Core/GCCcore/6.4.0/lib64/libstdc++.so.6(_ZN9__gnu_cxx27__verbose_terminate_handlerEv+0x15d)[0x7ffff7ce14dd]
+[bc11u11n1:34593] [ 4] /opt/apps/software/Core/GCCcore/6.4.0/lib64/libstdc++.so.6(+0x984a6)[0x7ffff7cdf4a6]
+[bc11u11n1:34593] [ 5] /opt/apps/software/Core/GCCcore/6.4.0/lib64/libstdc++.so.6(+0x984f1)[0x7ffff7cdf4f1]
+[bc11u11n1:34593] [ 6] /opt/apps/software/Core/GCCcore/6.4.0/lib64/libstdc++.so.6(+0x98709)[0x7ffff7cdf709]
+[bc11u11n1:34593] [ 7] /opt/apps/software/Core/GCCcore/6.4.0/lib64/libstdc++.so.6(+0x97482)[0x7ffff7cde482]
+[bc11u11n1:34593] [ 8] /scratch/ncm5/Distributed-LSH-Algorithm-For-Similarity-Search/src/./runme[0x409aee]
+[bc11u11n1:34593] [ 9] /scratch/ncm5/Distributed-LSH-Algorithm-For-Similarity-Search/src/./runme[0x40b8c8]
+[bc11u11n1:34593] [10] /scratch/ncm5/Distributed-LSH-Algorithm-For-Similarity-Search/src/./runme[0x4062c5]
+[bc11u11n1:34593] [11] /scratch/ncm5/Distributed-LSH-Algorithm-For-Similarity-Search/src/./runme[0x402a79]
+[bc11u11n1:34593] [12] /usr/lib64/libc.so.6(__libc_start_main+0xf5)[0x7ffff737e3d5]
+[bc11u11n1:34593] [13] /scratch/ncm5/Distributed-LSH-Algorithm-For-Similarity-Search/src/./runme[0x402c57]
+[bc11u11n1:34593] *** End of error message ***
+srun: error: bc11u11n1: task 0: Aborted
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+slurmstepd: *** JOB 48412 ON bc11u11n1 CANCELLED AT 2019-11-26T14:35:28 DUE TO TIME LIMIT ***
+slurmstepd: *** STEP 48412.0 ON bc11u11n1 CANCELLED AT 2019-11-26T14:35:28 DUE TO TIME LIMIT ***
