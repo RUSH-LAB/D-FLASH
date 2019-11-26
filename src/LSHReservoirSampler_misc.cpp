@@ -1,6 +1,4 @@
 #include "LSHReservoirSampler.h"
-#include "indexing.h"
-#include "misc.h"
 
 void LSHReservoirSampler::checkTableMemLoad() {
 	unsigned int maxx = 0;
@@ -64,8 +62,6 @@ void LSHReservoirSampler::viewTables() {
 		}
 		printf("\n");
 	}
-
-	pause();
 }
 
 void LSHReservoirSampler::tableContents() {
@@ -88,10 +84,4 @@ void LSHReservoirSampler::tableContents() {
 		}
 		printf("\n");
 	}
-}
-
-void LSHReservoirSampler::pause() {
-#ifdef VISUAL_STUDIO
-	system("pause");
-#endif
 }

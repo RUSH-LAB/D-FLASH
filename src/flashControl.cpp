@@ -158,19 +158,14 @@ void flashControl::topKBruteForceAggretation(int topK, unsigned int* outputs) {
     }
 }
 
-void flashControl::topKCMSAggregation(int topK, unsigned int* outputs, int threshold) {
+void flashControl::topKCMSAggregationTree(int topK, unsigned int* outputs, int threshold) {
     int segmentSize = _numTables * _numQueryProbes * _reservoirSize;
     unsigned int* allReservoirsExtracted = new unsigned int[segmentSize * _numQueryVectors];
     _myReservoir->extractReservoirs(_numQueryVectors, segmentSize, allReservoirsExtracted, _allQueryHashes);
 
     _mySketch->add(allReservoirsExtracted, segmentSize);
 
-#ifdef TREE_AGGREGATION
     _mySketch->aggregateSketchesTree();
-#endif
-#ifdef LINEAR_AGGREGATION
-    _mySketch->aggregateSketches();
-#endif
 
     if (_myRank == 0) {
         _mySketch->topK(topK, outputs, threshold);
@@ -179,17 +174,22 @@ void flashControl::topKCMSAggregation(int topK, unsigned int* outputs, int thres
     delete[] allReservoirsExtracted;
 }
 
-void flashControl::localTopK(int topK, unsigned int* outputs, int threshold) {
+void flashControl::topKCMSAggregationLinear(int topK, unsigned int* outputs, int threshold) {
     int segmentSize = _numTables * _numQueryProbes * _reservoirSize;
-    unsigned int* tally = new unsigned int[segmentSize * _numQueryVectors];
-    _myReservoir->extractReservoirs(_numQueryVectors, segmentSize, tally, _allQueryHashes);
+    unsigned int* allReservoirsExtracted = new unsigned int[segmentSize * _numQueryVectors];
+    _myReservoir->extractReservoirs(_numQueryVectors, segmentSize, allReservoirsExtracted, _allQueryHashes);
 
-    _mySketch->add(tally, segmentSize);
+    _mySketch->add(allReservoirsExtracted, segmentSize);
 
-    _mySketch->topK(topK, outputs, threshold);
+    _mySketch->aggregateSketches();
 
-    delete[] tally;
+    if (_myRank == 0) {
+        _mySketch->topK(topK, outputs, threshold);
+    }
+
+    delete[] allReservoirsExtracted;
 }
+
 
 void flashControl::printTables() {
     for (int n = 0; n < _worldSize; n++) {

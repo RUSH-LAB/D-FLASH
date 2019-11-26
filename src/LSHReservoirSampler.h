@@ -8,7 +8,7 @@
 #include <algorithm>
 #include <math.h>
 #include "indexing.h"
-#include "misc.h"
+#include "mathUtils.h"
 
 #include "omp.h"
 #include "LSH.h"
@@ -59,12 +59,6 @@ private:
 	// Param dataOffset is used to account for indexing across nodes.
 	void addTable(unsigned int *storelog, int numProbePerTb, int dataOffset);
 
-	// Preforms top-k selection on an array of reservoirs.
-	void kSelect(unsigned int *tally, unsigned int *outputs, int segmentSize, int numQueryEntries, int topk);
-
-	/* Aux. */
-	void pause();
-
 	/* Debug. */
 	void viewTables();
 	int benchCounting(int segmentSize, int* dataIdx, float* dataVal, int* dataMarker, float *timings);
@@ -105,20 +99,6 @@ public:
 	*/
 	void add(int numInputEntries, int* dataIdx, float* dataVal, int* dataMarker, int dataOffset);
 
-	/* Query vectors (in sparse format) and return top k neighbors for each.
-	Near-neighbors for each query will be returned in descending similarity.
-	For numQueryEntries > 1, simply concatenate data vectors.
-
-	@param numQueryEntries: number of query vectors.
-	@param dataIdx: non-zero indice of the sparse format.
-	@param dataVal Non-zero values of the sparse format.
-	@param dataMarker: marks the start index of each vector in dataIdx and dataVal. 
-		Has an additional marker at the end to mark the (end+1) index.
-	@param outputs: near-neighbor identifications. The i_th neighbor of the q_th query is outputs[q * k + i]
-	@param k: number of near-neighbors to query for each query vector.
-	*/
-	void ann(int numQueryEntries, int* dataIdx, float* dataVal, int* dataMarker, unsigned int* outputs, int k);
-
 	/* Computes hashes for a partition of the set of query vectors.
 
 	@param queryPartitionSize: the number of query vectors in the partition.
@@ -141,9 +121,6 @@ public:
 	@param hashIndices: the hash indices of the query vectors, corresponding to a reservoir(s) in each table.
 	*/
   	void extractReservoirs(int numQueryEntries, int segmentSize, unsigned int *queue, unsigned int *hashIndices);
-
-	// TESTING
-	void extractTopK(int numQueryEntries, unsigned int* hashIndices, int topK, unsigned int* outputs);
 
 	/* Print current parameter settings to the console.
 	*/

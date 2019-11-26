@@ -3,13 +3,10 @@
 #include "CMS.h"
 #include "LSH.h"
 #include "dataset.h"
-#include "misc.h"
-#include "evaluate.h"
+#include "mathUtils.h"
 #include "indexing.h"
 #include "omp.h"
-#include "MatMul.h"
 #include "benchmarking.h"
-#include "FrequentItems.h"
 
 #include <string>
 #include <sstream>

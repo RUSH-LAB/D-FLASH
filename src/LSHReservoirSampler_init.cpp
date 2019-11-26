@@ -1,6 +1,3 @@
-
-#include "indexing.h"
-#include "misc.h"
 #include "LSHReservoirSampler.h"
 
 //#define PRINT_CLINFO
