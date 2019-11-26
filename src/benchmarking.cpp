@@ -6,37 +6,22 @@
 #include "CMS.h"
 #include "dataset.h"
 #include "flashControl.h"
-#include "misc.h"
-#include "evaluate.h"
 #include "indexing.h"
 #include "benchmarking.h"
-#include "MatMul.h"
-#include "FrequentItems.h"
+#include "mathUtils.h"
+#include <chrono>
 
 
 #define TOPK_BENCHMARK
 
-void showConfig(std::string dataset, int numVectors, int queries, int nodes, int tables, int rangePow, int reservoirSize, int hashes, int cmsHashes, int cmsBucketSize, bool cms, bool tree){
+void showConfig(std::string dataset, int numVectors, int queries, int nodes, int tables, int rangePow, int reservoirSize, int hashes, int cmsHashes, int cmsBucketSize){
 	std::cout << "\n=================\n== " << dataset << "\n=================\n" << std::endl;
 
 	printf("%d Vectors, %d Queries\n", numVectors, queries);
 
 	printf("Nodes: %d\nTables: %d\nRangePow: %d\nReservoir Size: %d\nHashes: %d\n", nodes, tables, rangePow, reservoirSize, hashes);
 
-	if (cms) {
-		printf("Using CMS Aggregation\n");
-	} else {
-		printf("Using Bruteforce Aggregation\n");
-	}
-	
-	if (tree) {
-		printf("Using Tree Aggregation\n");
-	} else {
-		printf("Using Linear Aggregation\n");
-	}
-
 	printf("CMS Bucket Size: %d\nCMS Hashes: %d\n\n", cmsBucketSize, cmsHashes);
-
 
 }
 
@@ -76,7 +61,7 @@ void webspam()
 #ifdef TREE_AGGREGATION
 		tree = true;
 #endif
-		showConfig("Webspam", NUM_DATA_VECTORS, NUM_QUERY_VECTORS, worldSize, NUM_TABLES, RANGE_POW, RESERVOIR_SIZE, NUM_HASHES, CMS_HASHES, CMS_BUCKET_SIZE, cms, tree);
+		showConfig("Webspam", NUM_DATA_VECTORS, NUM_QUERY_VECTORS, worldSize, NUM_TABLES, RANGE_POW, RESERVOIR_SIZE, NUM_HASHES, CMS_HASHES, CMS_BUCKET_SIZE);
 
 	}	
 
@@ -179,18 +164,6 @@ void webspam()
 	MPI_Finalize();
 
 if (myRank == 0) {
-/* ===============================================================
-	Reading Groundtruths
-*/
-		unsigned int *gtruth_indice = new unsigned int[NUM_QUERY_VECTORS * AVAILABLE_TOPK];
-		float *gtruth_dist = new float[NUM_QUERY_VECTORS * AVAILABLE_TOPK];
-		std::cout << "Reading Groundtruth Node 0..." << std::endl;	
-		start = std::chrono::system_clock::now();
-		readGroundTruthInt(GTRUTHINDICE, NUM_QUERY_VECTORS, AVAILABLE_TOPK, gtruth_indice);
-		readGroundTruthFloat(GTRUTHDIST, NUM_QUERY_VECTORS, AVAILABLE_TOPK, gtruth_dist);
-		end = std::chrono::system_clock::now();
-		elapsed = end - start;
-		std::cout << "Groundtruth Read Node 0: " << elapsed.count() << " Seconds\n" << std::endl;
 
 /* ===============================================================
 	Similarity and Accuracy Calculations
@@ -204,33 +177,18 @@ if (myRank == 0) {
 
 		const int nCnt = 10;
 		int nList[nCnt] = {1, 10, 20, 30, 32, 40, 50, 64, 100, TOPK};
-		const int gstdCnt = 8;
-		float gstdVec[gstdCnt] = {0.95, 0.90, 0.85, 0.80, 0.75, 0.70, 0.65, 0.50};
-		const int tstdCnt = 10;
-		int tstdVec[tstdCnt] = {1, 10, 20, 30, 32, 40, 50, 64, 100, TOPK};
 
 		std::cout << "\n\n================================\nTOP K CMS\n" << std::endl;
 
 		similarityMetric(sparseIndices, sparseVals, sparseMarkers,
-							sparseIndices, sparseVals, sparseMarkers, outputs, gtruth_dist,
+							sparseIndices, sparseVals, sparseMarkers, outputs,
 							NUM_QUERY_VECTORS, TOPK, AVAILABLE_TOPK, nList, nCnt);
 		std::cout << "Similarity Metric Computed" << std::endl;
-		// Commented out for testing purposes
-		// similarityOfData(gtruth_dist, NUM_QUERY_VECTORS, TOPK, AVAILABLE_TOPK, nList, nCnt);
-		// std::cout << "Similarity of Data Computed" << std::endl;
-
-		// for (int i = 0; i < NUM_QUERY_VECTORS * TOPK; i++) {
-		// 	outputs[i] -= NUM_QUERY_VECTORS;
-		// }
-		//Commented out for testing purposes
-		//evaluate(outputs, NUM_QUERY_VECTORS, TOPK, gtruth_indice, gtruth_dist, AVAILABLE_TOPK, gstdVec, gstdCnt, tstdVec, tstdCnt, nList, nCnt);
 		std::cout << "Evaluation Complete" << std::endl;
 
 /* ===============================================================
 	De-allocating Memory
 */
-		delete[] gtruth_dist;
-		delete[] gtruth_indice;
 		delete[] sparseIndices;
 		delete[] sparseVals;
 		delete[] sparseMarkers;
@@ -264,17 +222,7 @@ void kdd12()
 	MPI_Comm_size(MPI_COMM_WORLD, &worldSize);
 	MPI_Comm_rank(MPI_COMM_WORLD, &myRank);
 	if (myRank == 0) {
-
-		bool cms = false;
-		bool tree = false;
-#ifdef CMS_AGGREGATION
-		cms = true;
-#endif
-#ifdef TREE_AGGREGATION
-		tree = true;
-#endif
-		showConfig("KDD12", NUM_DATA_VECTORS, NUM_QUERY_VECTORS, worldSize, NUM_TABLES, RANGE_POW, RESERVOIR_SIZE, NUM_HASHES, CMS_HASHES, CMS_BUCKET_SIZE, cms, tree);
-
+		showConfig("KDD12", NUM_DATA_VECTORS, NUM_QUERY_VECTORS, worldSize, NUM_TABLES, RANGE_POW, RESERVOIR_SIZE, NUM_HASHES, CMS_HASHES, CMS_BUCKET_SIZE);
 	}	
 
 /* ===============================================================
@@ -344,19 +292,38 @@ void kdd12()
 /* ===============================================================
 	Extracting Reservoirs and Preforming Top-K selection
 */
-	unsigned int *outputs = new unsigned int[TOPK * NUM_QUERY_VECTORS];
+	unsigned int *treeOutputs = new unsigned int[TOPK * NUM_QUERY_VECTORS];
 	start = std::chrono::system_clock::now();
-	std::cout << "Extracting Top K (CMS) Node " << myRank << "..." << std::endl;
-	control->topKCMSAggregation(TOPK, outputs, 0);
-#ifdef CMS
-	control->topKCMSAggregation(TOPK, outputs, 0);
-#endif
-#ifdef BF
-	control->topKBruteForceAggretation(TOPK, outputs);
-#endif
+	std::cout << "Extracting Top K (TREE) Node " << myRank << "..." << std::endl;
+	control->topKCMSAggregationTree(TOPK, treeOutputs, 0);
 	end = std::chrono::system_clock::now();
 	elapsed = end - start;
-	std::cout << "Top K Extracted Node " << myRank << ": " << elapsed.count() << " Seconds\n" << std::endl;
+	std::cout << "Top K (TREE) Extracted Node " << myRank << ": " << elapsed.count() << " Seconds\n" << std::endl;
+
+	MPI_Barrier(MPI_COMM_WORLD);
+
+// ==============================================
+
+	unsigned int *linearOutputs = new unsigned int[TOPK * NUM_QUERY_VECTORS];
+	start = std::chrono::system_clock::now();
+	std::cout << "Extracting Top K (LINEAR) Node " << myRank << "..." << std::endl;
+	control->topKCMSAggregationLinear(TOPK, linearOutputs, 0);
+	end = std::chrono::system_clock::now();
+	elapsed = end - start;
+	std::cout << "Top K (LINEAR) Extracted Node " << myRank << ": " << elapsed.count() << " Seconds\n" << std::endl;
+
+	MPI_Barrier(MPI_COMM_WORLD);
+
+// ==============================================
+
+
+	unsigned int *bruteforceOutputs = new unsigned int[TOPK * NUM_QUERY_VECTORS];
+	start = std::chrono::system_clock::now();
+	std::cout << "Extracting Top K (BRUTEFORCE) Node " << myRank << "..." << std::endl;
+	control->topKBruteForceAggretation(TOPK, bruteforceOutputs);
+	end = std::chrono::system_clock::now();
+	elapsed = end - start;
+	std::cout << "Top K (BRUTEFORCE) Extracted Node " << myRank << ": " << elapsed.count() << " Seconds\n" << std::endl;
 
 	MPI_Barrier(MPI_COMM_WORLD);
 
@@ -387,16 +354,25 @@ if (myRank == 0) {
 
 		const int nCnt = 10;
 		int nList[nCnt] = {1, 10, 20, 30, 32, 40, 50, 64, 100, TOPK};
-		const int gstdCnt = 8;
-		float gstdVec[gstdCnt] = {0.95, 0.90, 0.85, 0.80, 0.75, 0.70, 0.65, 0.50};
-		const int tstdCnt = 10;
-		int tstdVec[tstdCnt] = {1, 10, 20, 30, 32, 40, 50, 64, 100, TOPK};
 
-		std::cout << "\n\n================================\nTOP K CMS\n" << std::endl;
+		std::cout << "\n\n================================\nTOP K TREE\n" << std::endl;
 
 		similarityMetric(sparseIndices, sparseVals, sparseMarkers,
-							sparseIndices, sparseVals, sparseMarkers, outputs,
+							sparseIndices, sparseVals, sparseMarkers, treeOutputs,
 							NUM_QUERY_VECTORS, TOPK, AVAILABLE_TOPK, nList, nCnt);
+
+		std::cout << "\n\n================================\nTOP K LINEAR\n" << std::endl;
+
+		similarityMetric(sparseIndices, sparseVals, sparseMarkers,
+							sparseIndices, sparseVals, sparseMarkers, linearOutputs,
+							NUM_QUERY_VECTORS, TOPK, AVAILABLE_TOPK, nList, nCnt);
+
+		std::cout << "\n\n================================\nTOP K BRUTEFORCE\n" << std::endl;
+
+		similarityMetric(sparseIndices, sparseVals, sparseMarkers,
+							sparseIndices, sparseVals, sparseMarkers, bruteforceOutputs,
+							NUM_QUERY_VECTORS, TOPK, AVAILABLE_TOPK, nList, nCnt);
+
 		std::cout << "Similarity Metric Computed" << std::endl;
 		
 /* ===============================================================
@@ -406,7 +382,9 @@ if (myRank == 0) {
 		delete[] sparseVals;
 		delete[] sparseMarkers;
 	}
-	delete[] outputs;
+	delete[] treeOutputs;
+	delete[] linearOutputs;
+	delete[] bruteforceOutputs;
 }
 
 /*

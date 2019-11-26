@@ -1,8 +1,4 @@
 #include "LSHReservoirSampler.h"
-#include "misc.h"
-#include "indexing.h"
-#include "FrequentItems.h"
-#include <algorithm>
 #include "omp.h"
 
 void LSHReservoirSampler::reservoirSampling(unsigned int *allprobsHash, unsigned int *allprobsIdx,

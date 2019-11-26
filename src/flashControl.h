@@ -120,12 +120,12 @@ public:
     @param outputs: an array to store the selected top-k for each query vector.
     @param threshold: used for extracting heavy hitters in topKAPI
     */
-    void topKCMSAggregation(int topK, unsigned int* outputs, int threshold);
+    void topKCMSAggregationTree(int topK, unsigned int* outputs, int threshold);
+
+    void topKCMSAggregationLinear(int topK, unsigned int* outputs, int threshold);
 
     // For debugging: shows the partitions of the data and query allocated to a specific node.
     void showPartitions();
-
-    void localTopK(int topK, unsigned int* outputs, int threshold);
 
     void printTables();
 
