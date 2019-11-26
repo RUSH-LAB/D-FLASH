@@ -89,13 +89,13 @@ void flashControl::hashQuery() {
 }
 
 void flashControl::topKBruteForceAggretation(int topK, unsigned int* outputs) {
-    int segmentSize = _numTables * _numQueryProbes * _reservoirSize;
-    unsigned int* allReservoirsExtracted = new unsigned int[segmentSize * _numQueryVectors];
+    long segmentSize = _numTables * _numQueryProbes * _reservoirSize;
+    unsigned int* allReservoirsExtracted = new unsigned int[segmentSize * (long) _numQueryVectors];
     _myReservoir->extractReservoirs(_numQueryVectors, segmentSize, allReservoirsExtracted, _allQueryHashes);
 
     unsigned int* allReservoirsAllNodes;
     if (_myRank == 0) {
-        allReservoirsAllNodes = new unsigned int[segmentSize * _numQueryVectors * _worldSize];
+        allReservoirsAllNodes = new unsigned int[segmentSize * (long) _numQueryVectors * (long) _worldSize];
     }
     MPI_Gather(allReservoirsExtracted, segmentSize * _numQueryVectors, MPI_UNSIGNED, allReservoirsAllNodes, segmentSize * _numQueryVectors, MPI_UNSIGNED, 0, MPI_COMM_WORLD);
     

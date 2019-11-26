@@ -177,10 +177,10 @@ void CMS::combineSketches (int* newLHH) {
 }
 
 void CMS::aggregateSketches() {
-	int bufferSize = _sketchSize * _numSketches;
+	long bufferSize = _sketchSize * _numSketches;
 	int* sketchBuffer;
 	if (_myRank == 0) {
-		sketchBuffer = new int[bufferSize * _worldSize];
+		sketchBuffer = new int[bufferSize * (long) _worldSize];
 	}
 	MPI_Gather(_LHH, bufferSize, MPI_INT, sketchBuffer, bufferSize, MPI_INT, 0, MPI_COMM_WORLD);
 	if (_myRank == 0) {

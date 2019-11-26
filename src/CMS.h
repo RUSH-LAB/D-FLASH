@@ -29,7 +29,8 @@ class CMS {
 private:
 	int* _LHH;
 	int _myRank, _worldSize;
-	int _numHashes, _bucketSize, _numSketches, _sketchSize;
+	int _numHashes, _bucketSize, _numSketches;
+	long _sketchSize;
 	unsigned int* _hashingSeeds;
 
 	void getCanidateHashes(int candidate, unsigned int* hashes);
