@@ -52,17 +52,7 @@ void webspam()
 	MPI_Comm_size(MPI_COMM_WORLD, &worldSize);
 	MPI_Comm_rank(MPI_COMM_WORLD, &myRank);
 	if (myRank == 0) {
-
-		bool cms = false;
-		bool tree = false;
-#ifdef CMS_AGGREGATION
-		cms = true;
-#endif
-#ifdef TREE_AGGREGATION
-		tree = true;
-#endif
 		showConfig("Webspam", NUM_DATA_VECTORS, NUM_QUERY_VECTORS, worldSize, NUM_TABLES, RANGE_POW, RESERVOIR_SIZE, NUM_HASHES, CMS_HASHES, CMS_BUCKET_SIZE);
-
 	}	
 
 /* ===============================================================
@@ -139,7 +129,7 @@ void webspam()
 	start = std::chrono::system_clock::now();
 	std::cout << "Extracting Top K (CMS) Node " << myRank << "..." << std::endl;
 #ifdef CMS_AGGREGATION
-	control->topKCMSAggregation(TOPK, outputs, 0);
+	control->topKCMSAggregationTree(TOPK, outputs, 0);
 #endif
 #ifdef BF_AGGREGATION
 	control->topKBruteForceAggretation(TOPK, outputs);
@@ -490,7 +480,7 @@ void unitTesting()
 	unsigned int *outputs = new unsigned int[TOPK * NUM_QUERY_VECTORS];
 	start = std::chrono::system_clock::now();
 	std::cout << "Extracting Top K (CMS) Node " << myRank << "..." << std::endl;
-	control->topKCMSAggregation(TOPK, outputs, 0);
+	control->topKCMSAggregationTree(TOPK, outputs, 0);
 	// control->topKBruteForceAggretation(TOPK, outputs);
 	end = std::chrono::system_clock::now();
 	elapsed = end - start;
