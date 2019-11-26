@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #SBATCH --job-name=NotsTest
-#SBATCH --nodes=1 --exclusive 
+#SBATCH --nodes=6 --exclusive 
 #SBATCH --ntasks-per-node=2
 #SBATCH --cpus-per-task=8
 #SBATCH --time=00:20:00
