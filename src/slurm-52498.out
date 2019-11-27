@@ -1,0 +1,128 @@
+slurmstepd: task/cgroup: unable to add task[pid=8880] to memory cg '(null)'
+slurmstepd: jobacct_gather/cgroup: unable to instanciate job 52498 memory cgroup
+slurmstepd: task/cgroup: unable to add task[pid=8950] to memory cg '(null)'
+slurmstepd: task/cgroup: unable to add task[pid=8949] to memory cg '(null)'
+slurmstepd: task/cgroup: unable to add task[pid=8951] to memory cg '(null)'
+slurmstepd: jobacct_gather/cgroup: unable to instanciate job 52498 memory cgroup
+slurmstepd: jobacct_gather/cgroup: unable to instanciate job 52498 memory cgroup
+slurmstepd: jobacct_gather/cgroup: unable to instanciate job 52498 memory cgroup
+slurmstepd: task/cgroup: unable to add task[pid=78010] to memory cg '(null)'
+slurmstepd: task/cgroup: unable to add task[pid=78011] to memory cg '(null)'
+slurmstepd: task/cgroup: unable to add task[pid=48856] to memory cg '(null)'
+slurmstepd: task/cgroup: unable to add task[pid=48857] to memory cg '(null)'
+slurmstepd: task/cgroup: unable to add task[pid=48858] to memory cg '(null)'
+slurmstepd: task/cgroup: unable to add task[pid=78012] to memory cg '(null)'
+slurmstepd: unable to build slurm cgroup for ns memory: Cannot allocate memory
+slurmstepd: unable to build slurm cgroup for ns memory: Cannot allocate memory
+slurmstepd: jobacct_gather/cgroup: unable to instanciate user 17279 memory cgroup
+slurmstepd: jobacct_gather/cgroup: unable to instanciate user 17279 memory cgroup
+slurmstepd: unable to build slurm cgroup for ns memory: Cannot allocate memory
+slurmstepd: unable to build slurm cgroup for ns memory: Cannot allocate memory
+slurmstepd: jobacct_gather/cgroup: unable to instanciate user 17279 memory cgroup
+slurmstepd: jobacct_gather/cgroup: unable to instanciate user 17279 memory cgroup
+slurmstepd: unable to build slurm cgroup for ns memory: Cannot allocate memory
+slurmstepd: unable to build slurm cgroup for ns memory: Cannot allocate memory
+slurmstepd: jobacct_gather/cgroup: unable to instanciate user 17279 memory cgroup
+slurmstepd: jobacct_gather/cgroup: unable to instanciate user 17279 memory cgroup
+
+=================
+== KDD12
+=================
+
+[bc12u29n4:78010] *** Process received signal ***
+[bc12u29n3:48856] *** Process received signal ***
+[bc12u29n3:48856] Signal: Segmentation fault (11)
+[bc12u29n3:48856] Signal code: Address not mapped (1)
+[bc12u29n3:48856] Failing at address: (nil)
+140000000 Vectors, 10000 Queries
+Nodes: 9
+Tables: 16
+RangePow: 18
+Reservoir Size: 256
+Hashes: 4
+CMS Bucket Size: 2048
+CMS Hashes: 4
+
+LSH Initialized in Node 0
+LSH Initialized in Node 1
+LSH Initialized in Node 2
+--------------------------------------------------------------------------
+An MPI communication peer process has unexpectedly disconnected.  This
+usually indicates a failure in the peer process (e.g., a crash or
+otherwise exiting without calling MPI_FINALIZE first).
+
+Although this local MPI process will likely now behave unpredictably
+(it may even hang or crash), the root cause of this problem is the
+failure of the peer -- that is what you need to investigate.  For
+example, there may be a core file that you can examine.  More
+generally: such peer hangups are frequently caused by application bugs
+or other external events.
+
+  Local host: bc12u29n2
+  Local PID:  8949
+  Peer host:  bc12u29n4
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+An MPI communication peer process has unexpectedly disconnected.  This
+usually indicates a failure in the peer process (e.g., a crash or
+otherwise exiting without calling MPI_FINALIZE first).
+
+Although this local MPI process will likely now behave unpredictably
+(it may even hang or crash), the root cause of this problem is the
+failure of the peer -- that is what you need to investigate.  For
+example, there may be a core file that you can examine.  More
+generally: such peer hangups are frequently caused by application bugs
+or other external events.
+
+  Local host: bc12u29n2
+  Local PID:  8950
+  Peer host:  bc12u29n3
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+An MPI communication peer process has unexpectedly disconnected.  This
+usually indicates a failure in the peer process (e.g., a crash or
+otherwise exiting without calling MPI_FINALIZE first).
+
+Although this local MPI process will likely now behave unpredictably
+(it may even hang or crash), the root cause of this problem is the
+failure of the peer -- that is what you need to investigate.  For
+example, there may be a core file that you can examine.  More
+generally: such peer hangups are frequently caused by application bugs
+or other external events.
+
+  Local host: bc12u29n2
+  Local PID:  8951
+  Peer host:  bc12u29n4
+--------------------------------------------------------------------------
+[bc12u29n2][[52498,0],2][btl_tcp_endpoint.c:803:mca_btl_tcp_endpoint_complete_connect] connect() to 192.168.151.9 failed: Connection reset by peer (104)
+[bc12u29n4:78012] *** Process received signal ***
+[bc12u29n4:78012] Signal: Segmentation fault (11)
+[bc12u29n4:78012] Signal code: Address not mapped (1)
+[bc12u29n4:78012] Failing at address: (nil)
+[bc12u29n4:78010] Signal: Segmentation fault (11)
+[bc12u29n4:78010] Signal code: Address not mapped (1)
+[bc12u29n4:78010] Failing at address: (nil)
+[bc12u29n4:78010] [ 0] [bc12u29n4:78012] [ 0] /usr/lib64/libpthread.so.0(+0xf5d0)[0x7fb59d2875d0]
+/usr/lib64/libpthread.so.0(+0xf5d0)[0x7f20c90215d0]
+[bc12u29n4:78012] *** End of error message ***
+[bc12u29n4:78010] *** End of error message ***
+[bc12u29n3:48856] [ 0] [bc12u29n3:48857] *** Process received signal ***
+[bc12u29n3:48857] Signal: Segmentation fault (11)
+[bc12u29n3:48857] Signal code: Address not mapped (1)
+[bc12u29n3:48857] Failing at address: (nil)
+[bc12u29n3:48858] *** Process received signal ***
+[bc12u29n3:48858] Signal: Segmentation fault (11)
+[bc12u29n3:48858] Signal code: Address not mapped (1)
+[bc12u29n3:48858] Failing at address: (nil)
+/usr/lib64/libpthread.so.0(+0xf5d0)[0x7fcbaa9705d0]
+[bc12u29n3:48856] *** End of error message ***
+[bc12u29n3:48858] [ 0] [bc12u29n3:48857] [ 0] /usr/lib64/libpthread.so.0(+0xf5d0)[0x7f58fa9c75d0]
+[bc12u29n3:48858] *** End of error message ***
+/usr/lib64/libpthread.so.0(+0xf5d0)[0x7f4edc3f15d0]
+[bc12u29n3:48857] *** End of error message ***
+srun: error: bc12u29n4: tasks 6,8: Segmentation fault
+srun: error: bc12u29n3: tasks 3-5: Segmentation fault
+[bc12u29n2:08950] 1 more process has sent help message help-mpi-btl-tcp.txt / peer hung up
+[bc12u29n2:08950] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
+slurmstepd: *** JOB 52498 ON bc12u29n2 CANCELLED AT 2019-11-27T06:59:55 DUE TO TIME LIMIT ***
+slurmstepd: *** STEP 52498.0 ON bc12u29n2 CANCELLED AT 2019-11-27T06:59:55 DUE TO TIME LIMIT ***
