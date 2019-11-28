@@ -75,6 +75,20 @@ void readSparse(std::string fileName, int offset, int n, int *indices, float *va
 		ct - offset  << " vectors. " << std::endl;
 }
 
+
+void writeTopK(std::string filename, int numQueries, int k, unsigned int* topK) {
+	std::ofstream file;
+	file.open(filename);
+	for (int q = 0; q < numQueries; q++) {
+		for (int i = 0; i < k; i++) {
+			file << topK[q * k + i] << " ";
+		}
+		file << "\n";
+	}
+	file.close();
+}
+
+
 void similarityMetric(int *queries_indice, float *queries_val, int *queries_marker,
 	int *bases_indice, float *bases_val, int *bases_marker, unsigned int *queryOutputs,
 	unsigned int numQueries, unsigned int topk, unsigned int availableTopk, int *nList,

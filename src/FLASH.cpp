@@ -26,7 +26,7 @@ int main() {
 	webspam();	
 #endif
 #ifdef KDD12
-	kdd12();	
+	kdd12FileOutput();	
 #endif
 	return 0;
 }

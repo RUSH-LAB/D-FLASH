@@ -78,10 +78,10 @@
 
 #define DIMENSION					15
 #define FULL_DIMENSION				54686452
-// #define NUM_DATA_VECTORS			1000000
-// #define NUM_QUERY_VECTORS			100
-#define NUM_DATA_VECTORS			140000000
-#define NUM_QUERY_VECTORS			10000
+#define NUM_DATA_VECTORS			1000000
+#define NUM_QUERY_VECTORS			100
+// #define NUM_DATA_VECTORS			140000000
+// #define NUM_QUERY_VECTORS			10000
 #define MAX_RESERVOIR_RAND			35000
 #define TOPK						128
 #define AVAILABLE_TOPK				1024
@@ -133,6 +133,7 @@
 
 void webspam();
 void kdd12();
+void kdd12FileOutput();
 void showConfig(std::string dataset, int numVectors, int queries, int nodes, int tables, int rangePow, int reservoirSize, int hashes, int cmsHashes, int cmsBucketSize, bool cms, bool tree);
 void unitTesting();
 
