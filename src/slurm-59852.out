@@ -1,0 +1,97 @@
+slurmstepd: task/cgroup: unable to add task[pid=25312] to memory cg '(null)'
+slurmstepd: unable to build slurm cgroup for ns memory: Cannot allocate memory
+slurmstepd: jobacct_gather/cgroup: unable to instanciate user 17279 memory cgroup
+slurmstepd: task/cgroup: unable to add task[pid=46037] to memory cg '(null)'
+slurmstepd: jobacct_gather/cgroup: unable to instanciate job 59852 memory cgroup
+
+=================
+== KDD12
+=================
+
+140000000 Vectors, 10000 Queries
+Nodes: 10
+Tables: 16
+RangePow: 18
+Reservoir Size: 256
+Hashes: 4
+CMS Bucket Size: 2048
+CMS Hashes: 4
+
+LSH Initialized in Node 0
+LSH Initialized in Node 5
+[bc12u21n1:29947] *** Process received signal ***
+[bc12u21n1:29947] Signal: Segmentation fault (11)
+[bc12u21n1:29947] Signal code: Address not mapped (1)
+[bc12u21n1:29947] Failing at address: 0x38
+LSH Initialized in Node 6
+LSH Initialized in Node 8
+LSH Initialized in Node 2
+LSH Initialized in Node 9
+LSH Initialized in Node 4
+srun: error: bc12u29n1: task 6: Segmentation fault
+[bc12u29n1:42325] *** Process received signal ***
+[bc12u29n1:42325] Signal: Segmentation fault (11)
+[bc12u29n1:42325] Signal code: Address not mapped (1)
+[bc12u29n1:42325] Failing at address: 0x38
+[bc12u29n1:42325] [ 0] /usr/lib64/libpthread.so.0(+0xf5d0)[0x7fa8a178c5d0]
+[bc12u29n1:42325] [ 1] /opt/apps/software/Compiler/GCC/6.4.0/OpenMPI/2.1.3/lib/openmpi/mca_mtl_psm2.so(ompi_mtl_psm2_send+0xbc)[0x7fa89f7d8d0c]
+[bc12u29n1:42325] [ 2] /opt/apps/software/Compiler/GCC/6.4.0/OpenMPI/2.1.3/lib/openmpi/mca_pml_cm.so(+0x4015)[0x7fa89f9a3015]
+[bc12u29n1:42325] [ 3] /opt/apps/software/Compiler/GCC/6.4.0/OpenMPI/2.1.3/lib/libmpi.so.20(ompi_coll_base_barrier_intra_bruck+0x104)[0x7fa8a1fdedb4]
+[bc12u29n1:42325] [ 4] /opt/apps/software/Compiler/GCC/6.4.0/OpenMPI/2.1.3/lib/libmpi.so.20(PMPI_Barrier+0x44)[0x7fa8a1f9b7e4]
+[bc12u29n1:42325] [ 5] /scratch/ncm5/Distributed-LSH-Algorithm-For-Similarity-Search/src/./runme[0x407817]
+[bc12u29n1:42325] [ 6] /scratch/ncm5/Distributed-LSH-Algorithm-For-Similarity-Search/src/./runme[0x402c79]
+[bc12u29n1:42325] [ 7] /usr/lib64/libc.so.6(__libc_start_main+0xf5)[0x7fa8a13d23d5]
+[bc12u29n1:42325] [ 8] /scratch/ncm5/Distributed-LSH-Algorithm-For-Similarity-Search/src/./runme[0x402e57]
+[bc12u29n1:42325] *** End of error message ***
+[bc12u21n1:29947] [ 0] /usr/lib64/libpthread.so.0(+0xf5d0)[0x7fa34f1eb5d0]
+[bc12u21n1:29947] [ 1] /opt/apps/software/Compiler/GCC/6.4.0/OpenMPI/2.1.3/lib/openmpi/mca_mtl_psm2.so(ompi_mtl_psm2_isend+0x103)[0x7fa34d238043]
+[bc12u21n1:29947] [ 2] /opt/apps/software/Compiler/GCC/6.4.0/OpenMPI/2.1.3/lib/openmpi/mca_pml_cm.so(+0x327b)[0x7fa34d40127b]
+[bc12u21n1:29947] [ 3] /opt/apps/software/Compiler/GCC/6.4.0/OpenMPI/2.1.3/lib/libmpi.so.20(ompi_coll_base_bcast_intra_generic+0x4b6)[0x7fa34fa33826]
+[bc12u21n1:29947] [ 4] /opt/apps/software/Compiler/GCC/6.4.0/OpenMPI/2.1.3/lib/libmpi.so.20(ompi_coll_base_bcast_intra_binomial+0xb2)[0x7fa34fa33d02]
+[bc12u21n1:29947] [ 5] /opt/apps/software/Compiler/GCC/6.4.0/OpenMPI/2.1.3/lib/openmpi/mca_coll_tuned.so(ompi_coll_tuned_bcast_intra_dec_fixed+0xcb)[0x7fa34cf81e9b]
+[bc12u21n1:29947] [ 6] /opt/apps/software/Compiler/GCC/6.4.0/OpenMPI/2.1.3/lib/libmpi.so.20(PMPI_Bcast+0x1a0)[0x7fa34f9facd0]
+[bc12u21n1:29947] [ 7] /scratch/ncm5/Distributed-LSH-Algorithm-For-Similarity-Search/src/./runme[0x403706]
+[bc12u21n1:29947] [ 8] /scratch/ncm5/Distributed-LSH-Algorithm-For-Similarity-Search/src/./runme[0x40780b]
+[bc12u21n1:29947] [ 9] /scratch/ncm5/Distributed-LSH-Algorithm-For-Similarity-Search/src/./runme[0x402c79]
+[bc12u21n1:29947] [10] /usr/lib64/libc.so.6(__libc_start_main+0xf5)[0x7fa34ee313d5]
+[bc12u21n1:29947] [11] /scratch/ncm5/Distributed-LSH-Algorithm-For-Similarity-Search/src/./runme[0x402e57]
+[bc12u21n1:29947] *** End of error message ***
+srun: error: bc12u21n1: task 3: Segmentation fault
+[bc12u17n1:79730] PSM2 returned unhandled/unknown connect error: Operation timed out
+[bc12u17n1:79730] PSM2 EP connect error (unknown connect error):
+[bc12u17n1:79730]  bc12u21n1
+[bc12u17n1:79730] 
+[bc12u17n1:79730] *** Process received signal ***
+[bc12u17n1:79730] Signal: Segmentation fault (11)
+[bc12u17n1:79730] Signal code: Address not mapped (1)
+[bc12u17n1:79730] Failing at address: 0x38
+[bc12u23n3:25312] PSM2 returned unhandled/unknown connect error: Operation timed out
+[bc12u23n3:25312] PSM2 EP connect error (unknown connect error):
+[bc12u23n3:25312]  bc12u29n1
+[bc12u23n3:25312] 
+[bc12u23n3:25312] *** Process received signal ***
+[bc12u23n3:25312] Signal: Segmentation fault (11)
+[bc12u23n3:25312] Signal code: Address not mapped (1)
+[bc12u23n3:25312] Failing at address: 0x38
+[bc12u17n1:79730] [ 0] /usr/lib64/libpthread.so.0(+0xf5d0)[0x7f44d65865d0]
+[bc12u17n1:79730] [ 1] /opt/apps/software/Compiler/GCC/6.4.0/OpenMPI/2.1.3/lib/openmpi/mca_mtl_psm2.so(ompi_mtl_psm2_send+0xbc)[0x7f44d45d2d0c]
+[bc12u17n1:79730] [ 2] /opt/apps/software/Compiler/GCC/6.4.0/OpenMPI/2.1.3/lib/openmpi/mca_pml_cm.so(+0x4015)[0x7f44d479d015]
+[bc12u17n1:79730] [ 3] /opt/apps/software/Compiler/GCC/6.4.0/OpenMPI/2.1.3/lib/libmpi.so.20(ompi_coll_base_barrier_intra_bruck+0x104)[0x7f44d6dd8db4]
+[bc12u17n1:79730] [ 4] /opt/apps/software/Compiler/GCC/6.4.0/OpenMPI/2.1.3/lib/libmpi.so.20(PMPI_Barrier+0x44)[0x7f44d6d957e4]
+[bc12u17n1:79730] [ 5] /scratch/ncm5/Distributed-LSH-Algorithm-For-Similarity-Search/src/./runme[0x407817]
+[bc12u17n1:79730] [ 6] /scratch/ncm5/Distributed-LSH-Algorithm-For-Similarity-Search/src/./runme[0x402c79]
+[bc12u17n1:79730] [ 7] [bc12u23n3:25312] [ 0] /usr/lib64/libpthread.so.0(+0xf5d0)[0x7fb5a56d25d0]
+[bc12u23n3:25312] [ 1] /opt/apps/software/Compiler/GCC/6.4.0/OpenMPI/2.1.3/lib/openmpi/mca_mtl_psm2.so(ompi_mtl_psm2_send+0xbc)[0x7fb5a371ed0c]
+[bc12u23n3:25312] [ 2] /opt/apps/software/Compiler/GCC/6.4.0/OpenMPI/2.1.3/lib/openmpi/mca_pml_cm.so(+0x4015)[0x7fb5a38e9015]
+[bc12u23n3:25312] [ 3] /opt/apps/software/Compiler/GCC/6.4.0/OpenMPI/2.1.3/lib/libmpi.so.20(ompi_coll_base_barrier_intra_bruck+0x104)[0x7fb5a5f24db4]
+[bc12u23n3:25312] [ 4] /opt/apps/software/Compiler/GCC/6.4.0/OpenMPI/2.1.3/lib/libmpi.so.20(PMPI_Barrier+0x44)[0x7fb5a5ee17e4]
+[bc12u23n3:25312] [ 5] /scratch/ncm5/Distributed-LSH-Algorithm-For-Similarity-Search/src/./runme[0x407817]
+[bc12u23n3:25312] [ 6] /scratch/ncm5/Distributed-LSH-Algorithm-For-Similarity-Search/src/./runme[0x402c79]
+[bc12u23n3:25312] [ 7] /usr/lib64/libc.so.6(__libc_start_main+0xf5)[0x7f44d61cc3d5]
+[bc12u17n1:79730] [ 8] /scratch/ncm5/Distributed-LSH-Algorithm-For-Similarity-Search/src/./runme[0x402e57]
+[bc12u17n1:79730] *** End of error message ***
+/usr/lib64/libc.so.6(__libc_start_main+0xf5)[0x7fb5a53183d5]
+[bc12u23n3:25312] [ 8] /scratch/ncm5/Distributed-LSH-Algorithm-For-Similarity-Search/src/./runme[0x402e57]
+[bc12u23n3:25312] *** End of error message ***
+srun: error: bc12u23n3: task 5: Segmentation fault
+srun: error: bc12u17n1: task 2: Segmentation fault

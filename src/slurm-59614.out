@@ -1,0 +1,41 @@
+slurmstepd: task/cgroup: unable to add task[pid=59307] to memory cg '(null)'
+slurmstepd: unable to build slurm cgroup for ns memory: Cannot allocate memory
+slurmstepd: jobacct_gather/cgroup: unable to instanciate user 17279 memory cgroup
+
+=================
+== KDD12
+=================
+
+140000000 Vectors, 10000 Queries
+Nodes: 3
+Tables: 16
+RangePow: 18
+Reservoir Size: 256
+Hashes: 4
+CMS Bucket Size: 2048
+CMS Hashes: 4
+
+LSH Initialized in Node 0
+LSH Initialized in Node 2
+LSH Initialized in Node 1
+CMS Initialized in Node 2
+CMS Initialized in Node 1
+CMS Initialized in Node 0
+LSH Reservoir Initialized in Node 2
+LSH Reservoir Initialized in Node 1
+FLASH Controller Initialized in Node 2
+
+Reading Data Node 2...
+LSH Reservoir Initialized in Node 0
+FLASH Controller Initialized in Node 0
+
+Reading Data Node 0...
+[readSparse]
+FLASH Controller Initialized in Node 1
+
+Reading Data Node 1...
+[readSparse]
+[readSparse]
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+slurmstepd: *** JOB 59614 ON bc12u21n1 CANCELLED AT 2019-11-28T11:41:43 ***
+slurmstepd: *** STEP 59614.0 ON bc12u21n1 CANCELLED AT 2019-11-28T11:41:43 ***
