@@ -1,7 +1,7 @@
 #!/bin/bash
 
-#SBATCH --job-name=D-FLASH14
-#SBATCH --nodes=14
+#SBATCH --job-name=D-FLASH20
+#SBATCH --nodes=20
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=30G
