@@ -27,7 +27,7 @@ LDFLAGS := $(LIB)
 .PHONY: clean
 
 $(TARGET): $(CPPOBJDIR) $(COBJDIR) $(CPPOBJS) $(COBJS)
-	mpicxx -fPIC -o $(TARGET) $(CPPOBJS) $(LDFLAGS) 
+	mpicxx -fPIC -Wl,-z,noexecstack -o $(TARGET) $(CPPOBJS) $(LDFLAGS) 
 
 $(CPPOBJS): $(CPPOBJDIR)/%.o: %.cpp
 	@echo "compile $@ $<"
