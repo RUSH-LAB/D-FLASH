@@ -18,16 +18,19 @@
 
 int main() {
 
-  // #ifdef UNIT_TESTING
-  // 	unitTesting();
-  // #endif
-  // #ifdef WEBSPAM
-  // 	webspam();
-  // #endif
-  // #ifdef KDD12
-  // 	kdd12FileOutput();
-  // #endif
+#ifdef UNIT_TESTING
+  unitTesting();
+#endif
+#ifdef WEBSPAM
+  webspam();
+#endif
+#ifdef KDD12
+  kdd12FileOutput();
+#endif
+#ifdef WIKIDUMP
+  wikiDump();
+#endif
 
-  evaluateResults("../results/kdd12/Bruteforce-Nodes-3");
+  // evaluateResults("../results/kdd12/Bruteforce-Nodes-3");
   return 0;
 }
